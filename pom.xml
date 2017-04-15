@@ -97,7 +97,7 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <!-- 为了方便进行单元测试，添加spring-test包 -->
+        <!-- 为了方便进行单元测试， 添加spring-test包 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
