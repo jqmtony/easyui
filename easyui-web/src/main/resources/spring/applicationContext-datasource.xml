@@ -46,7 +46,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 实例化sqlSessionFactory时需要使用上述配置好的数据源以及SQL映射文件 -->
         <property name="dataSource" ref="dataSource" />
-        <!-- 自动扫描com/fcbox/panorama/mapping/目录下的所有SQL映射的xml文件, 省掉Configuration.xml里的手工配置 -->
+        <!-- 自动扫描zencbox/panorama/mapping/目录下的所有SQL映射的xml文件, 省掉Configuration.xml里的手工配置 -->
         <property name="mapperLocations" value="classpath:mapping/*.xml" />
         <!-- mybatis分页插件配置 -->
         <property name="typeAliasesPackage" value="com.isea533.ssm.model" />
@@ -64,8 +64,8 @@
     </bean>
     <!-- 配置扫描器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!-- 扫描com.fcbox.panorama.dao这个包以及它的子包下的所有映射接口类 -->
-        <property name="basePackage" value="com.fcbox.easyui.dao" />
+        <!-- 扫描zencbox.panorama.dao这个包以及它的子包下的所有映射接口类 -->
+        <property name="basePackage" value="com.zen.easyui.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
 

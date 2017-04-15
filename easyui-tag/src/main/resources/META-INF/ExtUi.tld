@@ -5,15 +5,15 @@
 	<tlib-version>3.0</tlib-version>
 	<jsp-version>1.2</jsp-version>
 	<short-name>ExtUi</short-name>
-	<uri>http://www.fcbox.com/ExtUi</uri>
+	<uri>http://www.zen.com/ExtUi</uri>
 	<display-name>ExtUi</display-name>
 	<description>ExtUi</description>
 		
 	<tag>
 		<name>treeGrid</name>
 		<tag-class>
-			com.fcbox.easyui.tag.ExtTreeGridTag
-		</tag-class>
+            com.zen.easyui.tag.ExtTreeGridTag
+        </tag-class>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -106,8 +106,8 @@
 	<tag>
 		<name>column</name>
 		<tag-class>
-			com.fcbox.easyui.tag.ExtTreeGridColumnTag
-		</tag-class>
+            com.zen.easyui.tag.ExtTreeGridColumnTag
+        </tag-class>
 		<attribute>
 			<name>field</name>
 			<required>true</required>
@@ -177,8 +177,8 @@
 	<tag>
 		<name>toolbar</name>
 		<tag-class>
-			com.fcbox.easyui.tag.ExtToolbarTag
-		</tag-class>
+            com.zen.easyui.tag.ExtToolbarTag
+        </tag-class>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -193,7 +193,7 @@
 	
 	<tag>
 		<name>button</name>
-		<tag-class>com.fcbox.easyui.tag.ExtButtonTag</tag-class>
+		<tag-class>com.zen.easyui.tag.ExtButtonTag</tag-class>
 		<attribute>
 			<name>id</name>
 			<rtexprvalue>true</rtexprvalue>

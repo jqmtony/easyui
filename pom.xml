@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.fcbox.easyui</groupId>
+    <groupId>com.zen.easyui</groupId>
     <artifactId>easyui</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -66,7 +66,7 @@
         <!-- elastic-job版本号 -->
         <elastic-job-lite-core.version>2.0.3</elastic-job-lite-core.version>
         <elastic-job-lite-spring.version>2.0.3</elastic-job-lite-spring.version>
-        <!-- fcbox-common版本号-->
+        <!--zencbox-common版本号-->
         <fcbox-common.version>0.0.1-SNAPSHOT</fcbox-common.version>
         <fcbox-uic.version>2.2.0-SNAPSHOT</fcbox-uic.version>
         <fcbox-operation.version>1.1.0-SNAPSHOT</fcbox-operation.version>

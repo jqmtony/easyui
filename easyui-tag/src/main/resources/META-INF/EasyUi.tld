@@ -5,14 +5,14 @@
 	<tlib-version>3.0</tlib-version>
 	<jsp-version>1.2</jsp-version>
 	<short-name>EasyUi</short-name>
-	<uri>http://www.fcbox.com/EasyUi</uri>
+	<uri>http://www.zen.com/EasyUi</uri>
 	<display-name>EasyUi</display-name>
 	<description>EasyUi</description>
 	<tag>
 		<name>form</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiFormTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiFormTag
+        </tag-class>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -148,8 +148,8 @@
 	<tag>
 		<name>table</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiDatagridTableTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiDatagridTableTag
+        </tag-class>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -552,14 +552,14 @@
 	<tag>
 		<name>columns</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiTableColumnsTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiTableColumnsTag
+        </tag-class>
 	</tag>
 	<tag>
 		<name>column</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiTableColumnTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiTableColumnTag
+        </tag-class>
 		<attribute>
 			<name>field</name>
 			<required>false</required>
@@ -622,8 +622,8 @@
 	<tag>
 		<name>toolbar</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiDatagridToolbarTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiDatagridToolbarTag
+        </tag-class>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -645,7 +645,7 @@
 	
 	<tag>
 		<name>menuButton</name>
-		<tag-class>com.fcbox.easyui.tag.EasyUiMenuButtonTag</tag-class>
+		<tag-class>com.zen.easyui.tag.EasyUiMenuButtonTag</tag-class>
 		<attribute>
 			<name>id</name>
 			<rtexprvalue>true</rtexprvalue>
@@ -666,7 +666,7 @@
 
 	<tag>
 		<name>button</name>
-		<tag-class>com.fcbox.easyui.tag.EasyUiButtonTag</tag-class>
+		<tag-class>com.zen.easyui.tag.EasyUiButtonTag</tag-class>
 		<attribute>
 			<name>id</name>
 			<rtexprvalue>true</rtexprvalue>
@@ -724,8 +724,8 @@
 	<tag>
 		<name>validateText</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiValidateTextTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiValidateTextTag
+        </tag-class>
 		<attribute>
 			<name>name</name>
 			<required>true</required>
@@ -810,8 +810,8 @@
 	<tag>
 		<name>text</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiTextTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiTextTag
+        </tag-class>
 		<attribute>
 			<name>name</name>
 			<required>true</required>
@@ -947,7 +947,7 @@
 	
 	<tag>
 		<name>dateBox</name>
-		<tag-class>com.fcbox.easyui.tag.EasyUiDateBoxTag</tag-class>
+		<tag-class>com.zen.easyui.tag.EasyUiDateBoxTag</tag-class>
 		<attribute>
 			<name>id</name>
 			<rtexprvalue>true</rtexprvalue>
@@ -1031,7 +1031,7 @@
 	
 	<tag>
 		<name>panel</name>
-		<tag-class>com.fcbox.easyui.tag.EasyUiPanelTag</tag-class>
+		<tag-class>com.zen.easyui.tag.EasyUiPanelTag</tag-class>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -1090,8 +1090,8 @@
 	<tag>
 		<name>tabPanel</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiTabsTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiTabsTag
+        </tag-class>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -1113,7 +1113,7 @@
 	</tag>
 	<tag>
 		<name>tab</name>
-		<tag-class>com.fcbox.easyui.tag.EasyUiTabPageTag</tag-class>
+		<tag-class>com.zen.easyui.tag.EasyUiTabPageTag</tag-class>
 		<attribute>
 			<name>id</name>
 			<rtexprvalue>true</rtexprvalue>
@@ -1162,8 +1162,8 @@
 	<tag>
 		<name>select</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiComboboxTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiComboboxTag
+        </tag-class>
 		<attribute>
 			<name>readonly</name>
 			<rtexprvalue>true</rtexprvalue>
@@ -1303,8 +1303,8 @@
 	<tag>
 		<name>combogrid</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiComboGridTag
-		</tag-class>		
+            com.zen.easyui.tag.EasyUiComboGridTag
+        </tag-class>
 		<attribute>
 			<name>readonly</name>
 			<rtexprvalue>true</rtexprvalue>
@@ -1405,8 +1405,8 @@
 	<tag>
 		<name>combogridcolumn</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiComboGridColumnTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiComboGridColumnTag
+        </tag-class>
 		<attribute>
 			<name>field</name>
 			<required>true</required>
@@ -1446,8 +1446,8 @@
 	<tag>
 		<name>treetable</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiTreegridTableTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiTreegridTableTag
+        </tag-class>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -1716,7 +1716,7 @@
 	</tag>
 	<tag>
 		<name>menu</name>
-		<tag-class>com.fcbox.easyui.tag.EasyUiMenuTag</tag-class>
+		<tag-class>com.zen.easyui.tag.EasyUiMenuTag</tag-class>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -1734,8 +1734,8 @@
 	<tag>
 		<name>menuColumn</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiMenuColumnTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiMenuColumnTag
+        </tag-class>
 		<attribute>
 			<name>id</name>
 			<rtexprvalue>true</rtexprvalue>
@@ -1756,8 +1756,8 @@
 	<tag>
 		<name>menuTree</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiMenuTreeTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiMenuTreeTag
+        </tag-class>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -1792,8 +1792,8 @@
 	<tag>
 		<name>tree</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiTreeTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiTreeTag
+        </tag-class>
 		<attribute>
 			<name>doEvent</name>
 			<required>false</required>
@@ -1879,8 +1879,8 @@
 	<tag>
 		<name>deptgrid</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiDeptGridTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiDeptGridTag
+        </tag-class>
 
 		<attribute>
 			<name>id</name>
@@ -1920,8 +1920,8 @@
 	<tag>
 		<name>comboTree</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiComboTreeTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiComboTreeTag
+        </tag-class>
 		<attribute>
 			<name>name</name>
 			<required>true</required>
@@ -2006,7 +2006,7 @@
 
 	<tag>
 		<name>uploadify</name>
-		<tag-class>com.fcbox.easyui.tag.EasyUiUploadifyTag</tag-class>
+		<tag-class>com.zen.easyui.tag.EasyUiUploadifyTag</tag-class>
 		<body-content>JSP</body-content>
 		<description>多文件上传标签</description>
 		<attribute>
@@ -2111,7 +2111,7 @@
 
 	<tag>
 		<name>radioCheckBox</name>
-		<tag-class>com.fcbox.easyui.tag.EasyUiRadioCheckBoxTag</tag-class>
+		<tag-class>com.zen.easyui.tag.EasyUiRadioCheckBoxTag</tag-class>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -2186,7 +2186,7 @@
 	
 	<tag>
 		<name>searchInput</name>
-		<tag-class>com.fcbox.easyui.tag.EasyUiSearchInputTag</tag-class>
+		<tag-class>com.zen.easyui.tag.EasyUiSearchInputTag</tag-class>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -2339,7 +2339,7 @@
 
 	<tag>
 		<name>textarea</name>
-		<tag-class>com.fcbox.easyui.tag.EasyUiTextareaTag</tag-class>
+		<tag-class>com.zen.easyui.tag.EasyUiTextareaTag</tag-class>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -2403,8 +2403,8 @@
 	<tag>
 		<name>numberBox</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiNumberBoxTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiNumberBoxTag
+        </tag-class>
 		<attribute>
 			<name>name</name>
 			<required>true</required>
@@ -2482,8 +2482,8 @@
 	<tag>
 		<name>fileBox</name>
 		<tag-class>
-			com.fcbox.easyui.tag.EasyUiFileBoxTag
-		</tag-class>
+            com.zen.easyui.tag.EasyUiFileBoxTag
+        </tag-class>
 		<attribute>
 			<name>name</name>
 			<required>true</required>

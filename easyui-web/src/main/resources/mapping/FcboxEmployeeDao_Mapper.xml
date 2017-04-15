@@ -2,9 +2,9 @@
 <!DOCTYPE mapper  
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.fcbox.easyui.dao.FcboxEmployeeDao" >
+  <mapper namespace="com.zen.easyui.dao.FcboxEmployeeDao" >
  	
- 	<resultMap type="com.fcbox.easyui.vo.FcboxEmployeeDto" id="fcboxEmployeeResultMap">
+ 	<resultMap type="com.zen.easyui.vo.FcboxEmployeeDto" id="fcboxEmployeeResultMap">
 			<result property="empCode" column="EMP_CODE" jdbcType="VARCHAR" />
 			<result property="empName" column="EMP_NAME" jdbcType="VARCHAR" />
 			<result property="deptId" column="DEPT_ID" jdbcType="VARCHAR" />
@@ -22,7 +22,7 @@
 			<result property="creattime" column="CREATTIME" jdbcType="TIMESTAMP" />
  	</resultMap>
  	
- 	<insert id="insertFcboxEmployeeDto" parameterType="com.fcbox.easyui.vo.FcboxEmployeeDto">
+ 	<insert id="insertFcboxEmployeeDto" parameterType="com.zen.easyui.vo.FcboxEmployeeDto">
      	INSERT INTO fcbox_employee (
      		EMP_CODE,EMP_NAME,DEPT_ID,DEPT_NAME,ORGANIZATION,DUTY_ID,DUTY_NAME,EMP_TYPE,EMP_MOBILE,EMP_ATTRIBUTE,IS_HEADQUARTERS,IS_LEADER,EMP_STUS,INNER_FLG,CREATTIME
      	) VALUES (#{empCode, jdbcType=VARCHAR},#{empName, jdbcType=VARCHAR},#{deptId, jdbcType=VARCHAR},#{deptName, jdbcType=VARCHAR},#{organization, jdbcType=VARCHAR},#{dutyId, jdbcType=VARCHAR},#{dutyName, jdbcType=VARCHAR},#{empType, jdbcType=VARCHAR},#{empMobile, jdbcType=VARCHAR},#{empAttribute, jdbcType=VARCHAR},#{isHeadquarters, jdbcType=NUMERIC},#{isLeader, jdbcType=NUMERIC},#{empStus, jdbcType=NUMERIC},#{innerFlg, jdbcType=NUMERIC},#{creattime, jdbcType=TIMESTAMP})
@@ -85,7 +85,7 @@
    		 </trim>   
    </sql>
    
-   <update id="updateFcboxEmployeeByPk" parameterType="com.fcbox.easyui.vo.FcboxEmployeeDto" >
+   <update id="updateFcboxEmployeeByPk" parameterType="com.zen.easyui.vo.FcboxEmployeeDto" >
    		UPDATE fcbox_employee 
    			SET
    			<trim suffix=" " suffixOverrides=","> 
@@ -136,16 +136,16 @@
    		    EMP_CODE=#{empCode, jdbcType=VARCHAR} 
    </update>
    
-   <select id="selectFcboxEmployeeByPk" parameterType="com.fcbox.easyui.vo.FcboxEmployeeDto" resultMap="fcboxEmployeeResultMap">
+   <select id="selectFcboxEmployeeByPk" parameterType="com.zen.easyui.vo.FcboxEmployeeDto" resultMap="fcboxEmployeeResultMap">
    		SELECT EMP_CODE,EMP_NAME,DEPT_ID,DEPT_NAME,ORGANIZATION,DUTY_ID,DUTY_NAME,EMP_TYPE,EMP_MOBILE,EMP_ATTRIBUTE,IS_HEADQUARTERS,IS_LEADER,EMP_STUS,INNER_FLG,CREATTIME FROM  fcbox_employee WHERE   EMP_CODE=#{empCode, jdbcType=VARCHAR}
    </select>
    
-   <select id="selectFcboxEmployeeByDto" parameterType="com.fcbox.easyui.vo.FcboxEmployeeDto" resultMap="fcboxEmployeeResultMap">
+   <select id="selectFcboxEmployeeByDto" parameterType="com.zen.easyui.vo.FcboxEmployeeDto" resultMap="fcboxEmployeeResultMap">
    		SELECT EMP_CODE,EMP_NAME,DEPT_ID,DEPT_NAME,ORGANIZATION,DUTY_ID,DUTY_NAME,EMP_TYPE,EMP_MOBILE,EMP_ATTRIBUTE,IS_HEADQUARTERS,IS_LEADER,EMP_STUS,INNER_FLG,CREATTIME FROM  fcbox_employee 
    		<include refid="fcboxEmployee_Where_Clause" />
    </select>
 
-   <delete id="deleteFcboxEmployeeByPk" parameterType="com.fcbox.easyui.vo.FcboxEmployeeDto">
+   <delete id="deleteFcboxEmployeeByPk" parameterType="com.zen.easyui.vo.FcboxEmployeeDto">
    		DELETE FROM fcbox_employee WHERE EMP_CODE=#{empCode, jdbcType=VARCHAR}
    </delete>
  	
