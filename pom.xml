@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.fcbox.easyui</groupId>
-    <artifactId>fcbox-easyui</artifactId>
+    <artifactId>easyui</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
