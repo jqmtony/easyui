@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.fcbox.easyui</groupId>
+    <artifactId>fcbox-easyui</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- spring版本号 -->
+        <spring.version>4.2.5.RELEASE</spring.version>
+        <!-- aspectjweaver版本号 -->
+        <aspectjweaver.version>1.8.9</aspectjweaver.version>
+        <!-- mybatis版本号 -->
+        <mybatis.version>3.4.1</mybatis.version>
+        <mybatis-spring.version>1.3.0</mybatis-spring.version>
+        <mybatis-pagehelper.version>4.1.6</mybatis-pagehelper.version>
+        <!-- mysql连接驱动 -->
+        <mysql-connector-java.version>5.1.39</mysql-connector-java.version>
+        <!-- druid版本号 -->
+        <druid.version>1.0.21</druid.version>
+        <!-- fastjson版本号 -->
+        <fastjson.version>1.2.28</fastjson.version>
+        <!-- commons相关版本号 -->
+        <commons-logging.version>1.2</commons-logging.version>
+        <commons-collections.version>3.2.2</commons-collections.version>
+        <commons-fileupload.version>1.3.2</commons-fileupload.version>
+        <commons-beanutils.version>1.9.2</commons-beanutils.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <commons-codec.version>1.10</commons-codec.version>
+        <!-- servlet相关版本号 -->
+        <servlet-api.version>3.0-alpha-1</servlet-api.version>
+        <jsp-api.version>2.2.1-b03</jsp-api.version>
+        <jstl.version>1.2</jstl.version>
+        <!-- logback日志版本号 -->
+        <slf4j-api.version>1.7.21</slf4j-api.version>
+        <logback-classic.version>1.1.7</logback-classic.version>
+        <!-- log4j版本号 -->
+        <log4j.version>1.2.17</log4j.version>
+        <!-- google guava版本号 -->
+        <guava.version>19.0</guava.version>
+        <!-- joda-time版本号 -->
+        <joda-time.version>2.9.4</joda-time.version>
+        <!-- ECharts版本号 -->
+        <ECharts.version>3.0.0</ECharts.version>
+        <!-- junit版本号 -->
+        <junit.version>4.12</junit.version>
+        <!-- kafka_2.11版本号 -->
+        <kafka_2.11.version>0.9.0.1</kafka_2.11.version>
+        <!-- redis与spring整合版本号 -->
+        <spring-data-redis.version>1.7.2.RELEASE</spring-data-redis.version>
+        <!-- redis.clients包 jedis版本号-->
+        <jedis.version>2.4.2</jedis.version>
+        <!-- camel版本号 -->
+        <hessian.version>4.0.38</hessian.version>
+        <camel.version>2.17.2</camel.version>
+        <dubbo.version>2.5.3</dubbo.version>
+        <!-- mongodb java 驱动包-->
+        <mongo.version>3.2.2</mongo.version>
+        <!-- mongodb与spring整合版本号 -->
+        <spring-data-mongodb.version>1.9.1.RELEASE</spring-data-mongodb.version>
+        <!-- elastic-job版本号 -->
+        <elastic-job-lite-core.version>2.0.3</elastic-job-lite-core.version>
+        <elastic-job-lite-spring.version>2.0.3</elastic-job-lite-spring.version>
+        <!-- fcbox-common版本号-->
+        <fcbox-common.version>0.0.1-SNAPSHOT</fcbox-common.version>
+        <fcbox-uic.version>2.2.0-SNAPSHOT</fcbox-uic.version>
+        <fcbox-operation.version>1.1.0-SNAPSHOT</fcbox-operation.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>${commons-logging.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- 添加Spring-core包 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- 添加Spring-webmvc包 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- 添加spring-jdbc包 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- 为了方便进行单元测试，添加spring-test包 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--添加aspectjweaver包 -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectjweaver.version}</version>
+        </dependency>
+        <!-- 添加mybatis的核心包 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        <!-- 添加mybatis与Spring整合的核心包 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis-spring.version}</version>
+        </dependency>
+        <!-- 添加mybatis分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>${mybatis-pagehelper.version}</version>
+        </dependency>
+        <!-- 添加mysql驱动包 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+        </dependency>
+        <!-- 添加druid连接池包 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+        <!-- 添加fastjson包 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <!-- 添加fileupload文件上传包 -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons-fileupload.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>${commons-beanutils.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-lang.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
+        </dependency>
+
+        <!-- 添加servlet3.0核心包 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>${jsp-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
+
+        <!-- logback日志包 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
+        </dependency>
+        <!-- 添加log4j日志包 -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <!-- 添加joda-time包为DateUtil工具类使用 -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+        <!-- 添加ECharts包为构造option JSON字符展示图标
+        <dependency>
+            <groupId>com.github.abel533</groupId>
+            <artifactId>ECharts</artifactId>
+            <version>${ECharts.version}</version>
+        </dependency>-->
+        <!-- 添加junit单元测试包 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- 添加redis核心包
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>${spring-data-redis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
+        </dependency> -->
+
+        <!-- 添加camel核心包
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>${camel.version}</version>
+        </dependency>-->
+        <!-- 添加camel与Spring整合的核心包
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+            <version>${hessian.version}</version>
+        </dependency>-->
+        <!-- <dependency>
+		    <groupId>org.springframework.integration</groupId>
+		    <artifactId>spring-integration-core</artifactId>
+		    <version>${spring.version}</version>
+		</dependency> -->
+        <!-- <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring-integration</artifactId>
+            <version>${camel.version}</version>
+	        </dependency> -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>${dubbo.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongo.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>${spring-data-mongodb.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+        <!-- 解决disconf与elastic-job jar包冲突 -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.21.0-GA</version>
+        </dependency>
+        <!-- 引入elastic-job-lite核心模块 -->
+        <dependency>
+            <groupId>com.dangdang</groupId>
+            <artifactId>elastic-job-lite-core</artifactId>
+            <version>${elastic-job-lite-core.version}</version>
+        </dependency>
+
+        <!-- 使用springframework自定义命名空间时引入 -->
+        <dependency>
+            <groupId>com.dangdang</groupId>
+            <artifactId>elastic-job-lite-spring</artifactId>
+            <version>${elastic-job-lite-spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <tomcat7.deploy.url>http://10.202.10.53:58088/manager/text</tomcat7.deploy.url>
+                <elastic-job.zookeeper.host>localhost:2181</elastic-job.zookeeper.host>
+                <disconf.server.host>10.202.52.23:8081</disconf.server.host>
+                <disconf.env>rd</disconf.env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>uat</id>
+            <properties>
+                <tomcat7.deploy.url>http://10.202.10.53:58088/manager/text</tomcat7.deploy.url>
+                <elastic-job.zookeeper.host>10.202.33.163:2181,10.202.33.164:2181,10.202.33.181:2181</elastic-job.zookeeper.host>
+                <disconf.server.host>10.202.52.23:8081</disconf.server.host>
+                <disconf.env>qa</disconf.env>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prd</id>
+            <properties>
+                <tomcat7.deploy.url>http://10.116.194.48:8080/manager/text</tomcat7.deploy.url>
+                <elastic-job.zookeeper.host>10.116.194.96:2181,10.116.194.97:2181,10.116.194.98:2181</elastic-job.zookeeper.host>
+                <disconf.server.host>10.116.194.91</disconf.server.host>
+                <disconf.env>online</disconf.env>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>fcprd</id>
+            <properties>
+                <disconf.server.host>10.204.8.67</disconf.server.host>
+                <disconf.env>online</disconf.env>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <!-- <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin> -->
+        </plugins>
+    </build>
+
+
+
+    <repositories>
+        <repository>
+            <id>internal</id>
+            <name>Archiva Managed Internal Repository</name>
+            <url>http://hq-op-461242a.sf.com:8787/archiva/repository/internal/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>snapshots</id>
+            <name>Archiva Managed Snapshot Repository</name>
+            <url>http://hq-op-461242a.sf.com:8787/archiva/repository/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>internal</id>
+            <url>http://hq-op-461242a.sf.com:8787/archiva/repository/internal/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Archiva Managed Snapshot Repository</name>
+            <url>http://hq-op-461242a.sf.com:8787/archiva/repository/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <modules>
+        <module>easyui-tag</module>
+        <module>easyui-web</module>
+    </modules>
+
+
+</project>

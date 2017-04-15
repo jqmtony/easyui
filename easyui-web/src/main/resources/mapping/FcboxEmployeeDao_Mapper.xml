@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.fcbox.easyui.dao.FcboxEmployeeDao" >
+ 	
+ 	<resultMap type="com.fcbox.easyui.vo.FcboxEmployeeDto" id="fcboxEmployeeResultMap">
+			<result property="empCode" column="EMP_CODE" jdbcType="VARCHAR" />
+			<result property="empName" column="EMP_NAME" jdbcType="VARCHAR" />
+			<result property="deptId" column="DEPT_ID" jdbcType="VARCHAR" />
+			<result property="deptName" column="DEPT_NAME" jdbcType="VARCHAR" />
+			<result property="organization" column="ORGANIZATION" jdbcType="VARCHAR" />
+			<result property="dutyId" column="DUTY_ID" jdbcType="VARCHAR" />
+			<result property="dutyName" column="DUTY_NAME" jdbcType="VARCHAR" />
+			<result property="empType" column="EMP_TYPE" jdbcType="VARCHAR" />
+			<result property="empMobile" column="EMP_MOBILE" jdbcType="VARCHAR" />
+			<result property="empAttribute" column="EMP_ATTRIBUTE" jdbcType="VARCHAR" />
+			<result property="isHeadquarters" column="IS_HEADQUARTERS" jdbcType="NUMERIC" />
+			<result property="isLeader" column="IS_LEADER" jdbcType="NUMERIC" />
+			<result property="empStus" column="EMP_STUS" jdbcType="NUMERIC" />
+			<result property="innerFlg" column="INNER_FLG" jdbcType="NUMERIC" />
+			<result property="creattime" column="CREATTIME" jdbcType="TIMESTAMP" />
+ 	</resultMap>
+ 	
+ 	<insert id="insertFcboxEmployeeDto" parameterType="com.fcbox.easyui.vo.FcboxEmployeeDto">
+     	INSERT INTO fcbox_employee (
+     		EMP_CODE,EMP_NAME,DEPT_ID,DEPT_NAME,ORGANIZATION,DUTY_ID,DUTY_NAME,EMP_TYPE,EMP_MOBILE,EMP_ATTRIBUTE,IS_HEADQUARTERS,IS_LEADER,EMP_STUS,INNER_FLG,CREATTIME
+     	) VALUES (#{empCode, jdbcType=VARCHAR},#{empName, jdbcType=VARCHAR},#{deptId, jdbcType=VARCHAR},#{deptName, jdbcType=VARCHAR},#{organization, jdbcType=VARCHAR},#{dutyId, jdbcType=VARCHAR},#{dutyName, jdbcType=VARCHAR},#{empType, jdbcType=VARCHAR},#{empMobile, jdbcType=VARCHAR},#{empAttribute, jdbcType=VARCHAR},#{isHeadquarters, jdbcType=NUMERIC},#{isLeader, jdbcType=NUMERIC},#{empStus, jdbcType=NUMERIC},#{innerFlg, jdbcType=NUMERIC},#{creattime, jdbcType=TIMESTAMP})
+   </insert>
+   
+    <insert id="batchInsertFcboxEmployeeDto" parameterType="java.util.List">
+             INSERT INTO fcbox_employee (EMP_CODE,EMP_NAME,DEPT_ID,DEPT_NAME,ORGANIZATION,DUTY_ID,DUTY_NAME,EMP_TYPE,EMP_MOBILE,EMP_ATTRIBUTE,IS_HEADQUARTERS,IS_LEADER,EMP_STUS,INNER_FLG,CREATTIME) 
+             <foreach collection="list" item="item" index="index" separator="union all">
+				select #{item.empCode, jdbcType=VARCHAR},#{item.empName, jdbcType=VARCHAR},#{item.deptId, jdbcType=VARCHAR},#{item.deptName, jdbcType=VARCHAR},#{item.organization, jdbcType=VARCHAR},#{item.dutyId, jdbcType=VARCHAR},#{item.dutyName, jdbcType=VARCHAR},#{item.empType, jdbcType=VARCHAR},#{item.empMobile, jdbcType=VARCHAR},#{item.empAttribute, jdbcType=VARCHAR},#{item.isHeadquarters, jdbcType=NUMERIC},#{item.isLeader, jdbcType=NUMERIC},#{item.empStus, jdbcType=NUMERIC},#{item.innerFlg, jdbcType=NUMERIC},#{item.creattime, jdbcType=TIMESTAMP} from dual
+			</foreach>
+    </insert>   
+   
+   <sql id="fcboxEmployee_Where_Clause"> 
+   		<trim prefix=" WHERE  " prefixOverrides="AND">
+   		    	        <if test="empCode!=null and empCode!='' ">
+   		    	        	AND EMP_CODE=#{empCode , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="empName!=null and empName!='' ">
+   		    	        	AND EMP_NAME=#{empName , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="deptId!=null and deptId!='' ">
+   		    	        	AND DEPT_ID=#{deptId , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="deptName!=null and deptName!='' ">
+   		    	        	AND DEPT_NAME=#{deptName , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="organization!=null and organization!='' ">
+   		    	        	AND ORGANIZATION=#{organization , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="dutyId!=null and dutyId!='' ">
+   		    	        	AND DUTY_ID=#{dutyId , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="dutyName!=null and dutyName!='' ">
+   		    	        	AND DUTY_NAME=#{dutyName , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="empType!=null and empType!='' ">
+   		    	        	AND EMP_TYPE=#{empType , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="empMobile!=null and empMobile!='' ">
+   		    	        	AND EMP_MOBILE=#{empMobile , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="empAttribute!=null and empAttribute!='' ">
+   		    	        	AND EMP_ATTRIBUTE=#{empAttribute , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="isHeadquarters!=null and isHeadquarters!='' ">
+   		    	        	AND IS_HEADQUARTERS=#{isHeadquarters , jdbcType=NUMERIC} 
+						</if>
+   		    	        <if test="isLeader!=null and isLeader!='' ">
+   		    	        	AND IS_LEADER=#{isLeader , jdbcType=NUMERIC} 
+						</if>
+   		    	        <if test="empStus!=null and empStus!='' ">
+   		    	        	AND EMP_STUS=#{empStus , jdbcType=NUMERIC} 
+						</if>
+   		    	        <if test="innerFlg!=null and innerFlg!='' ">
+   		    	        	AND INNER_FLG=#{innerFlg , jdbcType=NUMERIC} 
+						</if>
+   		    	        <if test="creattime!=null and creattime!='' ">
+   		    	        	AND CREATTIME=#{creattime , jdbcType=TIMESTAMP} 
+						</if>
+   		 </trim>   
+   </sql>
+   
+   <update id="updateFcboxEmployeeByPk" parameterType="com.fcbox.easyui.vo.FcboxEmployeeDto" >
+   		UPDATE fcbox_employee 
+   			SET
+   			<trim suffix=" " suffixOverrides=","> 
+   		    	        <if test="empName!=null and empName!='' ">
+   		    	        	EMP_NAME=#{empName , jdbcType=VARCHAR},
+						</if>
+   		    	        <if test="deptId!=null and deptId!='' ">
+   		    	        	DEPT_ID=#{deptId , jdbcType=VARCHAR},
+						</if>
+   		    	        <if test="deptName!=null and deptName!='' ">
+   		    	        	DEPT_NAME=#{deptName , jdbcType=VARCHAR},
+						</if>
+   		    	        <if test="organization!=null and organization!='' ">
+   		    	        	ORGANIZATION=#{organization , jdbcType=VARCHAR},
+						</if>
+   		    	        <if test="dutyId!=null and dutyId!='' ">
+   		    	        	DUTY_ID=#{dutyId , jdbcType=VARCHAR},
+						</if>
+   		    	        <if test="dutyName!=null and dutyName!='' ">
+   		    	        	DUTY_NAME=#{dutyName , jdbcType=VARCHAR},
+						</if>
+   		    	        <if test="empType!=null and empType!='' ">
+   		    	        	EMP_TYPE=#{empType , jdbcType=VARCHAR},
+						</if>
+   		    	        <if test="empMobile!=null and empMobile!='' ">
+   		    	        	EMP_MOBILE=#{empMobile , jdbcType=VARCHAR},
+						</if>
+   		    	        <if test="empAttribute!=null and empAttribute!='' ">
+   		    	        	EMP_ATTRIBUTE=#{empAttribute , jdbcType=VARCHAR},
+						</if>
+   		    	        <if test="isHeadquarters!=null and isHeadquarters!='' ">
+   		    	        	IS_HEADQUARTERS=#{isHeadquarters , jdbcType=NUMERIC},
+						</if>
+   		    	        <if test="isLeader!=null and isLeader!='' ">
+   		    	        	IS_LEADER=#{isLeader , jdbcType=NUMERIC},
+						</if>
+   		    	        <if test="empStus!=null and empStus!='' ">
+   		    	        	EMP_STUS=#{empStus , jdbcType=NUMERIC},
+						</if>
+   		    	        <if test="innerFlg!=null and innerFlg!='' ">
+   		    	        	INNER_FLG=#{innerFlg , jdbcType=NUMERIC},
+						</if>
+   		    	        <if test="creattime!=null and creattime!='' ">
+   		    	        	CREATTIME=#{creattime , jdbcType=TIMESTAMP},
+						</if>
+   		    </trim>
+   		WHERE 
+   		    EMP_CODE=#{empCode, jdbcType=VARCHAR} 
+   </update>
+   
+   <select id="selectFcboxEmployeeByPk" parameterType="com.fcbox.easyui.vo.FcboxEmployeeDto" resultMap="fcboxEmployeeResultMap">
+   		SELECT EMP_CODE,EMP_NAME,DEPT_ID,DEPT_NAME,ORGANIZATION,DUTY_ID,DUTY_NAME,EMP_TYPE,EMP_MOBILE,EMP_ATTRIBUTE,IS_HEADQUARTERS,IS_LEADER,EMP_STUS,INNER_FLG,CREATTIME FROM  fcbox_employee WHERE   EMP_CODE=#{empCode, jdbcType=VARCHAR}
+   </select>
+   
+   <select id="selectFcboxEmployeeByDto" parameterType="com.fcbox.easyui.vo.FcboxEmployeeDto" resultMap="fcboxEmployeeResultMap">
+   		SELECT EMP_CODE,EMP_NAME,DEPT_ID,DEPT_NAME,ORGANIZATION,DUTY_ID,DUTY_NAME,EMP_TYPE,EMP_MOBILE,EMP_ATTRIBUTE,IS_HEADQUARTERS,IS_LEADER,EMP_STUS,INNER_FLG,CREATTIME FROM  fcbox_employee 
+   		<include refid="fcboxEmployee_Where_Clause" />
+   </select>
+
+   <delete id="deleteFcboxEmployeeByPk" parameterType="com.fcbox.easyui.vo.FcboxEmployeeDto">
+   		DELETE FROM fcbox_employee WHERE EMP_CODE=#{empCode, jdbcType=VARCHAR}
+   </delete>
+ 	
+</mapper>
