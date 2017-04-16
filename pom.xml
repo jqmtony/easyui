@@ -66,10 +66,6 @@
         <!-- elastic-job版本号 -->
         <elastic-job-lite-core.version>2.0.3</elastic-job-lite-core.version>
         <elastic-job-lite-spring.version>2.0.3</elastic-job-lite-spring.version>
-        <!--zencbox-common版本号-->
-        <fcbox-common.version>0.0.1-SNAPSHOT</fcbox-common.version>
-        <fcbox-uic.version>2.2.0-SNAPSHOT</fcbox-uic.version>
-        <fcbox-operation.version>1.1.0-SNAPSHOT</fcbox-operation.version>
     </properties>
 
     <dependencies>
@@ -349,48 +345,6 @@
         </dependency>
     </dependencies>
 
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <properties>
-                <tomcat7.deploy.url>http://10.202.10.53:58088/manager/text</tomcat7.deploy.url>
-                <elastic-job.zookeeper.host>localhost:2181</elastic-job.zookeeper.host>
-                <disconf.server.host>10.202.52.23:8081</disconf.server.host>
-                <disconf.env>rd</disconf.env>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-
-        <profile>
-            <id>uat</id>
-            <properties>
-                <tomcat7.deploy.url>http://10.202.10.53:58088/manager/text</tomcat7.deploy.url>
-                <elastic-job.zookeeper.host>10.202.33.163:2181,10.202.33.164:2181,10.202.33.181:2181</elastic-job.zookeeper.host>
-                <disconf.server.host>10.202.52.23:8081</disconf.server.host>
-                <disconf.env>qa</disconf.env>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>prd</id>
-            <properties>
-                <tomcat7.deploy.url>http://10.116.194.48:8080/manager/text</tomcat7.deploy.url>
-                <elastic-job.zookeeper.host>10.116.194.96:2181,10.116.194.97:2181,10.116.194.98:2181</elastic-job.zookeeper.host>
-                <disconf.server.host>10.116.194.91</disconf.server.host>
-                <disconf.env>online</disconf.env>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>fcprd</id>
-            <properties>
-                <disconf.server.host>10.204.8.67</disconf.server.host>
-                <disconf.env>online</disconf.env>
-            </properties>
-        </profile>
-    </profiles>
 
     <build>
         <plugins>
@@ -421,43 +375,20 @@
         </plugins>
     </build>
 
-
-
-    <repositories>
+    <repositories><!-- 代码库 -->
         <repository>
-            <id>internal</id>
-            <name>Archiva Managed Internal Repository</name>
-            <url>http://hq-op-461242a.sf.com:8787/archiva/repository/internal/</url>
+            <id>maven-ali</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public//</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
             <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>snapshots</id>
-            <name>Archiva Managed Snapshot Repository</name>
-            <url>http://hq-op-461242a.sf.com:8787/archiva/repository/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
                 <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
             </snapshots>
         </repository>
     </repositories>
-    <distributionManagement>
-        <repository>
-            <id>internal</id>
-            <url>http://hq-op-461242a.sf.com:8787/archiva/repository/internal/</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Archiva Managed Snapshot Repository</name>
-            <url>http://hq-op-461242a.sf.com:8787/archiva/repository/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <modules>
         <module>easyui-tag</module>
