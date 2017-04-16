@@ -2,9 +2,6 @@ package com.zen.easyui.util;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-/**
- * Created by 000538 on 2017/4/14.
- */
 public class TriStringUtil {
 
     /**

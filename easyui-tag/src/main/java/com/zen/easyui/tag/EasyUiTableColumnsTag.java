@@ -8,9 +8,6 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.Tag;
 
 
-/**
- * @author hexuming
- */
 public class EasyUiTableColumnsTag extends BodyTagSupport {
     private static final long serialVersionUID = -4308552552551957488L;
 

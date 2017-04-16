@@ -8,9 +8,6 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
 
-/**
- * @author hexuming
- */
 public class EasyUiDatagridToolbarTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 598209081781510962L;

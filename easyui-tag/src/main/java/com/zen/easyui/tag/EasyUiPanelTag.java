@@ -8,15 +8,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
-/**
- * EasyUiPanelTag.java
- * <p>
- * comments:
- *
- * @author hexuming
- * @creation date        Oct 31, 2012
- * @version Version_2012
- */
 public class EasyUiPanelTag extends BodyTagSupport {
     private static final long serialVersionUID = 1980539023299830443L;
 

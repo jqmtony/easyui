@@ -1,14 +1,5 @@
 package com.zen.easyui.constant;
 
-/**
- * GlobalConstant.java
- * 
- * comments:  
- * 
- * @author          hexuming:
- * @creation date   Nov 23, 2012
- * @version         Version_2012
- */
 public class GlobalConstant {
 
 

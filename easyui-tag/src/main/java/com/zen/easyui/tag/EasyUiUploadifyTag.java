@@ -8,15 +8,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 
-/**
- * EasyUiUploadifyTag.java
- * <p>
- * comments:	上传标签
- *
- * @author Administrator
- * @creation date        2013-5-10
- * @version Version_2012
- */
 public class EasyUiUploadifyTag extends TagSupport {
     protected String id;// ID
 

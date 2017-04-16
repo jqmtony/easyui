@@ -10,10 +10,6 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 import java.util.*;
 
-/**
- * @author hexuming
- *         针对EasyUi的TreeGrid的封装
- */
 public class EasyUiTreegridTableTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 91284553969493878L;

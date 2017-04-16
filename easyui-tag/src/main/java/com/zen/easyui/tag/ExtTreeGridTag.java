@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * 针对Ext的TreeGrid的封装 (解决easyui性能慢)
- */
 public class ExtTreeGridTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 91284553969493878L;

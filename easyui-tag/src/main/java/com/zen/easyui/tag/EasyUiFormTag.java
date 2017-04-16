@@ -10,10 +10,6 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
 
-/**
- * @author hexuming
- *         针对EasyUi的Datagrid的封装
- */
 public class EasyUiFormTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 91284553969493878L;

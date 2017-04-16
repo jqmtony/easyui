@@ -5,15 +5,6 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-/**
- * TriObjectHelper.java
- * <p>
- * comments:  对象转换
- *
- * @author hexuming
- * @version Version_2012
- * @creation date   Oct 22, 2012
- */
 public class TriObjectHelper {
 
     // 尽量用日志记录调试信息

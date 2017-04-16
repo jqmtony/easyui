@@ -8,9 +8,6 @@ import javax.servlet.jsp.tagext.Tag;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
-/**
- * @author ADMINISTRATOR
- */
 public class ExtTreeGridColumnTag extends TagSupport implements Cloneable {
     private static final long serialVersionUID = -4308552552551957488L;
 

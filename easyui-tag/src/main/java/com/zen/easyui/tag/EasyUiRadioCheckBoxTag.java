@@ -14,15 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 
 
-/**
- * EasyUiComboGridTag.java
- * <p>
- * comments:
- *
- * @author hexuming
- * @version Version_2012
- * @creation date Oct 16, 2012
- */
 public class EasyUiRadioCheckBoxTag extends BodyTagSupport {
     private static final long serialVersionUID = 1634618855354058065L;
 

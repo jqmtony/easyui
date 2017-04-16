@@ -9,9 +9,6 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
 
-/**
- * @author zj
- */
 public class EasyUiFileBoxTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 540064338631167843L;

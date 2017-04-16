@@ -10,15 +10,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 
-/**
- * MessageUtil.java
- * <p>
- * comments:	从资源文件中获取文字
- *
- * @author hexuming
- * @version Version_2012
- * @creation date        Oct 13, 2012
- */
 public class MessageUtil {
 
     private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());

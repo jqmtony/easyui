@@ -7,9 +7,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.Tag;
 import javax.servlet.jsp.tagext.TagSupport;
 
-/**
- * @author hexuming
- */
 public class EasyUiTableColumnTag extends TagSupport implements Cloneable {
     private static final long serialVersionUID = -4308552552551957488L;
 

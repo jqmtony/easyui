@@ -8,10 +8,6 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
 
-/**
- * @author hexuming
- *         下拉框树结构控件
- */
 public class EasyUiTreeTag extends BodyTagSupport {
 
     private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());

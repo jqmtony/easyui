@@ -5,15 +5,6 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-/**
- * EasyUiTabTag.java
- * <p>
- * comments:
- *
- * @author hexuming
- * @version Version_2012
- * @creation date        2013-1-28
- */
 public class EasyUiTabPageTag extends TagSupport implements Cloneable {
 
     private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());

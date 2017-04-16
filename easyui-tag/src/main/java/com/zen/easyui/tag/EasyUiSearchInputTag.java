@@ -8,15 +8,6 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
 
-/**
- * EasyUiSearchInputTag.java
- * <p>
- * comments:
- *
- * @author hexuming
- * @version Version_2012
- * @creation date   Oct 16, 2012
- */
 public class EasyUiSearchInputTag extends BodyTagSupport {
 
     private static final String _HEIGHT = "550";

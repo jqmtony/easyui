@@ -11,16 +11,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * EasyUiDateBoxTag.java
- * <p>
- * comments:
- *
- * @author hexuming
- * @version Version_2012
- * @company IM Tri_stone Information Techonology Co.,Ltd
- * @creation date        Oct 16, 2012
- */
 public class EasyUiDateBoxTag extends BodyTagSupport {
 
     private static final long serialVersionUID = -4306262114383104919L;

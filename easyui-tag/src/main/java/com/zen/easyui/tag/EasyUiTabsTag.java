@@ -11,15 +11,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * EasyUiTabPanelTag.java
- * <p>
- * comments:
- *
- * @author hexuming
- * @creation date        Oct 31, 2012
- * @version Version_2012
- */
 public class EasyUiTabsTag extends BodyTagSupport {
     private static final long serialVersionUID = 1980539023299830443L;
 

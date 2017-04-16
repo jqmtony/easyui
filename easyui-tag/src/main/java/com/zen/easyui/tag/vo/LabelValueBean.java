@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author hexuming
- */
 public class LabelValueBean implements Serializable {
 
     private static final long serialVersionUID = -7969354945746683950L;

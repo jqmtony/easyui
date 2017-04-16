@@ -10,16 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * EasyUiComboGridTag.java
- * <p>
- * comments:
- *
- * @author hexuming
- * @version Version_2012
- * @creation date Oct 16, 2012
- */
 public class EasyUiComboGridTag extends BodyTagSupport {
+
     private static final long serialVersionUID = 1634618855354058065L;
 
     private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());

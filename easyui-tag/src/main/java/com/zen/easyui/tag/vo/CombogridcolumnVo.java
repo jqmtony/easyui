@@ -2,15 +2,6 @@ package com.zen.easyui.tag.vo;
 
 import java.io.Serializable;
 
-/**
- * CombogridcolumnVo.java
- * <p>
- * comments:
- *
- * @author hexuming
- * @creation date        2013-7-11
- * @version Version_2012
- */
 public class CombogridcolumnVo implements Serializable {
 
     private String field; // 字段值

@@ -9,15 +9,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
-/**
- * EasyUiMenuButtonTag.java
- * <p>
- * comments:
- *
- * @author ZhouJun
- * @version Version_2012
- * @creation date   2014年11月13日
- */
 public class EasyUiMenuButtonTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 4040423476954803162L;

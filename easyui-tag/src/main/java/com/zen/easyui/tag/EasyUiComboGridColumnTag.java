@@ -5,15 +5,6 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-/**
- * EasyUiComboGridColumnTag.java
- * <p>
- * comments:
- *
- * @author hexuming
- * @creation date        Oct 16, 2012
- * @version Version_2012
- */
 public class EasyUiComboGridColumnTag extends TagSupport implements Cloneable {
 
     private static final long serialVersionUID = 7931137982528038882L;

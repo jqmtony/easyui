@@ -8,9 +8,6 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
 
-/**
- * @author hexuming
- */
 public class EasyUiMenuTag extends BodyTagSupport {
 
     private static final long serialVersionUID = -8408069492551446646L;
