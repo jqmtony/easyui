@@ -11,7 +11,7 @@
     <name>easyui-web Maven Webapp</name>
     <dependencies>
         <dependency>
-            <groupId>com.fcbox.easyui</groupId>
+            <groupId>com.zen.easyui</groupId>
             <artifactId>easyui-tag</artifactId>
             <version>${project.version}</version>
         </dependency>
