@@ -1,14 +1,11 @@
 package com.zen.easyui.constant;
 
-//com.tristone.platform.general.constant
-
 /**
  * GlobalConstant.java
  * 
  * comments:  
  * 
  * @author          hexuming:
- * @company         IM Tri_stone Information Techonology Co.,Ltd
  * @creation date   Nov 23, 2012
  * @version         Version_2012
  */
