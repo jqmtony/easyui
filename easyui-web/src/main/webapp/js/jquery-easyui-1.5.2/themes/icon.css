@@ -94,3 +94,20 @@
 .icon-large-chart{
 	background:url('icons/large_chart.png') no-repeat center center;
 }
+
+.icon-updown{
+	background:url('icons/updown.png') no-repeat center center;
+}
+.icon-pagination_first{
+	background:url('icons/pagination_first.gif') no-repeat center center;
+}
+.icon-pagination_last{
+	background:url('icons/pagination_last.gif') no-repeat center center;
+}
+.icon-pagination_next{
+	background:url('icons/pagination_next.gif') no-repeat center center;
+}
+.icon-pagination_prev{
+	background:url('icons/pagination_prev.gif') no-repeat center center;
+}
+
