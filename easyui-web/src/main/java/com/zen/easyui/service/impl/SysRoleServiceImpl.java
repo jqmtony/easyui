@@ -1,5 +1,6 @@
 package com.zen.easyui.service.impl;
 
+import com.zen.easyui.common.util.IdentityUtil;
 import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.dao.SysRoleDao;
@@ -9,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
  * @author zen E-mail: xinjingziranchan@gmail.com
@@ -31,6 +34,8 @@ public class SysRoleServiceImpl implements ISysRoleService {
      */
     @Override
     public void addRole(SysRoleDto roleDto) {
+        roleDto.setId(IdentityUtil.dbUuid32());
+        roleDto.setCreateTm(new Date());
         sysRoleDao.insertSysRoleDto(roleDto);
     }
 

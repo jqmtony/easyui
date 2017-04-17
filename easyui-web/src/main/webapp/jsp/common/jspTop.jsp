@@ -25,8 +25,10 @@
 <script src="${pageContext.request.contextPath}/js/jquery-easyui-extensions/jquery.jdirk.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-easyui-extensions/jeasyui.extensions.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-easyui-extensions/jeasyui.extensions.validatebox.js"></script>
+<%--
 <script src="${pageContext.request.contextPath}/js/jquery-easyui-extensions/jeasyui.extensions.form.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-easyui-extensions/jeasyui.extensions.menu.js"></script>
+--%>
 <script src="${pageContext.request.contextPath}/js/jquery-easyui-extensions/jeasyui.extensions.datagrid.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-easyui-extensions/jeasyui.extensions.tree.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-easyui-extensions/jeasyui.extensions.treegrid.js"></script>

@@ -1,5 +1,7 @@
 package com.zen.easyui.service.impl;
 
+import com.zen.easyui.common.util.DesUtil;
+import com.zen.easyui.common.util.IdentityUtil;
 import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.dao.SysUserDao;
@@ -9,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
  * @author zen E-mail: xinjingziranchan@gmail.com
@@ -31,6 +35,9 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     public void addUser(SysUserDto userDto) {
+        userDto.setId(IdentityUtil.dbUuid32());
+        userDto.setPassword(DesUtil.strEncrypt(userDto.getPassword()));
+        userDto.setCreateTm(new Date());
         sysUserDao.insertSysUserDto(userDto);
     }
 
