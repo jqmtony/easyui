@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 数节点对象
  * @ClassName Tree.java
- * @author 000538 E-mail: jinjing@zen.com
+ * @author zen E-mail: xinjingziranchan@gmail.com
  * @Date 2017年3月17日 上午9:40:05
  * @version 1.0.0
  */
