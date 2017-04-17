@@ -1,4 +1,4 @@
-package com.zen.easyui.common;
+package com.zen.easyui.common.vo;
 
 import java.io.Serializable;
 import java.util.List;

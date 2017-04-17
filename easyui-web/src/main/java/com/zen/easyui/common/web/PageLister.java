@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.zen.easyui.common;
+package com.zen.easyui.common.web;
 
 import com.github.pagehelper.Page;
 

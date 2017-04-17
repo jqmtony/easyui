@@ -1,4 +1,4 @@
-package com.zen.easyui.common;
+package com.zen.easyui.common.web;
 
 import java.io.Serializable;
 

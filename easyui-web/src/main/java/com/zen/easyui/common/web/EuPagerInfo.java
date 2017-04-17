@@ -1,4 +1,4 @@
-package com.zen.easyui.common;
+package com.zen.easyui.common.web;
 
 import com.zen.easyui.util.TriRegulation;
 import com.github.pagehelper.PageHelper;

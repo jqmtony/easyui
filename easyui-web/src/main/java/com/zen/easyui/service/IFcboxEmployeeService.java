@@ -1,7 +1,7 @@
 package com.zen.easyui.service;
 
-import com.zen.easyui.common.EuPagerInfo;
-import com.zen.easyui.common.PageLister;
+import com.zen.easyui.common.web.EuPagerInfo;
+import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.vo.FcboxEmployeeDto;
 
 import java.util.List;

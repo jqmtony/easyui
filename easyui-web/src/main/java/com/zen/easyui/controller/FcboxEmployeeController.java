@@ -1,10 +1,10 @@
 package com.zen.easyui.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.zen.easyui.common.EditEnum;
-import com.zen.easyui.common.EuPagerInfo;
-import com.zen.easyui.common.PageLister;
-import com.zen.easyui.common.ResultDto;
+import com.zen.easyui.common.enums.EditEnum;
+import com.zen.easyui.common.web.EuPagerInfo;
+import com.zen.easyui.common.web.PageLister;
+import com.zen.easyui.common.web.ResultDto;
 import com.zen.easyui.service.IFcboxEmployeeService;
 import com.zen.easyui.vo.FcboxEmployeeDto;
 import org.springframework.beans.factory.annotation.Autowired;
