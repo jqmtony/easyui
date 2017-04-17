@@ -50,7 +50,8 @@ public class SysUserController {
     /**
      * 跳转到用户编辑页面
      *
-     * @param modelAndView
+     * @param userDto
+     * @param editFlag
      * @return
      */
     @RequestMapping(value = "/toEditPage")

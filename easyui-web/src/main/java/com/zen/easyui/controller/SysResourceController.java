@@ -50,7 +50,8 @@ public class SysResourceController {
     /**
      * 跳转到资源编辑页面
      *
-     * @param modelAndView
+     * @param resourceDto
+     * @param editFlag
      * @return
      */
     @RequestMapping(value = "/toEditPage")

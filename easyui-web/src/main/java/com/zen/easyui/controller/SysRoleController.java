@@ -50,7 +50,8 @@ public class SysRoleController {
     /**
      * 跳转到角色编辑页面
      *
-     * @param modelAndView
+     * @param roleDto
+     * @param editFlag
      * @return
      */
     @RequestMapping(value = "/toEditPage")
