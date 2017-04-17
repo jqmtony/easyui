@@ -469,21 +469,6 @@ function ajaxPost(url, callback) {
 	});
 }
 
-/**
- * 使用Ajax的get方式获取数据
- * 
- * @param url
- * @param callback
- *            2012年11月12日修改：由于IE下，get方式导致许多错误，这里全部使用Post方式，经过测试，对原有程序没有影响
- */
-function ajaxGet(url, callback) {
-	var resultArr = getJson4Url(url);
-	$.post(resultArr[0], (resultArr[1].length > 0 ? evalObj(resultArr[1])
-			: null), function(result) {
-		callback(result);
-	});
-}
-
 // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -584,143 +569,6 @@ function isFunction(obj) {
 	return (typeof obj == 'function') && obj.constructor == Function;
 }
 
-/**
- * 记录是否已锁定或有效
- * 
- * @param val
- *            值（0，1）
- * @param node
- *            节点
- */
-function formatLockOrNot(val, node) {
-	if ("0" == val) {
-		return "<span class='l-btn-text icon-no' style='padding-left: 40px;'>"
-				+ formatLock + "</span>";
-	} else {
-		return "<span class='l-btn-text icon-ok' style='padding-left: 40px;'>"
-				+ formatUnlock + "</span>";
-	}
-}
-
-function formatInterfaceOrNot(val, node) {
-	if ("0" == val) {
-		return "<span class='l-btn-text icon-no' style='padding-left: 30px;'>"
-				+ formatNo + "</span>";
-	} else {
-		return "<span class='l-btn-text icon-ok' style='padding-left: 30px;'>"
-				+ formatYes + "</span>";
-	}
-}
-function formatValOrNo(val, node) {
-	if ("0" == val) {
-		return "<span class='l-btn-text icon-no' style='padding-left: 30px;'>"
-				+ formatNo + "</span>";
-	} else {
-		return "<span class='l-btn-text icon-ok' style='padding-left: 30px;'>"
-				+ formatYes + "</span>";
-	}
-}
-function formatValueYesOrNo(val, node) {
-	if ("0" == val) {
-		return "<span class='l-btn-text icon-no' style='padding-left: 30px;'>"
-				+ formatNo + "</span>";
-	} else {
-		return "<span class='l-btn-text icon-ok' style='padding-left: 30px;'>"
-				+ formatYes + "</span>";
-	}
-}
-
-function formatStaticYesOrNo(val, node) {
-	if ("1" == val) {
-		return "<span class='l-btn-text icon-ok' style='padding-left: 30px;'>"
-				+ formatYes + "</span>";
-	} else {
-		return "<span class='l-btn-text icon-no' style='padding-left: 30px;'>"
-				+ formatNo + "</span>";
-	}
-}
-function formatModuleName(val, node) {
-	if ("BS" == val) {
-		return "基础模块";
-	} else if ("ERP" == val) {
-		return "工艺模块";
-	} else if ("PM" == val) {
-		return "生产模块";
-	} else if ("DM" == val) {
-		return "设备模块";
-	} else if ("WMS" == val) {
-		return "仓库模块";
-	} else if ("QC" == val) {
-		return "质量模块";
-	} else if ("PC_SA" == val) {
-		return "采购销售模块";
-	}
-}
-function formatChartType(val, node) {
-	if ("1" == val) {
-		return "柱状图";
-	} else if ("2" == val) {
-		return "饼状图";
-	} else {
-		return "条形图";
-	}
-}
-function formatResourceType(val, node) {
-	if ("1" == val) {
-		return "url链接";
-	} else if ("2" == val) {
-		return "table数据表格";
-	} else {
-		return "图表";
-	}
-}
-
-function formatStatus(value, rowData, rowIndex) {
-	if (value == "0") {
-		return "新建";
-	} else if (value == "1") {
-		return "审核通过";
-	} else if (value == "2") {
-		return "弃审";
-	} else if (value == "3") {
-		return "关闭";
-	} else {
-		return value;
-	}
-}
-
-/**
- * 格式化FORM类型
- * @param val
- * @param node
- * @returns {String}
- */
-function formatFormType(val, node) {
-	if("1" == val) {
-		return "独立form";
-	} else if("2" == val) {
-		return "框架布局form";
-	} else if("3" == val) {
-		return "布局主form";
-	} else if("4" == val) {
-		return "布局子form";
-	}
-}
-/**
- * 字段默认类型（无,常量,REQUEST）
- * @param val
- * @param node
- * @returns
- */
-function formatFieldDefaultType(val, node) {
-	if("0" == val) {
-		return "无";
-	} else if("1" == val) {
-		return "常量";
-	} else if("2" == val) {
-		return "REQUEST";
-	}
-}
 // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -1005,7 +853,6 @@ function compareToDate(sdate, edate) {
 	}
 }
 
-
 /**
  * 执行方法反射
  */
@@ -1018,16 +865,4 @@ function executeReflectFun() {
 		}
 	}
 	pageFunctionArr = null;
-}
-
-function formatUseArea(val, node) {
-	if ("0" == val) {
-		return "通用";
-	} else if ("1" == val) {
-		return "FORM编辑";
-	} else if ("2" == val) {
-		return "列表行编辑";
-	} else {
-		return "";
-	}
 }
