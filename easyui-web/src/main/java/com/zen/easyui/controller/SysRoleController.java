@@ -2,7 +2,7 @@ package com.zen.easyui.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.zen.easyui.common.constant.GlobalConstant;
-import com.zen.easyui.common.enums.EditEnum;
+import com.zen.easyui.common.enums.EditFlagEnum;
 import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.common.web.ResultDto;
@@ -31,7 +31,7 @@ public class SysRoleController {
     @RequestMapping(value = "/toListPage")
     ModelAndView toListPage() {
         ModelAndView modelAndView = new ModelAndView(GlobalConstant.LIST_PAGE);
-        modelAndView.addObject("page", "jsp/sys/listRole");
+        modelAndView.addObject(GlobalConstant.TO_PAGE_PARAM_NAME, "jsp/sys/listRole");
         return modelAndView;
     }
 
@@ -54,13 +54,13 @@ public class SysRoleController {
      * @return
      */
     @RequestMapping(value = "/toEditPage")
-    ModelAndView toEditPage(SysRoleDto roleDto, String flag) {
+    ModelAndView toEditPage(SysRoleDto roleDto, String editFlag) {
         ModelAndView modelAndView = new ModelAndView(GlobalConstant.EDIT_PAGE);
-        if (EditEnum.UPDATE.name().equalsIgnoreCase(flag)) {//修改
-            modelAndView.addObject("formJson", JSON.toJSONString(sysRoleService.getRoleByPk(roleDto)));
+        if (EditFlagEnum.UPDATE.name().equalsIgnoreCase(editFlag)) {//修改
+            modelAndView.addObject(GlobalConstant.EDIT_PAGE_VALUES_PARAM_NAME, JSON.toJSONString(sysRoleService.getRoleByPk(roleDto)));
         }
-        modelAndView.addObject("flag", flag);
-        modelAndView.addObject("page", "jsp/sys/editRole");
+        modelAndView.addObject(GlobalConstant.EDIT_PAGE_FLAG_PARAM_NAME, editFlag);
+        modelAndView.addObject(GlobalConstant.TO_PAGE_PARAM_NAME, "jsp/sys/editRole");
         return modelAndView;
     }
 
@@ -68,14 +68,14 @@ public class SysRoleController {
      * 编辑角色信息
      *
      * @param roleDto
-     * @param flag
+     * @param editFlag
      * @return
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    ResultDto<Void> edit(SysRoleDto roleDto, String flag) {
+    ResultDto<Void> edit(SysRoleDto roleDto, String editFlag) {
         ResultDto<Void> resultDto = new ResultDto<>();
         try {
-            if (EditEnum.UPDATE.name().equalsIgnoreCase(flag)) {//修改
+            if (EditFlagEnum.UPDATE.name().equalsIgnoreCase(editFlag)) {//修改
                 sysRoleService.updateRoleByPk(roleDto);
             } else {//新增
                 sysRoleService.addRole(roleDto);

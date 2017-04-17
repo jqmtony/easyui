@@ -2,7 +2,7 @@ package com.zen.easyui.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.zen.easyui.common.constant.GlobalConstant;
-import com.zen.easyui.common.enums.EditEnum;
+import com.zen.easyui.common.enums.EditFlagEnum;
 import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.common.web.ResultDto;
@@ -31,7 +31,7 @@ public class SysUserController {
     @RequestMapping(value = "/toListPage")
     ModelAndView toListPage() {
         ModelAndView modelAndView = new ModelAndView(GlobalConstant.LIST_PAGE);
-        modelAndView.addObject("page", "jsp/sys/listUser");
+        modelAndView.addObject(GlobalConstant.TO_PAGE_PARAM_NAME, "jsp/sys/listUser");
         return modelAndView;
     }
 
@@ -54,13 +54,13 @@ public class SysUserController {
      * @return
      */
     @RequestMapping(value = "/toEditPage")
-    ModelAndView toEditPage(SysUserDto userDto, String flag) {
+    ModelAndView toEditPage(SysUserDto userDto, String editFlag) {
         ModelAndView modelAndView = new ModelAndView(GlobalConstant.EDIT_PAGE);
-        if (EditEnum.UPDATE.name().equalsIgnoreCase(flag)) {//修改
-            modelAndView.addObject("formJson", JSON.toJSONString(sysUserService.getUserByPk(userDto)));
+        if (EditFlagEnum.UPDATE.name().equalsIgnoreCase(editFlag)) {//修改
+            modelAndView.addObject(GlobalConstant.EDIT_PAGE_VALUES_PARAM_NAME, JSON.toJSONString(sysUserService.getUserByPk(userDto)));
         }
-        modelAndView.addObject("flag", flag);
-        modelAndView.addObject("page", "jsp/sys/editUser");
+        modelAndView.addObject(GlobalConstant.EDIT_PAGE_FLAG_PARAM_NAME, editFlag);
+        modelAndView.addObject(GlobalConstant.TO_PAGE_PARAM_NAME, "jsp/sys/editUser");
         return modelAndView;
     }
 
@@ -68,14 +68,14 @@ public class SysUserController {
      * 编辑用户信息
      *
      * @param userDto
-     * @param flag
+     * @param editFlag
      * @return
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    ResultDto<Void> edit(SysUserDto userDto, String flag) {
+    ResultDto<Void> edit(SysUserDto userDto, String editFlag) {
         ResultDto<Void> resultDto = new ResultDto<>();
         try {
-            if (EditEnum.UPDATE.name().equalsIgnoreCase(flag)) {//修改
+            if (EditFlagEnum.UPDATE.name().equalsIgnoreCase(editFlag)) {//修改
                 sysUserService.updateUserByPk(userDto);
             } else {//新增
                 sysUserService.addUser(userDto);

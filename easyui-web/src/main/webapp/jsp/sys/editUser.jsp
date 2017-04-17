@@ -20,7 +20,7 @@
                 <td class="columnTitle" >用户名</td>
                 <td class="columnData">
                     <eu:text id="editName" name="name" required="true" />
-                    <input type="hidden" name="flag" value="${flag}"/>
+                    <input type="hidden" name="editFlag" value="${editFlag}"/>
                 </td>
             </tr>
             <tr>

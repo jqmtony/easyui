@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/jsp/common/taglibs.jsp"%>
+<%@page import="com.zen.easyui.common.constant.GlobalConstant"%>
 <jsp:include page="/easyui/common/toEditPage"></jsp:include>
 
 <script type="text/javascript">
@@ -9,12 +10,12 @@ $(document).ready(function(){
 	var lastForm = getLastWindowCurrentForm();
 	//alert("loadJsonTempForm=" + loadJsonTempForm + "   ,  document getLastWindowCurrentForm=" + lastForm);
 	//easyui所有对象解析完成后，触发事件
-$.parser.onComplete = function () {
+    $.parser.onComplete = function () {
 		if (isEmpty(loadJsonTempForm) || loadJsonTempForm.indexOf(lastForm)<0) {
 			//alert("execute editCommon begin" );
 			var formJson = ${requestScope.formJson!= null? requestScope.formJson : "''"};
-			//为修改界面，自动赋值到文本框 
-			if(${requestScope.flag != null} && ${requestScope.flag == "update"} && !isEmpty(formJson)){
+			//为修改界面，自动赋值到文本框
+			if(${requestScope.editFlag != null} && ${requestScope.editFlag == "update"} && !isEmpty(formJson)){
 				loadJsonTempForm.push(lastForm);
 				//alert("unloadCombogridNum="+unloadCombogridNum + "--------unloadCombotreeNum="+unloadCombotreeNum);
 				if (unloadCombotreeNum>0) {
@@ -32,7 +33,7 @@ $.parser.onComplete = function () {
 				//检查是否刷新（修改页面）
 				setTimeout('isAutoReloadDatagrid()',200);
 			}else{
-				//alert("flag=" + '${requestScope.flag}' +"fromJson=" + '${requestScope.formJson}');
+				//alert("editFlag=" + '${requestScope.editFlag}' +"fromJson=" + '${requestScope.formJson}');
 				//alert("setTimeout('isAutoCombogrid()',200)");
 				//下拉框根据父界面自动定位(添加时),定位完后，再进行页面数据列表加载。
 				setTimeout('isAutoCombogrid()',200);
@@ -54,7 +55,7 @@ function loadFormJson4EditPage() {
 	var formJson = ${requestScope.formJson!= null? requestScope.formJson : "''"};
 	if (!isEmpty(formJson)) {
 		//alert("loadFormJson4EditPage formJson is not null ===="+formJson);
-		
+
 		if(${requestScope.editFormId != null}){
 			loadFormJson("${requestScope.editFormId}", formJson);
 		}else if (${requestScope.formNum != null}) {
@@ -63,19 +64,19 @@ function loadFormJson4EditPage() {
 				$(".popupWindowContainer form").each(function(index){
 					loadFormJsonObj($(".popupWindowContainer form")[index], formJson);
 				});
-			} else {				
+			} else {
 				//parseInt("${requestScope.formNum}")加载第几个FORM
 				//alert("加载第几个FORM");
 				loadFormJsonObj($(".popupWindowContainer form")[parseInt("${requestScope.formNum}")], formJson);
 			}
-		} else {			
+		} else {
 			var currentForm = getLastWindowCurrentForm();
 			if (!isEmpty(currentForm) && formJson!= null) {
 				//alert("loadFormJson=============begin! currentForm="+currentForm);
-				//loadFormJson(currentForm, evalObj(formJson));	
-				loadFormJson(currentForm, formJson);	
+				//loadFormJson(currentForm, evalObj(formJson));
+				loadFormJson(currentForm, formJson);
 				//alert("loadFormJson=============end!");
-			}	
+			}
 			//当数据赋值完成后，自动触发一次已选中对象的change事件//$("input:radio||checkbox:checked").change();
 			$(currentForm).find("input:checked").each(function(){
 					$(this).change();
@@ -89,17 +90,17 @@ function loadFormJson4EditPage() {
 function isAutoReloadDatagrid(){
 	//下拉框定位数据后，执行一次查询
 	var searchButton = getCurrentPageSearchButton();
-	//alert("searchButton.size()="+searchButton.size() + ",filterSearchButtonRecord="+filterSearchButtonRecord);  
+	//alert("searchButton.size()="+searchButton.size() + ",filterSearchButtonRecord="+filterSearchButtonRecord);
 	searchButton.each(function(i){
-		//alert("each searchButton."+i+" id="+$(this).attr("id"));  
+		//alert("each searchButton."+i+" id="+$(this).attr("id"));
 	})
 	//判断是否存在“查询”按钮，存在，则执行
-	if((${requestScope.doSearch == null} || ${requestScope.doSearch != "false"}) && searchButton.size()!=0 
+	if((${requestScope.doSearch == null} || ${requestScope.doSearch != "false"}) && searchButton.size()!=0
 			&& filterSearchButtonRecord.indexOf(searchButton.attr("id"))<0){
 		//alert("unloadCombogridNum="+unloadCombogridNum+",unloadDatagridIds="+unloadDatagridIds + "searchButton.id=" + searchButton.attr("id") + ", searchButton.size()="+searchButton.size());
 		if (unloadCombogridNum<=0) {
 			searchButton.each(function(i){
-			    filterSearchButtonRecord += $(this).attr("id") + ",";	
+			    filterSearchButtonRecord += $(this).attr("id") + ",";
 			})
 			//alert("excutePageSearchButton ========searchButton.id=" + searchButton.attr("id"));
 			excutePageSearchButton(searchButton);
@@ -110,7 +111,7 @@ function isAutoReloadDatagrid(){
 		//不存在“查询”按钮，判断是否存在datagrid或treegrid，如果存在，则自动刷新
 		//alert("unloadDatagridIds="+unloadDatagridIds + "and !!!!  searchButton.size()="+searchButton.size());
 		//datagrid url加载
-		if (!isEmpty(unloadDatagridIds)) {		
+		if (!isEmpty(unloadDatagridIds)) {
 			var datagrids = unloadDatagridIds.split(",");
 			for(i=0;i<datagrids.length;i++) {
 				if (!isEmpty(datagrids[i])) {
@@ -119,7 +120,7 @@ function isAutoReloadDatagrid(){
 					//$("#" + datagrids[i]).datagrid("reload");
 					}
 				}
-		} 
+		}
 		//treegrid url加载
 		if (!isEmpty(unloadTreegridIds)) {
 				var treegrids = unloadTreegridIds.split(",");
@@ -129,7 +130,7 @@ function isAutoReloadDatagrid(){
 						reloadTreegrid(treegrids[i]);
 						}
 					}
-			}		
+			}
 	}	//完成后初始全局变量值
 	unloadCombotreeIds = "";
 	unloadCombogridIds = "";
@@ -150,19 +151,19 @@ var setIntervalIdLoadFormJson ;
 var cycleNum = 6;
 function isAutoCombogrid(){
 	//alert("execute function isAutoCombogrid");
-	var comp = $(".editTable select[class^='sign-combobox'][autoValueCombo='true']");	
+	var comp = $(".editTable select[class^='sign-combobox'][autoValueCombo='true']");
 	if(${requestScope.autoCombogrid != "false"} && comp.size()!=0 && unloadCombogridNum>0){//是否有需要自动赋值的下拉框  出现isloadSuccess会为负数的情况，所以isloadSuccess>0
 		if (unloadCombogridNum<=0) {
 			//alert("unloadCombogridNum="+unloadCombogridNum + " execute autoCombogrid");
 			autoCombogrid();
 		} else {
 			setIntervalIdCombogrid = window.setInterval("startAutoCombogridValidate()",200);
-		}		
+		}
 	} else {
 		//alert("unloadCombogridNum<0 execute isAutoReloadDatagrid");
 		//检查是否刷新
 		isAutoReloadDatagrid();
-	}		
+	}
 }
 
 /**
@@ -174,7 +175,7 @@ function startAutoCombogridValidate() {
 		if (unloadCombogridNum<=0) {
 			window.clearInterval(setIntervalIdCombogrid);
 			autoCombogrid();
-		} 
+		}
 		 ++tempNumCombogrid;
 		} else {
 			window.clearInterval(setIntervalIdCombogrid);
@@ -191,7 +192,7 @@ function startAutoCombogridValidate() {
 			if (unloadCombogridNum<=0) {
 				loadFormJson4EditPage();
 				window.clearInterval(setIntervalIdLoadFormJson);
-			} 
+			}
 			 ++tempNumCombogrid;
 			} else {
 				loadFormJson4EditPage();
@@ -207,7 +208,7 @@ function startAutoCombogridValidate() {
  			if (unloadCombotreeNum<=0) {
  				loadFormJson4EditPage();
  				window.clearInterval(setIntervalIdLoadFormJson);
- 			} 
+ 			}
  			 ++tempNumCombotree;
  			} else {
  				loadFormJson4EditPage();
@@ -216,10 +217,10 @@ function startAutoCombogridValidate() {
  	}
 
 //下拉框根据父界面自动定位
-function autoCombogrid(){	
-	var comp = $(".editTable select[class^='sign-combobox'][autoValueCombo='true']");		
+function autoCombogrid(){
+	var comp = $(".editTable select[class^='sign-combobox'][autoValueCombo='true']");
 	comp.each(function(i){
-		var compid = $(".formTable  select[class^='sign-combobox'][comboname='"+$(this).attr('comboname')+"']").attr('id');		
+		var compid = $(".formTable  select[class^='sign-combobox'][comboname='"+$(this).attr('comboname')+"']").attr('id');
 		if (!isEmpty(compid) && !isEmpty($("#"+compid).combogrid('getValue'))) {
 			$(this).combogrid('setValue', $("#"+compid).combogrid('getValue'));
 			$(this).attr("autoValueCombo","false");
@@ -233,7 +234,7 @@ function autoCombogrid(){
 
 </script>
 
-<c:if test="${requestScope.flag == 'add' and (requestScope.continueAdd == null or requestScope.continueAdd == 'true')}">
+<c:if test="${requestScope.editFlag == 'add' and (requestScope.continueAdd == null or requestScope.continueAdd == 'true')}">
 <!-- 连续添加按钮 -->
 <div id="popupPanelAddBottom" >
 </div>

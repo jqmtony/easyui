@@ -1,5 +1,6 @@
 package com.zen.easyui.controller;
 
+import com.zen.easyui.common.constant.GlobalConstant;
 import com.zen.easyui.util.TriRegulation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +25,10 @@ public class CommonController {
 
     @RequestMapping(value = "/toListPage")
     public String toListPage(HttpServletRequest request, HttpServletResponse response, Model model) {
-        if (!TriRegulation.isEmpty(request.getAttribute("page"))) {
-            return (String) request.getAttribute("page");
-        } else if (!TriRegulation.isEmpty(request.getParameter("page"))) {
-            return request.getParameter("page");
+        if (!TriRegulation.isEmpty(request.getAttribute(GlobalConstant.TO_PAGE_PARAM_NAME))) {
+            return (String) request.getAttribute(GlobalConstant.TO_PAGE_PARAM_NAME);
+        } else if (!TriRegulation.isEmpty(request.getParameter(GlobalConstant.TO_PAGE_PARAM_NAME))) {
+            return request.getParameter(GlobalConstant.TO_PAGE_PARAM_NAME);
         } else {
             return null;
         }
@@ -35,10 +36,10 @@ public class CommonController {
 
     @RequestMapping(value = "/toEditPage")
     public String toEditPage(HttpServletRequest request, HttpServletResponse response, Model model) {
-        if (!TriRegulation.isEmpty(request.getAttribute("page"))) {
-            return (String) request.getAttribute("page");
-        } else if (!TriRegulation.isEmpty(request.getParameter("page"))) {
-            return request.getParameter("page");
+        if (!TriRegulation.isEmpty(request.getAttribute(GlobalConstant.TO_PAGE_PARAM_NAME))) {
+            return (String) request.getAttribute(GlobalConstant.TO_PAGE_PARAM_NAME);
+        } else if (!TriRegulation.isEmpty(request.getParameter(GlobalConstant.TO_PAGE_PARAM_NAME))) {
+            return request.getParameter(GlobalConstant.TO_PAGE_PARAM_NAME);
         } else {
             return null;
         }

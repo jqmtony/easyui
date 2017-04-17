@@ -2,7 +2,7 @@ package com.zen.easyui.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.zen.easyui.common.constant.GlobalConstant;
-import com.zen.easyui.common.enums.EditEnum;
+import com.zen.easyui.common.enums.EditFlagEnum;
 import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.common.web.ResultDto;
@@ -31,7 +31,7 @@ public class SysResourceController {
     @RequestMapping(value = "/toListPage")
     ModelAndView toListPage() {
         ModelAndView modelAndView = new ModelAndView(GlobalConstant.LIST_PAGE);
-        modelAndView.addObject("page", "jsp/sys/listResource");
+        modelAndView.addObject(GlobalConstant.TO_PAGE_PARAM_NAME, "jsp/sys/listResource");
         return modelAndView;
     }
 
@@ -54,13 +54,13 @@ public class SysResourceController {
      * @return
      */
     @RequestMapping(value = "/toEditPage")
-    ModelAndView toEditPage(SysResourceDto resourceDto, String flag) {
+    ModelAndView toEditPage(SysResourceDto resourceDto, String editFlag) {
         ModelAndView modelAndView = new ModelAndView(GlobalConstant.EDIT_PAGE);
-        if (EditEnum.UPDATE.name().equalsIgnoreCase(flag)) {//修改
-            modelAndView.addObject("formJson", JSON.toJSONString(sysResourceService.getResourceByPk(resourceDto)));
+        if (EditFlagEnum.UPDATE.name().equalsIgnoreCase(editFlag)) {//修改
+            modelAndView.addObject(GlobalConstant.EDIT_PAGE_VALUES_PARAM_NAME, JSON.toJSONString(sysResourceService.getResourceByPk(resourceDto)));
         }
-        modelAndView.addObject("flag", flag);
-        modelAndView.addObject("page", "jsp/sys/editResource");
+        modelAndView.addObject(GlobalConstant.EDIT_PAGE_FLAG_PARAM_NAME, editFlag);
+        modelAndView.addObject(GlobalConstant.TO_PAGE_PARAM_NAME, "jsp/sys/editResource");
         return modelAndView;
     }
 
@@ -72,10 +72,10 @@ public class SysResourceController {
      * @return
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    ResultDto<Void> edit(SysResourceDto resourceDto, String flag) {
+    ResultDto<Void> edit(SysResourceDto resourceDto, String editFlag) {
         ResultDto<Void> resultDto = new ResultDto<>();
         try {
-            if (EditEnum.UPDATE.name().equalsIgnoreCase(flag)) {//修改
+            if (EditFlagEnum.UPDATE.name().equalsIgnoreCase(editFlag)) {//修改
                 sysResourceService.updateResourceByPk(resourceDto);
             } else {//新增
                 sysResourceService.addResource(resourceDto);

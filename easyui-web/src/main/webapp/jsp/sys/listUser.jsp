@@ -34,14 +34,14 @@
          * 点击"修改"
          */
         function doUpdate() {
-            var url = toEditUrl + "?flag=update" + getSingleRecordParams(grid, singleRecordParams);
+            var url = toEditUrl + "?editFlag=update" + getSingleRecordParams(grid, singleRecordParams);
             doOpenWindow(url, "修改");
         }
         /**
          * 点击"添加"
          */
         function doAdd() {
-            doOpenWindow(toEditUrl + "?flag=add", "新增");
+            doOpenWindow(toEditUrl + "?editFlag=add", "新增");
         }
 
         /**
