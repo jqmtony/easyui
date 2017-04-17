@@ -7,6 +7,7 @@
 
     <div data-options="region:'center'" style="width:90%;height:auto;">
         <a href="/easyui/employee/toListPage">员工管理</a>
+        <br>
         <a href="/easyui/module/toListPage">菜单管理</a>
     </div>
 </body>

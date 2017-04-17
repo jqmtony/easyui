@@ -99,7 +99,7 @@
         <eu:column field="empType" title="人员类别" width="100" align="center"/>
         <eu:column field="empMobile" title="手机号码" width="100" align="center"/>
         <eu:column field="empAttribute" title="员工属性" width="100" align="center"/>
-        <eu:column field="innerFlg" title="是否内部职工" formatter="formatValOrNo" width="100" align="center"/>
+        <eu:column field="innerFlg" title="是否内部职工" formatter="formatExpOrNo" width="100" align="center"/>
     </eu:table>
 </div>
 </body>
