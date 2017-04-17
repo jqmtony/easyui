@@ -1,4 +1,4 @@
-package com.zen.easyui.vo;
+package com.zen.easyui.dto;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-public class FcboxEmployeeDto implements Serializable {
+public class FcboxEmployeeDto extends BaseDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

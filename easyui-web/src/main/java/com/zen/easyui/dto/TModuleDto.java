@@ -1,4 +1,4 @@
-package com.zen.easyui.vo;
+package com.zen.easyui.dto;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -6,7 +6,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 
-public class TModuleDto implements Serializable {
+public class TModuleDto extends BaseDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -6,7 +6,7 @@ import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.common.web.ResultDto;
 import com.zen.easyui.service.IFcboxEmployeeService;
-import com.zen.easyui.vo.FcboxEmployeeDto;
+import com.zen.easyui.dto.FcboxEmployeeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

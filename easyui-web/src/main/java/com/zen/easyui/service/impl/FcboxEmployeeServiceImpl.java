@@ -4,7 +4,7 @@ import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.dao.FcboxEmployeeDao;
 import com.zen.easyui.service.IFcboxEmployeeService;
-import com.zen.easyui.vo.FcboxEmployeeDto;
+import com.zen.easyui.dto.FcboxEmployeeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

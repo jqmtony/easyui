@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.zen.easyui.dao.TModuleDao" >
  	
- 	<resultMap type="com.zen.easyui.vo.TModuleDto" id="tModuleResultMap">
+ 	<resultMap type="com.zen.easyui.dto.TModuleDto" id="tModuleResultMap">
 			<result property="moduleId" column="MODULE_ID" jdbcType="NUMERIC" />
 			<result property="parentCode" column="PARENT_CODE" jdbcType="VARCHAR" />
 			<result property="moduleName" column="MODULE_NAME" jdbcType="VARCHAR" />
@@ -19,7 +19,7 @@
 			<result property="autoCreate" column="AUTO_CREATE" jdbcType="NUMERIC" />
  	</resultMap>
  	
- 	<insert id="insertTModuleDto" parameterType="com.zen.easyui.vo.TModuleDto">
+ 	<insert id="insertTModuleDto" parameterType="com.zen.easyui.dto.TModuleDto">
      	INSERT INTO t_module (
      		MODULE_ID,PARENT_CODE,MODULE_NAME,MODULE_CODE,MODULE_DESC,MODULE_ICON,MODULE_TYPE,APP_TYPE,ACTION_URL,SORT,HELP_URL,AUTO_CREATE
      	) VALUES (#{moduleId, jdbcType=NUMERIC},#{parentCode, jdbcType=VARCHAR},#{moduleName, jdbcType=VARCHAR},#{moduleCode, jdbcType=VARCHAR},#{moduleDesc, jdbcType=VARCHAR},#{moduleIcon, jdbcType=VARCHAR},#{moduleType, jdbcType=NUMERIC},#{appType, jdbcType=NUMERIC},#{actionUrl, jdbcType=VARCHAR},#{sort, jdbcType=NUMERIC},#{helpUrl, jdbcType=VARCHAR},#{autoCreate, jdbcType=NUMERIC})
@@ -73,7 +73,7 @@
    		 </trim>   
    </sql>
    
-   <update id="updateTModuleByPk" parameterType="com.zen.easyui.vo.TModuleDto" >
+   <update id="updateTModuleByPk" parameterType="com.zen.easyui.dto.TModuleDto" >
    		UPDATE t_module 
    			SET
    			<trim suffix=" " suffixOverrides=","> 
@@ -115,16 +115,16 @@
    		    MODULE_ID=#{moduleId, jdbcType=NUMERIC} 
    </update>
    
-   <select id="selectTModuleByPk" parameterType="com.zen.easyui.vo.TModuleDto" resultMap="tModuleResultMap">
+   <select id="selectTModuleByPk" parameterType="com.zen.easyui.dto.TModuleDto" resultMap="tModuleResultMap">
    		SELECT MODULE_ID,PARENT_CODE,MODULE_NAME,MODULE_CODE,MODULE_DESC,MODULE_ICON,MODULE_TYPE,APP_TYPE,ACTION_URL,SORT,HELP_URL,AUTO_CREATE FROM  t_module WHERE   MODULE_ID=#{moduleId, jdbcType=NUMERIC}
    </select>
    
-   <select id="selectTModuleByDto" parameterType="com.zen.easyui.vo.TModuleDto" resultMap="tModuleResultMap">
+   <select id="selectTModuleByDto" parameterType="com.zen.easyui.dto.TModuleDto" resultMap="tModuleResultMap">
    		SELECT MODULE_ID,PARENT_CODE,MODULE_NAME,MODULE_CODE,MODULE_DESC,MODULE_ICON,MODULE_TYPE,APP_TYPE,ACTION_URL,SORT,HELP_URL,AUTO_CREATE FROM  t_module 
    		<include refid="tModule_Where_Clause" />
    </select>
    
-   <delete id="deleteTModuleByPk" parameterType="com.zen.easyui.vo.TModuleDto">
+   <delete id="deleteTModuleByPk" parameterType="com.zen.easyui.dto.TModuleDto">
    		DELETE FROM t_module WHERE MODULE_ID=#{moduleId, jdbcType=NUMERIC}
    </delete>
  	

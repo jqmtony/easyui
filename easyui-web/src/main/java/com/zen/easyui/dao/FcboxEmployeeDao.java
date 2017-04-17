@@ -1,6 +1,6 @@
 package com.zen.easyui.dao;
 
-import com.zen.easyui.vo.FcboxEmployeeDto;
+import com.zen.easyui.dto.FcboxEmployeeDto;
 
 import java.util.List;
 

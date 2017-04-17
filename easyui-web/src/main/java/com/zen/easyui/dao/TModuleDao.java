@@ -1,6 +1,6 @@
 package com.zen.easyui.dao;
 
-import com.zen.easyui.vo.TModuleDto;
+import com.zen.easyui.dto.TModuleDto;
 
 import java.util.List;
 
