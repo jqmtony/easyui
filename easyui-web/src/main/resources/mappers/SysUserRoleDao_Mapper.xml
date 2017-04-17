@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.zen.easyui.dao.SysUserRoleDao" >
+ 	
+ 	<resultMap type="com.zen.easyui.dto.SysUserRoleDto" id="sysUserRoleResultMap">
+			<result property="sysUserId" column="SYS_USER_ID" jdbcType="VARCHAR" />
+			<result property="sysRoleId" column="SYS_ROLE_ID" jdbcType="VARCHAR" />
+ 	</resultMap>
+ 	
+ 	<insert id="insertSysUserRoleDto" parameterType="com.zen.easyui.dto.SysUserRoleDto">       
+     	INSERT INTO sys_user_role (
+     		SYS_USER_ID,SYS_ROLE_ID
+     	) VALUES (#{sysUserId, jdbcType=VARCHAR},#{sysRoleId, jdbcType=VARCHAR})
+   </insert>
+   
+    <insert id="batchInsertSysUserRoleDto" parameterType="java.util.List">
+             INSERT INTO sys_user_role (SYS_USER_ID,SYS_ROLE_ID) 
+             <foreach collection="list" item="item" index="index" separator="union all">
+				select #{item.sysUserId, jdbcType=VARCHAR},#{item.sysRoleId, jdbcType=VARCHAR} from dual
+			</foreach>
+    </insert>   
+   
+   <sql id="sysUserRole_Where_Clause"> 
+   		<trim prefix=" WHERE  " prefixOverrides="AND">
+   		    	        <if test="sysUserId!=null and sysUserId!='' ">
+   		    	        	AND SYS_USER_ID=#{sysUserId , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="sysRoleId!=null and sysRoleId!='' ">
+   		    	        	AND SYS_ROLE_ID=#{sysRoleId , jdbcType=VARCHAR} 
+						</if>
+   		 </trim>   
+   </sql>
+   
+   <update id="updateSysUserRoleByPk" parameterType="com.zen.easyui.dto.SysUserRoleDto" >  	
+   		UPDATE sys_user_role 
+   			SET
+   			<trim suffix=" " suffixOverrides=","> 
+   		    </trim>
+   		WHERE 
+   		    SYS_USER_ID=#{sysUserId, jdbcType=VARCHAR} and SYS_ROLE_ID=#{sysRoleId, jdbcType=VARCHAR} 
+   </update>
+   
+   <select id="getSysUserRoleByPk" parameterType="com.zen.easyui.dto.SysUserRoleDto" resultMap="sysUserRoleResultMap">
+   		SELECT SYS_USER_ID,SYS_ROLE_ID FROM  sys_user_role WHERE   SYS_USER_ID=#{sysUserId, jdbcType=VARCHAR} and SYS_ROLE_ID=#{sysRoleId, jdbcType=VARCHAR}
+   </select>
+   
+   <select id="listSysUserRoleByDto" parameterType="com.zen.easyui.dto.SysUserRoleDto" resultMap="sysUserRoleResultMap">
+   		SELECT SYS_USER_ID,SYS_ROLE_ID FROM  sys_user_role 
+   		<include refid="sysUserRole_Where_Clause" />
+		<if test="orderClause!=null and orderClause!='' ">
+        	ORDER BY ${orderClause}
+		</if>
+   </select>
+   
+   <delete id="deleteSysUserRoleByPk" parameterType="com.zen.easyui.dto.SysUserRoleDto">
+   		DELETE FROM sys_user_role WHERE SYS_USER_ID=#{sysUserId, jdbcType=VARCHAR} and SYS_ROLE_ID=#{sysRoleId, jdbcType=VARCHAR}
+   </delete>
+ 	
+</mapper>

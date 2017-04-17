@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.zen.easyui.dao.SysUserDao" >
+ 	
+ 	<resultMap type="com.zen.easyui.dto.SysUserDto" id="sysUserResultMap">
+			<result property="id" column="ID" jdbcType="VARCHAR" />
+			<result property="name" column="NAME" jdbcType="VARCHAR" />
+			<result property="password" column="PASSWORD" jdbcType="VARCHAR" />
+			<result property="createUser" column="CREATE_USER" jdbcType="VARCHAR" />
+			<result property="createTm" column="CREATE_TM" jdbcType="TIMESTAMP" />
+			<result property="updateUser" column="UPDATE_USER" jdbcType="VARCHAR" />
+			<result property="updateTm" column="UPDATE_TM" jdbcType="TIMESTAMP" />
+ 	</resultMap>
+ 	
+ 	<insert id="insertSysUserDto" parameterType="com.zen.easyui.dto.SysUserDto">       
+     	INSERT INTO sys_user (
+     		ID,NAME,PASSWORD,CREATE_USER,CREATE_TM,UPDATE_USER,UPDATE_TM
+     	) VALUES (#{id, jdbcType=VARCHAR},#{name, jdbcType=VARCHAR},#{password, jdbcType=VARCHAR},#{createUser, jdbcType=VARCHAR},#{createTm, jdbcType=TIMESTAMP},#{updateUser, jdbcType=VARCHAR},#{updateTm, jdbcType=TIMESTAMP})
+   </insert>
+   
+    <insert id="batchInsertSysUserDto" parameterType="java.util.List">
+             INSERT INTO sys_user (ID,NAME,PASSWORD,CREATE_USER,CREATE_TM,UPDATE_USER,UPDATE_TM) 
+             <foreach collection="list" item="item" index="index" separator="union all">
+				select #{item.id, jdbcType=VARCHAR},#{item.name, jdbcType=VARCHAR},#{item.password, jdbcType=VARCHAR},#{item.createUser, jdbcType=VARCHAR},#{item.createTm, jdbcType=TIMESTAMP},#{item.updateUser, jdbcType=VARCHAR},#{item.updateTm, jdbcType=TIMESTAMP} from dual
+			</foreach>
+    </insert>   
+   
+   <sql id="sysUser_Where_Clause"> 
+   		<trim prefix=" WHERE  " prefixOverrides="AND">
+   		    	        <if test="id!=null and id!='' ">
+   		    	        	AND ID=#{id , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="name!=null and name!='' ">
+   		    	        	AND NAME=#{name , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="password!=null and password!='' ">
+   		    	        	AND PASSWORD=#{password , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="createUser!=null and createUser!='' ">
+   		    	        	AND CREATE_USER=#{createUser , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="createTm!=null and createTm!='' ">
+   		    	        	AND CREATE_TM=#{createTm , jdbcType=TIMESTAMP} 
+						</if>
+   		    	        <if test="updateUser!=null and updateUser!='' ">
+   		    	        	AND UPDATE_USER=#{updateUser , jdbcType=VARCHAR} 
+						</if>
+   		    	        <if test="updateTm!=null and updateTm!='' ">
+   		    	        	AND UPDATE_TM=#{updateTm , jdbcType=TIMESTAMP} 
+						</if>
+   		 </trim>   
+   </sql>
+   
+   <update id="updateSysUserByPk" parameterType="com.zen.easyui.dto.SysUserDto" >  	
+   		UPDATE sys_user 
+   			SET
+   			<trim suffix=" " suffixOverrides=","> 
+   		    	        <if test="name!=null and name!='' ">
+   		    	        	NAME=#{name , jdbcType=VARCHAR},
+						</if>
+   		    	        <if test="password!=null and password!='' ">
+   		    	        	PASSWORD=#{password , jdbcType=VARCHAR},
+						</if>
+   		    	        <if test="createUser!=null and createUser!='' ">
+   		    	        	CREATE_USER=#{createUser , jdbcType=VARCHAR},
+						</if>
+   		    	        <if test="createTm!=null and createTm!='' ">
+   		    	        	CREATE_TM=#{createTm , jdbcType=TIMESTAMP},
+						</if>
+   		    	        <if test="updateUser!=null and updateUser!='' ">
+   		    	        	UPDATE_USER=#{updateUser , jdbcType=VARCHAR},
+						</if>
+   		    	        <if test="updateTm!=null and updateTm!='' ">
+   		    	        	UPDATE_TM=#{updateTm , jdbcType=TIMESTAMP},
+						</if>
+   		    </trim>
+   		WHERE 
+   		    ID=#{id, jdbcType=VARCHAR} 
+   </update>
+   
+   <select id="getSysUserByPk" parameterType="com.zen.easyui.dto.SysUserDto" resultMap="sysUserResultMap">
+   		SELECT ID,NAME,PASSWORD,CREATE_USER,CREATE_TM,UPDATE_USER,UPDATE_TM FROM  sys_user WHERE   ID=#{id, jdbcType=VARCHAR}
+   </select>
+   
+   <select id="listSysUserByDto" parameterType="com.zen.easyui.dto.SysUserDto" resultMap="sysUserResultMap">
+   		SELECT ID,NAME,PASSWORD,CREATE_USER,CREATE_TM,UPDATE_USER,UPDATE_TM FROM  sys_user 
+   		<include refid="sysUser_Where_Clause" />
+		<if test="orderClause!=null and orderClause!='' ">
+        	ORDER BY ${orderClause}
+		</if>
+   </select>
+   
+   <delete id="deleteSysUserByPk" parameterType="com.zen.easyui.dto.SysUserDto">
+   		DELETE FROM sys_user WHERE ID=#{id, jdbcType=VARCHAR}
+   </delete>
+ 	
+</mapper>
