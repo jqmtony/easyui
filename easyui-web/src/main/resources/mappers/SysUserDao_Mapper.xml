@@ -87,9 +87,6 @@
    <select id="listSysUserByDto" parameterType="com.zen.easyui.dto.SysUserDto" resultMap="sysUserResultMap">
    		SELECT ID,NAME,PASSWORD,CREATE_USER,CREATE_TM,UPDATE_USER,UPDATE_TM FROM  sys_user 
    		<include refid="sysUser_Where_Clause" />
-		<if test="orderClause!=null and orderClause!='' ">
-        	ORDER BY ${orderClause}
-		</if>
    </select>
    
    <delete id="deleteSysUserByPk" parameterType="com.zen.easyui.dto.SysUserDto">

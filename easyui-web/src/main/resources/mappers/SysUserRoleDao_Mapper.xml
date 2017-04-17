@@ -49,9 +49,6 @@
    <select id="listSysUserRoleByDto" parameterType="com.zen.easyui.dto.SysUserRoleDto" resultMap="sysUserRoleResultMap">
    		SELECT SYS_USER_ID,SYS_ROLE_ID FROM  sys_user_role 
    		<include refid="sysUserRole_Where_Clause" />
-		<if test="orderClause!=null and orderClause!='' ">
-        	ORDER BY ${orderClause}
-		</if>
    </select>
    
    <delete id="deleteSysUserRoleByPk" parameterType="com.zen.easyui.dto.SysUserRoleDto">

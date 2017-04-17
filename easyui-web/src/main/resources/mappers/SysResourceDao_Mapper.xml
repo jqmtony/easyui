@@ -129,9 +129,6 @@
    <select id="listSysResourceByDto" parameterType="com.zen.easyui.dto.SysResourceDto" resultMap="sysResourceResultMap">
    		SELECT ID,ICON,NAME,TYPE,SEQ,URL,FLAG,PID,REMARK,CREATE_USER,CREATE_TM,UPDATE_USER,UPDATE_TM FROM  sys_resource 
    		<include refid="sysResource_Where_Clause" />
-		<if test="orderClause!=null and orderClause!='' ">
-        	ORDER BY ${orderClause}
-		</if>
    </select>
    
    <delete id="deleteSysResourceByPk" parameterType="com.zen.easyui.dto.SysResourceDto">

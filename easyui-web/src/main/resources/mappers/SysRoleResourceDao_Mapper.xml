@@ -49,9 +49,6 @@
    <select id="listSysRoleResourceByDto" parameterType="com.zen.easyui.dto.SysRoleResourceDto" resultMap="sysRoleResourceResultMap">
    		SELECT SYS_ROLE_ID,SYS_RESOURCE_ID FROM  sys_role_resource 
    		<include refid="sysRoleResource_Where_Clause" />
-		<if test="orderClause!=null and orderClause!='' ">
-        	ORDER BY ${orderClause}
-		</if>
    </select>
    
    <delete id="deleteSysRoleResourceByPk" parameterType="com.zen.easyui.dto.SysRoleResourceDto">

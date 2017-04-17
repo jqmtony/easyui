@@ -1,85 +1,84 @@
 package com.zen.easyui.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.zen.easyui.common.constant.GlobalConstant;
 import com.zen.easyui.common.enums.EditEnum;
 import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.common.web.ResultDto;
-import com.zen.easyui.service.IFcboxEmployeeService;
-import com.zen.easyui.dto.FcboxEmployeeDto;
+import com.zen.easyui.dto.SysRoleDto;
+import com.zen.easyui.service.ISysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- * Created by 000538 on 2017/4/14.
- */
+
 @RestController
-@RequestMapping("/employee")
-public class FcboxEmployeeController {
+@RequestMapping("/role")
+public class SysRoleController {
 
     @Autowired
-    private IFcboxEmployeeService fcboxEmployeeService;
+    private ISysRoleService sysRoleService;
 
     /**
-     * 跳转到员工列表页面
+     * 跳转到角色列表页面
      *
      * @param modelAndView
      * @return
      */
     @RequestMapping(value = "/toListPage")
     ModelAndView toListPage() {
-        ModelAndView modelAndView = new ModelAndView("jsp/base/list");
-        modelAndView.addObject("page", "jsp/sys/listEmployee");
+        ModelAndView modelAndView = new ModelAndView(GlobalConstant.LIST_PAGE);
+        modelAndView.addObject("page", "jsp/sys/listRole");
         return modelAndView;
     }
 
     /**
-     * 分页员工获取信息
+     * 分页角色获取信息
      *
-     * @param employeeDto
+     * @param roleDto
      * @param pageInfo
      * @return
      */
     @RequestMapping(value = "/listByPage")
-    PageLister<FcboxEmployeeDto> listByPage(FcboxEmployeeDto employeeDto, EuPagerInfo pageInfo) {
-        return fcboxEmployeeService.listByPage(employeeDto, pageInfo);
+    PageLister<SysRoleDto> listByPage(SysRoleDto roleDto, EuPagerInfo pageInfo) {
+        return sysRoleService.listRoleByPage(roleDto, pageInfo);
     }
 
     /**
-     * 跳转到员工编辑页面
+     * 跳转到角色编辑页面
      *
      * @param modelAndView
      * @return
      */
     @RequestMapping(value = "/toEditPage")
-    ModelAndView toEditPage(FcboxEmployeeDto employeeDto, String flag) {
-        ModelAndView modelAndView = new ModelAndView("jsp/base/edit");
+    ModelAndView toEditPage(SysRoleDto roleDto, String flag) {
+        ModelAndView modelAndView = new ModelAndView(GlobalConstant.EDIT_PAGE);
         if (EditEnum.UPDATE.name().equalsIgnoreCase(flag)) {//修改
-            modelAndView.addObject("formJson", JSON.toJSONString(fcboxEmployeeService.get(employeeDto)));
+            modelAndView.addObject("formJson", JSON.toJSONString(sysRoleService.getRoleByPk(roleDto)));
         }
         modelAndView.addObject("flag", flag);
-        modelAndView.addObject("page", "jsp/sys/editEmployee");
+        modelAndView.addObject("page", "jsp/sys/editRole");
         return modelAndView;
     }
 
     /**
-     * 编辑员工信息
+     * 编辑角色信息
      *
-     * @param employeeDto
+     * @param roleDto
      * @param flag
      * @return
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    ResultDto<Void> edit(FcboxEmployeeDto employeeDto, String flag) {
+    ResultDto<Void> edit(SysRoleDto roleDto, String flag) {
         ResultDto<Void> resultDto = new ResultDto<>();
         try {
             if (EditEnum.UPDATE.name().equalsIgnoreCase(flag)) {//修改
-                fcboxEmployeeService.update(employeeDto);
+                sysRoleService.updateRoleByPk(roleDto);
             } else {//新增
-                fcboxEmployeeService.add(employeeDto);
+                sysRoleService.addRole(roleDto);
             }
         } catch (Exception e) {
             resultDto.setCode("-1");
@@ -90,16 +89,16 @@ public class FcboxEmployeeController {
     }
 
     /**
-     * 删除员工信息
+     * 删除角色信息
      *
-     * @param employeeDto
+     * @param roleDto
      * @return
      */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    ResultDto<Void> delete(FcboxEmployeeDto employeeDto) {
+    ResultDto<Void> delete(SysRoleDto roleDto) {
         ResultDto<Void> resultDto = new ResultDto<>();
         try {
-            fcboxEmployeeService.delete(employeeDto);
+            sysRoleService.deleteRoleByPk(roleDto);
         } catch (Exception e) {
             resultDto.setCode("-1");
             resultDto.setSuccess(false);

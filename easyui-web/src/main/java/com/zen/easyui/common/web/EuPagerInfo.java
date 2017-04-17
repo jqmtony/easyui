@@ -102,7 +102,7 @@ public class EuPagerInfo implements Serializable {
      * @param fieldName
      * @return
      */
-    public String getDbFieldNameByCamelCase(String fieldName) {
+    private String getDbFieldNameByCamelCase(String fieldName) {
         if (TriRegulation.isEmpty(fieldName)) {
             return "";
         } else {

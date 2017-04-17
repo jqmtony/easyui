@@ -108,9 +108,6 @@
    <select id="listSysRoleByDto" parameterType="com.zen.easyui.dto.SysRoleDto" resultMap="sysRoleResultMap">
    		SELECT ID,NAME,REMARK,SEQ,FLAG,PID,CREATE_USER,CREATE_TM,UPDATE_USER,UPDATE_TM FROM  sys_role 
    		<include refid="sysRole_Where_Clause" />
-		<if test="orderClause!=null and orderClause!='' ">
-        	ORDER BY ${orderClause}
-		</if>
    </select>
    
    <delete id="deleteSysRoleByPk" parameterType="com.zen.easyui.dto.SysRoleDto">
