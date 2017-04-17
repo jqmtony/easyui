@@ -1,0 +1,188 @@
+@CHARSET "UTF-8";
+
+.formTable {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width:100%;
+}
+
+.formTable .columnTitle {
+	text-align: right;
+	height: 20px;
+	width: 10%;
+}
+
+.formTable .columnData {
+	text-align: left;
+	width: 10%;
+}
+
+.formTable .button {
+	text-align: left;
+	padding: 0.3em 2em;
+}
+
+.editTable {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width:100%;
+}
+
+.editTable .columnTitle {
+	text-align: right;
+	height: 20px;
+	background: #eee;
+	border: 1px solid #8CACBB;
+	padding: 0.3em 0.7em;
+	width: 20%;
+}
+
+.editTable .columnData {
+	text-align: left;
+	border: 1px solid #8CACBB;
+	padding: 0.3em 0.7em;
+	width: 30%;
+}
+
+.editTable .columnTitle2 {
+	text-align: right;
+	height: 20px;
+	background: #eee;
+	border: 1px solid #8CACBB;
+	padding: 0.3em 0.7em;
+	width: 10%;
+}
+
+.editTable .columnData2 {
+	text-align: left;
+	border: 1px solid #8CACBB;
+	padding: 0.3em 0.7em;
+	width: 10%;
+}
+
+.viewTable {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.viewTable .columnTitle {
+	text-align: right;
+	height: 20px;
+	background: #eee;
+	border: 1px solid #8CACBB;
+	padding: 0.3em 0.7em;
+	width: 10%;
+}
+
+.viewTable .columnData {
+	text-align: left;
+	border: 1px solid #8CACBB;
+	padding: 0.3em 0.7em;
+	width: 10%;
+}
+.readonlyText {
+	background-color: #EBEBE4;
+	border: #a4bed4 1px solid;
+}
+.form-style-small-textfield {
+	width: 200px;
+	font-family: "Verdana", "Arial", "Helvetica", "sans-serif";
+	font-size: 12px;
+	font-weight: normal;
+	border: 1px solid #999999;
+}
+
+.form-style-small-textfield-disabled {
+	width: 200px;
+	font-family: "Verdana", "Arial", "Helvetica", "sans-serif";
+	font-size: 12px;
+	font-weight: normal;
+	border: 1px solid #999999;
+	background-color: #DDDDDD;
+}
+
+.input-label-style {
+	width: 120px;
+	height: 20px;
+	border: 0px;
+	font-family: "Verdana", "Arial", "Helvetica", "sans-serif";
+	font-size: 12px;
+	type: text;
+}
+.textbox-disabled-style {
+	background-color: #EBEBE4;
+	border: #a4bed4 1px solid;
+}
+
+.formtable-input-label-style{
+	  border-bottom-width:0px;
+	   border-left-width:0px;
+	   border-right-width:0px;
+	   border-top-width:0px;
+	   background: #F4F4F4;
+}
+	  
+.popupWindowContainer {
+  /*
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  */
+  background-color: #ffffff;
+}
+
+#specsPopupPanelBottom {
+	height:auto;
+    clear:both;
+	height: 35px;
+}
+
+#specsPopupPanelBottom #buttonSection {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	float: right;
+}
+
+#popupPanelBottom {
+    clear:both;
+	background-color: #efefef;
+	position: absolute;
+	z-index: 910;
+	/* width: 99%; */
+	left: 6px;
+	bottom: 6px;
+	right: 6px;
+}
+
+#popupPanelBottom #buttonSection {
+	margin-bottom: 5px;
+	margin-right: 5px;
+	float: right;
+}
+
+#popupPanelAddBottom {
+    clear:both;
+	position: absolute;
+	z-index: 921;
+	left: 6px;
+	bottom: 6px;
+}
+#popupPanelAddBottom #buttonAddSection {
+	margin-bottom: 5px;
+	margin-right: 5px;
+	float: left;
+}
+
+#popupPanelBottom #center {
+    margin-top:5px;
+    margin-right:5px;
+    align: center;
+}
+
+#popupPanelBottom #right {
+    margin-top:5px;
+    margin-right:5px;
+    float: right;
+}
