@@ -3,6 +3,7 @@ package com.zen.easyui.controller;
 import com.alibaba.fastjson.JSON;
 import com.zen.easyui.common.constant.GlobalConstant;
 import com.zen.easyui.common.enums.EditFlagEnum;
+import com.zen.easyui.common.vo.ExtTreeNode;
 import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.common.web.ResultDto;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 
 @RestController
@@ -45,6 +48,30 @@ public class SysResourceController {
     @RequestMapping(value = "/listByPage")
     PageLister<SysResourceDto> listByPage(SysResourceDto resourceDto, EuPagerInfo pageInfo) {
         return sysResourceService.listResourceByPage(resourceDto, pageInfo);
+    }
+
+    /**
+     * 跳转到EXT资源列表页面
+     *
+     * @param modelAndView
+     * @return
+     */
+    @RequestMapping(value = "/toExtListPage")
+    ModelAndView toExtListPage() {
+        ModelAndView modelAndView = new ModelAndView(GlobalConstant.LIST_PAGE);
+        modelAndView.addObject(GlobalConstant.TO_PAGE_PARAM_NAME, "jsp/sys/listExtResource");
+        return modelAndView;
+    }
+
+    /**
+     * 获取Ext资源树信息
+     *
+     * @param resourceDto
+     * @return
+     */
+    @RequestMapping(value = "/listTreeNode")
+    List<ExtTreeNode> listTreeNode(SysResourceDto resourceDto) {
+        return sysResourceService.listResourceTree(resourceDto);
     }
 
     /**

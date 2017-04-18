@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -33,6 +35,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param roleDto 角色信息实体
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void addRole(SysRoleDto roleDto) {
         roleDto.setId(IdentityUtil.dbUuid32());
         roleDto.setCreateTm(new Date());
@@ -45,6 +48,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param roleDto 角色信息实体
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void deleteRoleByPk(SysRoleDto roleDto) {
         sysRoleDao.deleteSysRoleByPk(roleDto);
     }
@@ -55,6 +59,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param roleDto 角色信息实体
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void updateRoleByPk(SysRoleDto roleDto) {
         sysRoleDao.updateSysRoleByPk(roleDto);
     }
@@ -65,6 +70,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param roleDto 角色信息实体
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public SysRoleDto getRoleByPk(SysRoleDto roleDto) {
         return sysRoleDao.getSysRoleByPk(roleDto);
     }
@@ -76,6 +82,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param pagerInfo 分页参数
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public PageLister<SysRoleDto> listRoleByPage(SysRoleDto roleDto, EuPagerInfo pagerInfo) {
         pagerInfo.startPage();
         return new PageLister<SysRoleDto>(sysRoleDao.listSysRoleByDto(roleDto));

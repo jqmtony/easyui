@@ -9,6 +9,8 @@
         <a href="/easyui/user/toListPage">用户管理</a>
         <br>
         <a href="/easyui/resource/toListPage">资源管理</a>
+        <br>
+        <a href="/easyui/resource/toExtListPage">EXT资源管理</a>
     </div>
 </body>
 </html>

@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -34,6 +36,7 @@ public class SysUserServiceImpl implements ISysUserService {
      * @param userDto 用户信息实体
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void addUser(SysUserDto userDto) {
         userDto.setId(IdentityUtil.dbUuid32());
         userDto.setPassword(DesUtil.strEncrypt(userDto.getPassword()));
@@ -47,6 +50,7 @@ public class SysUserServiceImpl implements ISysUserService {
      * @param userDto 用户信息实体
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void deleteUserByPk(SysUserDto userDto) {
         sysUserDao.deleteSysUserByPk(userDto);
     }
@@ -57,6 +61,7 @@ public class SysUserServiceImpl implements ISysUserService {
      * @param userDto 用户信息实体
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void updateUserByPk(SysUserDto userDto) {
         sysUserDao.updateSysUserByPk(userDto);
     }
@@ -67,6 +72,7 @@ public class SysUserServiceImpl implements ISysUserService {
      * @param userDto 用户信息实体
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public SysUserDto getUserByPk(SysUserDto userDto) {
         return sysUserDao.getSysUserByPk(userDto);
     }
@@ -78,6 +84,7 @@ public class SysUserServiceImpl implements ISysUserService {
      * @param pagerInfo 分页参数
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public PageLister<SysUserDto> listUserByPage(SysUserDto userDto, EuPagerInfo pagerInfo) {
         pagerInfo.startPage();
         return new PageLister<SysUserDto>(sysUserDao.listSysUserByDto(userDto));

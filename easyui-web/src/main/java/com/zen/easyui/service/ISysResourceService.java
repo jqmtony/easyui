@@ -1,8 +1,11 @@
 package com.zen.easyui.service;
 
+import com.zen.easyui.common.vo.ExtTreeNode;
 import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.dto.SysResourceDto;
+
+import java.util.List;
 
 /**
  * 资源管理
@@ -45,8 +48,15 @@ public interface ISysResourceService {
     /**
      * 分页获取资源
      *
-     * @param resourceDto   资源信息实体
-     * @param pagerInfo 分页参数
+     * @param resourceDto 资源信息实体
+     * @param pagerInfo   分页参数
      */
     PageLister<SysResourceDto> listResourceByPage(SysResourceDto resourceDto, EuPagerInfo pagerInfo);
+
+    /**
+     * 获取Ext资源树
+     *
+     * @param resourceDto 资源信息实体
+     */
+    List<ExtTreeNode> listResourceTree(SysResourceDto resourceDto);
 }

@@ -1,6 +1,8 @@
 package com.zen.easyui.service.impl;
 
+import com.zen.easyui.common.util.ExtUtils;
 import com.zen.easyui.common.util.IdentityUtil;
+import com.zen.easyui.common.vo.ExtTreeNode;
 import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.dao.SysResourceDao;
@@ -10,8 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author zen E-mail: xinjingziranchan@gmail.com
@@ -33,6 +39,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
      * @param resourceDto 资源信息实体
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void addResource(SysResourceDto resourceDto) {
         resourceDto.setId(IdentityUtil.dbUuid32());
         resourceDto.setCreateTm(new Date());
@@ -45,6 +52,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
      * @param resourceDto 资源信息实体
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void deleteResourceByPk(SysResourceDto resourceDto) {
         sysResourceDao.deleteSysResourceByPk(resourceDto);
     }
@@ -55,6 +63,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
      * @param resourceDto 资源信息实体
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void updateResourceByPk(SysResourceDto resourceDto) {
         sysResourceDao.updateSysResourceByPk(resourceDto);
     }
@@ -65,6 +74,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
      * @param resourceDto 资源信息实体
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public SysResourceDto getResourceByPk(SysResourceDto resourceDto) {
         return sysResourceDao.getSysResourceByPk(resourceDto);
     }
@@ -72,12 +82,33 @@ public class SysResourceServiceImpl implements ISysResourceService {
     /**
      * 分页获取资源
      *
-     * @param resourceDto   资源信息实体
-     * @param pagerInfo 分页参数
+     * @param resourceDto 资源信息实体
+     * @param pagerInfo   分页参数
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public PageLister<SysResourceDto> listResourceByPage(SysResourceDto resourceDto, EuPagerInfo pagerInfo) {
         pagerInfo.startPage();
         return new PageLister<SysResourceDto>(sysResourceDao.listSysResourceByDto(resourceDto));
+    }
+
+    /**
+     * 获取Ext资源树
+     *
+     * @param resourceDto 资源信息实体
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    public List<ExtTreeNode> listResourceTree(SysResourceDto resourceDto) {
+        List<ExtTreeNode> extTreeNodes = new ArrayList<>();
+        List<SysResourceDto> resources = sysResourceDao.listSysResourceByDto(resourceDto);
+        for (SysResourceDto resource : resources) {
+            ExtTreeNode extTreeNode = new ExtTreeNode();
+            extTreeNode.setId(resource.getId());
+            extTreeNode.setParentId(resource.getPid());
+            extTreeNode.setName(resource.getName());
+            extTreeNodes.add(extTreeNode);
+        }
+        return ExtUtils.getTreeList(extTreeNodes, null, true);
     }
 }
