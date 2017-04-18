@@ -1888,47 +1888,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>deptgrid</name>
-		<tag-class>
-            com.zen.easyui.tag.EasyUiDeptGridTag
-        </tag-class>
-
-		<attribute>
-			<name>id</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>name</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>style</name>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>onChange</name>
-			<rtexprvalue>false</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>value</name>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>required</name>
-			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<name>disabled</name>
-			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
-			<type>java.lang.Boolean</type>
-		</attribute>
-	</tag>
-	<tag>
 		<name>comboTree</name>
 		<tag-class>
             com.zen.easyui.tag.EasyUiComboTreeTag
