@@ -97,7 +97,7 @@
     </div>
 
     <div data-options="region:'center'" >
-        <exu:treeGrid  url="${pageContext.request.contextPath}/easyui/resource/listTreeNode" idField="id" fitColumns="true"
+        <exu:treeGrid  url="${pageContext.request.contextPath}/easyui/resource/listExtTreeNode" idField="id" fitColumns="true"
                        id="resourceTreeGrid"  fit="true" toolbarId="toolBarId" >
             <exu:column field="id"  hidden="true"  title="ID" tdCls="tdValign"/>
             <exu:column field="pid" hidden="true" title="parentId" tdCls="tdValign"/>
