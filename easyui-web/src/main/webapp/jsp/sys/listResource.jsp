@@ -33,7 +33,7 @@
          * 点击"修改"
          */
         function doUpdate() {
-            var url = toEditUrl + "?editFlag=update" + getSingleRecordParams(grid, singleRecordParams);
+            var url = toEditUrl + "?editFlag=update" + getSingleTgRecordParams(treeGrid, singleRecordParams);
             doOpenWindow(url, "修改");
         }
         /**
@@ -47,15 +47,25 @@
          * 点击"删除"
          */
         function doDelete() {
-            isSelectedRecordAdConfirm(grid, deleteGrid, "确认删除？");
+            isSelectedTgRecordAdConfirm(treeGrid, deleteGrid, "确认删除？");
         }
 
         /**
          * 删除 处理操作
          */
         function deleteGrid() {
-            var url = deleteUrl + getSingleRecordParams(grid, singleRecordParams);
-            ajaxPostAndReloadDatagrid(url, grid);
+            var url = deleteUrl + getSingleTgRecordParams(treeGrid, singleRecordParams);
+            ajaxPostAdReloadCall2Tg(url, treeGrid);
+        }
+
+        function formatterType(val, node) {
+            if("0" == val){
+                return "菜单";
+            }else if("1" == val){
+                return "按钮";
+            }else{
+                return val;
+            }
         }
 
     </script>
@@ -81,7 +91,7 @@
             <!-- 添加 -->
             <eu:button title="添加" iconClass="icon-add" plain="true" onClick="javaScript: doAdd();"/>
             <!-- 修改 -->
-            <eu:button title="修改" iconClass="icon-edit" plain="true" onClick="javaScript: isSelectedSingleRecord(grid, doUpdate);"/>
+            <eu:button title="修改" iconClass="icon-edit" plain="true" onClick="javaScript: isSelectedSingleTgRecord(treeGrid, doUpdate);"/>
             <!-- 删除 -->
             <eu:button title="删除" iconClass="icon-remove" plain="true" onClick="javaScript: doDelete();"/>
         </eu:toolbar>
@@ -94,7 +104,7 @@
 
             <eu:column field="name" title="资源名称"   width="200" align="left" />
             <eu:column field="url"  title="资源路径"   width="200" align="center"/>
-            <eu:column field="type"  title="资源类型"   width="100" align="center"/>
+            <eu:column field="type"  title="资源类型"   width="100" align="center" formatter="formatterType"/>
             <eu:column field="flag"  title="资源标识"  width="100" align="center"/>
             <eu:column field="seq"  title="序号"  width="100" align="center"/>
             <eu:column field="remarks" title="描述"   width="200" align="center"/>

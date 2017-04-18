@@ -7,6 +7,21 @@
  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * 
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * 验证是否只选择了一条记录
+ *
+ * @param treegridId
+ * @param callback
+ */
+function isSelectedSingleTgRecord(treegridId, callback) {
+    var rows = $("#" + treegridId).treegrid("getSelections");
+    if (rows.length == 1) {
+        callback();
+    } else {
+        euAlert(selectOnlyRow);
+    }
+}
 /**
  * 清空TreegridId列表
  * 
@@ -27,13 +42,15 @@ function clearTreegrid(treegridId) {
  */
 function treegridFormSearch(treegridId, formId, url) {
 	if ($("#" + formId).form("validate")) {
+        var params = $("#" + treegridId).treegrid("options").queryParams;
 		var fields = $("#" + formId).serializeArray();
 		$.each(fields, function(i, field) {
-			if (field.value != null && field.value != '') {
+			/*if (field.value != null && field.value != '') {
 				url += "&" + field.name + "="
 						+ field.value.replace(/(^[\s]*)|([\s]*$)/g, "");
 				;
-			}
+			}*/
+            params[field.name] = field.value.replace(/(^[\s]*)|([\s]*$)/g, "");
 		});
 		reloadTreegrid(treegridId, url);
 	}
@@ -52,8 +69,8 @@ function treegridFormSearch(treegridId, formId, url) {
 function retResultAdReloadTd4Call(result, reloadGridId, closeObj, reloadUrl) {
 	showProcess(false);
 	if (!isEmpty(result)) {
-
-		if ("true" == result.split(',')[0]) {
+        result = evalObj(result);
+        if (result.success) {
 			euShow("操作成功！");
 			// 刷新grid
 			if (!isEmpty(reloadGridId)) {
@@ -64,10 +81,40 @@ function retResultAdReloadTd4Call(result, reloadGridId, closeObj, reloadUrl) {
 				closeThisPopWindow();
 			}
 		} else {
-			euShow("操作失败   原因:" + result, null, 10);
+            euShow("操作失败   原因:" + result.msg, null, 10);
 		}
 	}
 }
+
+/**
+ * 使用Ajax的方式提交表单，提交之前验证页面字段是否合法，自动刷新treegridId,然后关闭closeObj弹出框
+ *
+ * @param formId
+ *            表单编号
+ * @param treegridId
+ *            grid id
+ * @param closeObj
+ *            是否关闭
+ * @param nodeId
+ *            当前选中节点
+ */
+function ajaxPostAdReloadTgNode2Form(formId, treegridId, closeObj, nodeId) {
+    if ($("#" + formId).form("validate")) {
+        showProcess(true, titleinfo, submitTitle);
+        $.post($("#" + formId).attr("action"),
+            $("#" + formId).serializeArray(), function (result, status) {
+                showProcess(false);
+                if (!isEmpty(nodeId)) {
+                    retResultAdReloadTd4Call(result, null, closeObj);// 重加载数据定义到下行,
+                    // 2参数为null代表不执行公共的刷新
+                    reload2TgNode(treegridId, nodeId);
+                } else {
+                    retResultAdReloadTd4Call(result, treegridId, closeObj);
+                }
+            });
+    }
+}
+
 /**
  * Ajax提交url请求后，如果选中一个节点，那么对当前treegrid的这个节点执行刷新；否则全部刷新
  * 
@@ -156,6 +203,23 @@ function getCheckIdValue4Tg(treegridId, isGetParentId) {
 }
 
 /**
+ * 获取grid单行记录参数值,返回字符串。 格式："&fieldName=" + fieldName
+ *
+ * @param grid
+ *            名称
+ * @param checkParamArr
+ *            行记录中需要当参数的字段数组（支持多字段）
+ */
+function getSingleTgRecordParams(treegridId, checkParamArr) {
+    var params = "";
+    var rows = $("#" + treegridId).treegrid("getSelected");
+    for (var i = 0; i < checkParamArr.length; i++) {
+        params += "&" + checkParamArr[i] + "=" + rows[checkParamArr[i]];
+    }
+    return params;
+}
+
+/**
  * 判断是否选中树状列表复选框 执行callback
  * 
  * @param treeId
@@ -171,6 +235,27 @@ function isCheckedRowAdCall2Tg(treegridId, callback) {
 		callback();
 	}
 }
+
+/**
+ * 验证是否有选择记录，并且提示是否进行操作
+ *
+ * @param treegridId
+ * @param callback
+ * @confirmMsg 确认消息
+ */
+function isSelectedTgRecordAdConfirm(treegridId, callback, confirmMsg) {
+    var rowData = $("#" + treegridId).treegrid("getSelected");
+    if (rowData) {
+        $.messager.confirm(titleinfo, confirmMsg, function(r) {
+            if (r) {
+                callback(rowData);
+            }
+        });
+    } else {
+        euAlert(selectOneRow);
+    }
+}
+
 /**
  * 判断当前树节点是否为叶子节点
  * 

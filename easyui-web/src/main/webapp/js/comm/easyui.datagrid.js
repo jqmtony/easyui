@@ -1651,8 +1651,7 @@ function reloadDatagridByParamsV2(datagridId, paramStr) {
  * @param closeObj
  *            关闭的对象
  */
-function retResultAdReloadByParams4Call(result, reloadGridId, closeObj,
-		reloadGridParams) {
+function retResultAdReloadByParams4Call(result, reloadGridId, closeObj, reloadGridParams) {
 	showProcess(false);
 	if (!isEmpty(result)) {
         result = evalObj(result);
@@ -1671,6 +1670,7 @@ function retResultAdReloadByParams4Call(result, reloadGridId, closeObj,
 		}
 	}
 }
+
 /**
  * 回调函数
  * 

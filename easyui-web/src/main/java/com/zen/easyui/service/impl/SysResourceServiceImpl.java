@@ -2,7 +2,9 @@ package com.zen.easyui.service.impl;
 
 import com.zen.easyui.common.util.ExtUtils;
 import com.zen.easyui.common.util.IdentityUtil;
+import com.zen.easyui.common.util.TreeNodeUtil;
 import com.zen.easyui.common.vo.ExtTreeNode;
+import com.zen.easyui.common.vo.TreeNode;
 import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.dao.SysResourceDao;
@@ -99,7 +101,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-    public List<ExtTreeNode> listResourceTree(SysResourceDto resourceDto) {
+    public List<ExtTreeNode> listExtResourceTree(SysResourceDto resourceDto) {
         List<ExtTreeNode> extTreeNodes = new ArrayList<>();
         List<SysResourceDto> resources = sysResourceDao.listSysResourceByDto(resourceDto);
         for (SysResourceDto resource : resources) {
@@ -110,5 +112,25 @@ public class SysResourceServiceImpl implements ISysResourceService {
             extTreeNodes.add(extTreeNode);
         }
         return ExtUtils.getTreeList(extTreeNodes, null, true);
+    }
+
+    /**
+     * 获取资源下拉树
+     *
+     * @param resourceDto 资源信息实体
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    public List<TreeNode<SysResourceDto>> listResourceTree(SysResourceDto resourceDto) {
+        List<TreeNode<SysResourceDto>> treeNodes = new ArrayList<>();
+        List<SysResourceDto> resources = sysResourceDao.listSysResourceByDto(resourceDto);
+        for (SysResourceDto resource : resources) {
+            TreeNode<SysResourceDto> treeNode = new TreeNode<SysResourceDto>();
+            treeNode.setId(resource.getId());
+            treeNode.setPid(resource.getPid());
+            treeNode.setText(resource.getName());
+            treeNodes.add(treeNode);
+        }
+        return TreeNodeUtil.getRootNodeList(treeNodes);
     }
 }

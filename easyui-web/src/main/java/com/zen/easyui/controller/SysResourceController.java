@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.zen.easyui.common.constant.GlobalConstant;
 import com.zen.easyui.common.enums.EditFlagEnum;
 import com.zen.easyui.common.vo.ExtTreeNode;
+import com.zen.easyui.common.vo.TreeNode;
 import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.common.web.ResultDto;
@@ -69,8 +70,19 @@ public class SysResourceController {
      * @param resourceDto
      * @return
      */
+    @RequestMapping(value = "/listExtTreeNode")
+    List<ExtTreeNode> listExtTreeNode(SysResourceDto resourceDto) {
+        return sysResourceService.listExtResourceTree(resourceDto);
+    }
+
+    /**
+     * 获取下拉资源树信息
+     *
+     * @param resourceDto
+     * @return
+     */
     @RequestMapping(value = "/listTreeNode")
-    List<ExtTreeNode> listTreeNode(SysResourceDto resourceDto) {
+    List<TreeNode<SysResourceDto>> listTreeNode(SysResourceDto resourceDto) {
         return sysResourceService.listResourceTree(resourceDto);
     }
 

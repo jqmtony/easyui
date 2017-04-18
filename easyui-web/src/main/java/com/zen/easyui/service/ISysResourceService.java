@@ -1,6 +1,7 @@
 package com.zen.easyui.service;
 
 import com.zen.easyui.common.vo.ExtTreeNode;
+import com.zen.easyui.common.vo.TreeNode;
 import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.dto.SysResourceDto;
@@ -58,5 +59,12 @@ public interface ISysResourceService {
      *
      * @param resourceDto 资源信息实体
      */
-    List<ExtTreeNode> listResourceTree(SysResourceDto resourceDto);
+    List<ExtTreeNode> listExtResourceTree(SysResourceDto resourceDto);
+
+    /**
+     * 获取资源下拉树
+     *
+     * @param resourceDto 资源信息实体
+     */
+    List<TreeNode<SysResourceDto>> listResourceTree(SysResourceDto resourceDto);
 }
