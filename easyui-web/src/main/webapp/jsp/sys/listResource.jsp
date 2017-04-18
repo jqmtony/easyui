@@ -85,8 +85,10 @@
             <!-- 删除 -->
             <eu:button title="删除" iconClass="icon-remove" plain="true" onClick="javaScript: doDelete();"/>
         </eu:toolbar>
-        <eu:treetable  url="${pageContext.request.contextPath}/easyui/resource/listByPage" treeField="name" idField="id" fitColumns="true"
-                       id="resourceTreeGrid"  fit="true" toolbarId="toolBarId" pagination="true">
+        <eu:treetable  url="${pageContext.request.contextPath}/easyui/resource/listByPage"
+                       treeField="name" idField="id" dataPlain="true" parentField="pid"
+                       fitColumns="true"
+                       id="resourceTreeGrid"  fit="true" toolbarId="toolBarId" pagination="false">
             <eu:column field="id"  hidden="true"  title="ID" />
             <eu:column field="pid" hidden="true" title="parentId" align="center"/>
 

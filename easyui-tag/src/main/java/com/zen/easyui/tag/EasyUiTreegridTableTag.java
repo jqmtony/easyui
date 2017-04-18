@@ -26,6 +26,10 @@ public class EasyUiTreegridTableTag extends BodyTagSupport {
 
     private String treeField;// TreeGrid展开字段
 
+    private boolean dataPlain; // 该属性用以启用当前 easyui-treegrid 控件对平滑数据格式的支持
+
+    private String parentField;// 该属性表示支持平滑数据格式时指向父级节点idField的属性名，默认为 "pid"
+
     private String frozenFields; // 锁定列字段
 
     private String frozenTitleKeys;
@@ -229,6 +233,8 @@ public class EasyUiTreegridTableTag extends BodyTagSupport {
             htmlSb.append("   nowrap: ").append(this.isNowrap()).append(",\n");
             htmlSb.append("   idField: '").append(this.getIdField()).append("',\n");
             htmlSb.append("   treeField: '").append(this.getTreeField()).append("',\n");
+            htmlSb.append("   dataPlain: ").append(this.isDataPlain()).append(",\n");
+            htmlSb.append("   parentField: '").append(this.getParentField()).append("',\n");
 
             htmlSb.append("   collapsible: ").append(this.isCollapsible()).append(",\n");
             htmlSb.append("   pagination: ").append(this.isPagination()).append(",\n");
@@ -765,6 +771,22 @@ public class EasyUiTreegridTableTag extends BodyTagSupport {
 
     public void setTreeField(String treeField) {
         this.treeField = treeField;
+    }
+
+    public boolean isDataPlain() {
+        return dataPlain;
+    }
+
+    public void setDataPlain(boolean dataPlain) {
+        this.dataPlain = dataPlain;
+    }
+
+    public String getParentField() {
+        return parentField;
+    }
+
+    public void setParentField(String parentField) {
+        this.parentField = parentField;
     }
 
     public boolean isCollapsible() {
