@@ -30,7 +30,7 @@ public class EasyUiTableColumnTag extends TagSupport implements Cloneable {
 
     private boolean checkbox = false; // 是否显示Checkbox
 
-    private boolean sortable = true; // 是否可以排序
+    private boolean sortable = false; // 是否可以排序
 
     private String styler; // 列的样式 可自行定义方法
 
