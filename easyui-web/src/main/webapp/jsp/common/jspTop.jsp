@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${UI_TITLE}</title>
+<%--
 <link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon"/>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon"/>
+--%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 <%--
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/icons/icon-all.min.css" rel="stylesheet" type="text/css" />

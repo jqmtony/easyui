@@ -107,4 +107,15 @@ public class SysUserController {
         }
         return resultDto;
     }
+
+    /**
+     * 删除用户信息
+     *
+     * @param userDto
+     * @return
+     */
+    @RequestMapping(value = "/validateName", method = RequestMethod.POST)
+    String validateName(String name) {
+        return "false";
+    }
 }

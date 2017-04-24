@@ -1,54 +1,131 @@
 package com.zen.easyui.tag;
 
 import com.zen.easyui.constant.GlobalConstant;
-import com.zen.easyui.util.TriRegulation;
 import com.zen.easyui.util.MessageUtil;
+import com.zen.easyui.util.TriRegulation;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
+/**
+ *
+ */
 public class EasyUiValidateTextTag extends BodyTagSupport {
     private static final long serialVersionUID = -4795604324752399473L;
 
     private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private String id; // 编号
+    /**
+     * 编号
+     */
+    private String id;
 
-    private String name; // 名称
+    /**
+     * 名称
+     */
+    private String name;
 
-    private String value; // 默认值
+    /**
+     * 默认值
+     */
+    private String value;
 
-    private String tooltip; // 提示
+    /**
+     * 类型
+     */
+    private String type = "text";
 
-    private String type = "text"; // 类型
+    /**
+     * 样式、宽度、高度
+     */
+    private String style;
 
-    private boolean required = false; // 必须输入
+    /**
+     * 定义为必填字段
+     */
+    private boolean required = false;
 
-    private boolean readonly = false; // 必须输入
+    /**
+     * 为true时关闭验证功能。（该属性自1.3.4版开始可用）
+     */
+    private boolean novalidate = false;
 
-    private String validType; // 特殊验证类型
+    /**
+     * 为true时用户可以在文本域中输入内容。（该属性自1.4.5版开始可用）
+     */
 
-    private String data_options;// 扩展原生功能,如支持多类型验证data-options="validType:['email','length[0,20]']
+    private boolean editable = true;
 
-    private String style; // 样式、宽度、高度
+    /**
+     * 为true时禁用验证框（在表单提交时不会被提交）。（该属性自1.4.5版开始可用）
+     */
+    private boolean disabled = false;
 
-    private String missingMessage; // 验证框为空时，提示字符
+    /**
+     * 为true时将验证框设为只读（在表单提交时会被提交）。（该属性自1.4.5版开始可用）
+     */
+    private boolean readonly = false;
 
-    private String missingMessageKey; // 验证框为空时，提示字符
+    /**
+     * 为true时在创建该组件时就进行验证。（该属性自1.4.5版开始可用）
+     */
+    private boolean validateOnCreate = true;
 
-    private String invalidMessage; // 不合格时的提示字符
+    /**
+     * 为true时在该组件失去焦点的时候进行验证。（该属性自1.4.5版开始可用）
+     */
+    private boolean validateOnBlur = false;
 
-    private String invalidMessageKey; // 不合格时的提示字符ID
+    /**
+     * 特殊验证类型
+     */
+    private String validType;
 
-    private String onblur; // 焦点事件
+    /**
+     * 当文本框未填写时出现的提示信息
+     */
+    private String missingMessage;
 
+    private String missingMessageKey;
+
+    /**
+     * 当文本框的内容被验证为无效时出现的提示。
+     */
+    private String invalidMessage;
+
+    private String invalidMessageKey;
+
+    /**
+     * 焦点事件
+     */
+    private String onblur;
+
+    /**
+     * 点击事件
+     */
     private String onclick;
 
+    /**
+     * 改变事件
+     */
     private String onchange;
 
+    /**
+     * 鼠标移出事件
+     */
     private String onmouseout;
+
+    /**
+     * 在验证一个字段之前触发。（该事件自1.4版开始可用）
+     */
+    private String onBeforeValidate;
+
+    /**
+     * 在验证一个字段的时候触发。（该事件自1.4版开始可用）
+     */
+    private String onValidate;
 
     @Override
     public int doStartTag() throws JspException {
@@ -60,29 +137,22 @@ public class EasyUiValidateTextTag extends BodyTagSupport {
         if (!TriRegulation.isEmpty(this.getId())) {
             htmlSb.append(" id=\"").append(this.getId()).append("\"");
         }
-        if (this.isReadonly()) {
-            htmlSb.append(" readonly=\"").append(this.isReadonly()).append("\"");
-        }
-        if (this.isRequired()) {
-            htmlSb.append(" required=\"").append(this.isRequired()).append("\"");
-        }
-        if (!TriRegulation.isEmpty(this.getData_options())) {
-            htmlSb.append(" data-options=\"").append(this.getData_options()).append("\"");
-        }
+
         if (!TriRegulation.isEmpty(this.getType())) {
             htmlSb.append(" type=\"").append(this.getType()).append("\"");
-        } else {
-            htmlSb.append(" type=\"text\" ");
         }
+
+        if (!TriRegulation.isEmpty(this.getValue())) {
+            htmlSb.append(" value=\"").append(this.getValue()).append("\"");
+        }
+
         if (this.isReadonly()) {
             this.setStyle(!TriRegulation.isEmpty(this.getStyle()) ? this.getStyle() + GlobalConstant.WEB_DISABLE_STYLE : GlobalConstant.WEB_DISABLE_STYLE);
         }
         if (!TriRegulation.isEmpty(this.getStyle())) {
             htmlSb.append(" style=\"").append(this.getStyle()).append("\"");
         }
-        if (!TriRegulation.isEmpty(this.getValidType())) {
-            htmlSb.append(" validType=\"").append(this.getValidType()).append("\"");
-        }
+
         if (!TriRegulation.isEmpty(this.getOnblur())) {
             htmlSb.append("  onblur=\"").append(this.onblur).append("\"");
         }
@@ -95,11 +165,28 @@ public class EasyUiValidateTextTag extends BodyTagSupport {
         if (!TriRegulation.isEmpty(this.getOnmouseout())) {
             htmlSb.append("  onmouseout=\"").append(this.getOnmouseout()).append("\"");
         }
-        if (!TriRegulation.isEmpty(this.getValue())) {
-            htmlSb.append(" value=\"").append(this.getValue()).append("\"");
+
+
+        htmlSb.append(" data-options=\"");
+
+        htmlSb.append(" required : ").append(this.isRequired()).append(",\n");
+        if (!TriRegulation.isEmpty(this.getValidType())) {
+            htmlSb.append(" validType : ").append(this.getValidType()).append(",\n");
         }
-        if (!TriRegulation.isEmpty(this.getTooltip())) {
-            htmlSb.append(" title=\"").append(this.getTooltip()).append("\"");
+        htmlSb.append(" novalidate : ").append(this.isNovalidate()).append(",\n");
+        htmlSb.append(" editable : ").append(this.isEditable()).append(",\n");
+        htmlSb.append(" disabled : ").append(this.isDisabled()).append(",\n");
+        htmlSb.append(" readonly : ").append(this.isReadonly()).append(",\n");
+        htmlSb.append(" validateOnCreate : ").append(this.isValidateOnCreate()).append(",\n");
+        htmlSb.append(" validateOnBlur : ").append(this.isValidateOnBlur());
+
+        htmlSb.append("\"");
+
+        if (!TriRegulation.isEmpty(this.getOnBeforeValidate())) {
+            htmlSb.append("  onBeforeValidate=\"").append(this.getOnBeforeValidate()).append("\"");
+        }
+        if (!TriRegulation.isEmpty(this.getOnValidate())) {
+            htmlSb.append("  onValidate=\"").append(this.getOnValidate()).append("\"");
         }
 
         String keyStr = "";
@@ -130,7 +217,7 @@ public class EasyUiValidateTextTag extends BodyTagSupport {
             htmlSb.append(" missingMessage=\"").append(this.getMissingMessage()).append("\"");
         }
 
-        htmlSb.append(">");
+        htmlSb.append(" />");
 
         if (!TriRegulation.isEmpty(this.getId()) && !TriRegulation.isEmpty(this.getValue())) {
             htmlSb.append("<script type=\"text/javascript\">\n");
@@ -140,19 +227,7 @@ public class EasyUiValidateTextTag extends BodyTagSupport {
             htmlSb.append("}\n");
             htmlSb.append("   });\n");
             htmlSb.append("</script>\n");
-
         }
-        // if (!TriRegulation.isEmpty(this.getId()) && this.isFocus()) {
-        // htmlSb.append("<script type=\"text/javascript\">\n");
-        // htmlSb.append("$(function(){\n");
-        // htmlSb.append("$(\"#").append(this.getId()).append("\").focus(function() {\n");
-        // htmlSb.append("   $(\"#").append(this.getId()).append("\").val($(\"#").append(this.getId()).append("\").val());\n");
-        // htmlSb.append("   });\n");
-        // htmlSb.append("$(\"#").append(this.getId()).append("\").focus();\n");
-        // htmlSb.append(" });\n");
-        // htmlSb.append("</script>\n");
-        //
-        // }
 
         try {
             pageContext.getOut().write(htmlSb.toString());
@@ -169,36 +244,14 @@ public class EasyUiValidateTextTag extends BodyTagSupport {
         return EVAL_PAGE;
     }
 
-    public String getType() {
-        return type;
+    @Override
+    public String getId() {
+        return id;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public boolean isReadonly() {
-        return readonly;
-    }
-
-    public void setReadonly(boolean readonly) {
-        this.readonly = readonly;
-    }
-
-    public String getOnclick() {
-        return onclick;
-    }
-
-    public void setOnclick(String onclick) {
-        this.onclick = onclick;
-    }
-
-    public String getOnblur() {
-        return onblur;
-    }
-
-    public void setOnblur(String onblur) {
-        this.onblur = onblur;
+    @Override
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -209,22 +262,6 @@ public class EasyUiValidateTextTag extends BodyTagSupport {
         this.name = name;
     }
 
-    public boolean isRequired() {
-        return required;
-    }
-
-    public void setRequired(boolean required) {
-        this.required = required;
-    }
-
-    public String getValidType() {
-        return validType;
-    }
-
-    public void setValidType(String validType) {
-        this.validType = validType;
-    }
-
     public String getValue() {
         return value;
     }
@@ -233,28 +270,12 @@ public class EasyUiValidateTextTag extends BodyTagSupport {
         this.value = value;
     }
 
-    public String getTooltip() {
-        return tooltip;
+    public String getType() {
+        return type;
     }
 
-    public void setTooltip(String tooltip) {
-        this.tooltip = tooltip;
-    }
-
-    public String getInvalidMessage() {
-        return invalidMessage;
-    }
-
-    public void setInvalidMessage(String invalidMessage) {
-        this.invalidMessage = invalidMessage;
-    }
-
-    public String getInvalidMessageKey() {
-        return invalidMessageKey;
-    }
-
-    public void setInvalidMessageKey(String invalidMessageKey) {
-        this.invalidMessageKey = invalidMessageKey;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getStyle() {
@@ -265,36 +286,68 @@ public class EasyUiValidateTextTag extends BodyTagSupport {
         this.style = style;
     }
 
-    public String getId() {
-        return id;
+    public boolean isRequired() {
+        return required;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRequired(boolean required) {
+        this.required = required;
     }
 
-    public String getOnchange() {
-        return onchange;
+    public boolean isNovalidate() {
+        return novalidate;
     }
 
-    public void setOnchange(String onchange) {
-        this.onchange = onchange;
+    public void setNovalidate(boolean novalidate) {
+        this.novalidate = novalidate;
     }
 
-    public String getOnmouseout() {
-        return onmouseout;
+    public boolean isEditable() {
+        return editable;
     }
 
-    public void setOnmouseout(String onmouseout) {
-        this.onmouseout = onmouseout;
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 
-    public String getData_options() {
-        return data_options;
+    public boolean isDisabled() {
+        return disabled;
     }
 
-    public void setData_options(String data_options) {
-        this.data_options = data_options;
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public boolean isReadonly() {
+        return readonly;
+    }
+
+    public void setReadonly(boolean readonly) {
+        this.readonly = readonly;
+    }
+
+    public boolean isValidateOnCreate() {
+        return validateOnCreate;
+    }
+
+    public void setValidateOnCreate(boolean validateOnCreate) {
+        this.validateOnCreate = validateOnCreate;
+    }
+
+    public boolean isValidateOnBlur() {
+        return validateOnBlur;
+    }
+
+    public void setValidateOnBlur(boolean validateOnBlur) {
+        this.validateOnBlur = validateOnBlur;
+    }
+
+    public String getValidType() {
+        return validType;
+    }
+
+    public void setValidType(String validType) {
+        this.validType = validType;
     }
 
     public String getMissingMessage() {
@@ -313,4 +366,67 @@ public class EasyUiValidateTextTag extends BodyTagSupport {
         this.missingMessageKey = missingMessageKey;
     }
 
+    public String getInvalidMessage() {
+        return invalidMessage;
+    }
+
+    public void setInvalidMessage(String invalidMessage) {
+        this.invalidMessage = invalidMessage;
+    }
+
+    public String getInvalidMessageKey() {
+        return invalidMessageKey;
+    }
+
+    public void setInvalidMessageKey(String invalidMessageKey) {
+        this.invalidMessageKey = invalidMessageKey;
+    }
+
+    public String getOnblur() {
+        return onblur;
+    }
+
+    public void setOnblur(String onblur) {
+        this.onblur = onblur;
+    }
+
+    public String getOnclick() {
+        return onclick;
+    }
+
+    public void setOnclick(String onclick) {
+        this.onclick = onclick;
+    }
+
+    public String getOnchange() {
+        return onchange;
+    }
+
+    public void setOnchange(String onchange) {
+        this.onchange = onchange;
+    }
+
+    public String getOnmouseout() {
+        return onmouseout;
+    }
+
+    public void setOnmouseout(String onmouseout) {
+        this.onmouseout = onmouseout;
+    }
+
+    public String getOnBeforeValidate() {
+        return onBeforeValidate;
+    }
+
+    public void setOnBeforeValidate(String onBeforeValidate) {
+        this.onBeforeValidate = onBeforeValidate;
+    }
+
+    public String getOnValidate() {
+        return onValidate;
+    }
+
+    public void setOnValidate(String onValidate) {
+        this.onValidate = onValidate;
+    }
 }
