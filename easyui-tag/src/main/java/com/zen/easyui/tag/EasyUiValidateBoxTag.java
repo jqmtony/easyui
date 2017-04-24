@@ -10,9 +10,14 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
 /**
+ * ValidateBox（验证框）
  *
+ * @author zen E-mail: xinjingziranchan@gmail.com
+ * @version 1.0.0
+ * @ClassName EasyUiValidateBoxTag.java
+ * @Date 2017/4/24 15:53
  */
-public class EasyUiValidateTextTag extends BodyTagSupport {
+public class EasyUiValidateBoxTag extends BodyTagSupport {
     private static final long serialVersionUID = -4795604324752399473L;
 
     private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());

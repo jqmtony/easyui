@@ -722,9 +722,9 @@
         </attribute>
     </tag>
     <tag>
-        <name>validateText</name>
+        <name>validateBox</name>
         <tag-class>
-            com.zen.easyui.tag.EasyUiValidateTextTag
+            com.zen.easyui.tag.EasyUiValidateBoxTag
         </tag-class>
         <description>验证框</description>
         <attribute>
