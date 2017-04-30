@@ -128,19 +128,21 @@ public class MessageUtil {
     /**
      * 获取资源属性名称
      *
-     * @param request
+     * @param ServletRequest
      * @param messageId
      * @return
      */
-    public static String getMessage(ServletRequest request, String messageId) {
-        return getMessage(request, messageId, null);
+    public static String getMessage(ServletRequest ServletRequest, String messageId) {
+        return getMessage(ServletRequest, messageId, null);
     }
 
-    public static String getMessage(ServletRequest request, String messageId, Object[] args) {
+    public static String getMessage(ServletRequest ServletRequest, String messageId, Object[] args) {
         String msg = "";
-        locale = SessionContainer.getUserLocale(((HttpServletRequest) request));
+        HttpServletRequest request = (HttpServletRequest) ServletRequest;
+        locale = SessionContainer.getUserLocale(request);
         try {
-            msg = RequestContextUtils.getWebApplicationContext(request).getMessage(messageId, args, locale);
+            //msg = RequestContextUtils.getWebApplicationContext(request).getMessage(messageId, args, locale);
+            msg = RequestContextUtils.findWebApplicationContext(request).getMessage(messageId, args, locale);
         } catch (Exception e) {
             e.printStackTrace();
         }

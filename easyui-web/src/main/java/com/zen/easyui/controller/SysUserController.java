@@ -25,7 +25,6 @@ public class SysUserController {
     /**
      * 跳转到用户列表页面
      *
-     * @param modelAndView
      * @return
      */
     @RequestMapping(value = "/toListPage")
@@ -109,13 +108,17 @@ public class SysUserController {
     }
 
     /**
-     * 删除用户信息
+     * 校验用户名是否已存在
      *
-     * @param userDto
+     * @param name
      * @return
      */
     @RequestMapping(value = "/validateName", method = RequestMethod.POST)
     String validateName(String name) {
-        return "false";
+        if("admin".equalsIgnoreCase(name)){
+            return "false";
+        }else{
+            return "true";
+        }
     }
 }

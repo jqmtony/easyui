@@ -6,7 +6,6 @@ import com.zen.easyui.util.TriStringUtil;
 import com.zen.easyui.util.MessageUtil;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
@@ -110,7 +109,7 @@ public class EasyUiRadioCheckBoxTag extends BodyTagSupport {
 
                 htmlSb.append("<label for=\"").append(this.getId().split(",")[i]).append("\">");
                 if (titleKey) {
-                    htmlSb.append(MessageUtil.getMessage((HttpServletRequest) pageContext.getRequest(), this.getText().split(",")[i]));
+                    htmlSb.append(MessageUtil.getMessage(pageContext.getRequest(), this.getText().split(",")[i]));
                 } else {
                     htmlSb.append(this.getText().split(",")[i]);
                 }
