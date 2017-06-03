@@ -1,58 +1,65 @@
-<?xml version="1.0" encoding="UTF-8" ?>  
-<!DOCTYPE mapper  
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.zen.easyui.dao.SysRoleResourceDao" >
- 	
- 	<resultMap type="com.zen.easyui.dto.SysRoleResourceDto" id="sysRoleResourceResultMap">
-			<result property="sysRoleId" column="SYS_ROLE_ID" jdbcType="VARCHAR" />
-			<result property="sysResourceId" column="SYS_RESOURCE_ID" jdbcType="VARCHAR" />
- 	</resultMap>
- 	
- 	<insert id="insertSysRoleResourceDto" parameterType="com.zen.easyui.dto.SysRoleResourceDto">       
-     	INSERT INTO sys_role_resource (
-     		SYS_ROLE_ID,SYS_RESOURCE_ID
-     	) VALUES (#{sysRoleId, jdbcType=VARCHAR},#{sysResourceId, jdbcType=VARCHAR})
-   </insert>
-   
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zen.easyui.dao.SysRoleResourceDao">
+
+    <resultMap type="com.zen.easyui.dto.SysRoleResourceDto" id="sysRoleResourceResultMap">
+        <result property="sysRoleId" column="SYS_ROLE_ID" jdbcType="VARCHAR"/>
+        <result property="sysResourceId" column="SYS_RESOURCE_ID" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertSysRoleResourceDto" parameterType="com.zen.easyui.dto.SysRoleResourceDto">
+        INSERT INTO sys_role_resource (
+            SYS_ROLE_ID, SYS_RESOURCE_ID
+        ) VALUES (#{sysRoleId, jdbcType=VARCHAR}, #{sysResourceId, jdbcType=VARCHAR})
+    </insert>
+
     <insert id="batchInsertSysRoleResourceDto" parameterType="java.util.List">
-             INSERT INTO sys_role_resource (SYS_ROLE_ID,SYS_RESOURCE_ID) 
-             <foreach collection="list" item="item" index="index" separator="union all">
-				select #{item.sysRoleId, jdbcType=VARCHAR},#{item.sysResourceId, jdbcType=VARCHAR} from dual
-			</foreach>
-    </insert>   
-   
-   <sql id="sysRoleResource_Where_Clause"> 
-   		<trim prefix=" WHERE  " prefixOverrides="AND">
-   		    	        <if test="sysRoleId!=null and sysRoleId!='' ">
-   		    	        	AND SYS_ROLE_ID=#{sysRoleId , jdbcType=VARCHAR} 
-						</if>
-   		    	        <if test="sysResourceId!=null and sysResourceId!='' ">
-   		    	        	AND SYS_RESOURCE_ID=#{sysResourceId , jdbcType=VARCHAR} 
-						</if>
-   		 </trim>   
-   </sql>
-   
-   <update id="updateSysRoleResourceByPk" parameterType="com.zen.easyui.dto.SysRoleResourceDto" >  	
-   		UPDATE sys_role_resource 
-   			SET
-   			<trim suffix=" " suffixOverrides=","> 
-   		    </trim>
-   		WHERE 
-   		    SYS_ROLE_ID=#{sysRoleId, jdbcType=VARCHAR} and SYS_RESOURCE_ID=#{sysResourceId, jdbcType=VARCHAR} 
-   </update>
-   
-   <select id="getSysRoleResourceByPk" parameterType="com.zen.easyui.dto.SysRoleResourceDto" resultMap="sysRoleResourceResultMap">
-   		SELECT SYS_ROLE_ID,SYS_RESOURCE_ID FROM  sys_role_resource WHERE   SYS_ROLE_ID=#{sysRoleId, jdbcType=VARCHAR} and SYS_RESOURCE_ID=#{sysResourceId, jdbcType=VARCHAR}
-   </select>
-   
-   <select id="listSysRoleResourceByDto" parameterType="com.zen.easyui.dto.SysRoleResourceDto" resultMap="sysRoleResourceResultMap">
-   		SELECT SYS_ROLE_ID,SYS_RESOURCE_ID FROM  sys_role_resource 
-   		<include refid="sysRoleResource_Where_Clause" />
-   </select>
-   
-   <delete id="deleteSysRoleResourceByPk" parameterType="com.zen.easyui.dto.SysRoleResourceDto">
-   		DELETE FROM sys_role_resource WHERE SYS_ROLE_ID=#{sysRoleId, jdbcType=VARCHAR} and SYS_RESOURCE_ID=#{sysResourceId, jdbcType=VARCHAR}
-   </delete>
- 	
+        INSERT INTO sys_role_resource (SYS_ROLE_ID,SYS_RESOURCE_ID)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            select #{item.sysRoleId, jdbcType=VARCHAR},#{item.sysResourceId, jdbcType=VARCHAR} from dual
+        </foreach>
+    </insert>
+
+    <sql id="sysRoleResource_Where_Clause">
+        <trim prefix=" WHERE  " prefixOverrides="AND">
+            <if test="sysRoleId!=null and sysRoleId!='' ">
+                AND SYS_ROLE_ID=#{sysRoleId , jdbcType=VARCHAR}
+            </if>
+            <if test="sysResourceId!=null and sysResourceId!='' ">
+                AND SYS_RESOURCE_ID=#{sysResourceId , jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <update id="updateSysRoleResourceByPk" parameterType="com.zen.easyui.dto.SysRoleResourceDto">
+        UPDATE sys_role_resource
+        SET
+        <trim suffix=" " suffixOverrides=",">
+        </trim>
+        WHERE
+        SYS_ROLE_ID=#{sysRoleId, jdbcType=VARCHAR} and SYS_RESOURCE_ID=#{sysResourceId, jdbcType=VARCHAR}
+    </update>
+
+    <select id="getSysRoleResourceByPk" parameterType="com.zen.easyui.dto.SysRoleResourceDto"
+            resultMap="sysRoleResourceResultMap">
+        SELECT
+            SYS_ROLE_ID,
+            SYS_RESOURCE_ID
+        FROM sys_role_resource
+        WHERE SYS_ROLE_ID = #{sysRoleId, jdbcType=VARCHAR} AND SYS_RESOURCE_ID = #{sysResourceId, jdbcType=VARCHAR}
+    </select>
+
+    <select id="listSysRoleResourceByDto" parameterType="com.zen.easyui.dto.SysRoleResourceDto"
+            resultMap="sysRoleResourceResultMap">
+        SELECT SYS_ROLE_ID,SYS_RESOURCE_ID FROM sys_role_resource
+        <include refid="sysRoleResource_Where_Clause"/>
+    </select>
+
+    <delete id="deleteSysRoleResourceByPk" parameterType="com.zen.easyui.dto.SysRoleResourceDto">
+        DELETE FROM sys_role_resource
+        WHERE SYS_ROLE_ID = #{sysRoleId, jdbcType=VARCHAR} AND SYS_RESOURCE_ID = #{sysResourceId, jdbcType=VARCHAR}
+    </delete>
+
 </mapper>

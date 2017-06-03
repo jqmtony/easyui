@@ -1,117 +1,135 @@
-<?xml version="1.0" encoding="UTF-8" ?>  
-<!DOCTYPE mapper  
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.zen.easyui.dao.SysRoleDao" >
- 	
- 	<resultMap type="com.zen.easyui.dto.SysRoleDto" id="sysRoleResultMap">
-			<result property="id" column="ID" jdbcType="VARCHAR" />
-			<result property="name" column="NAME" jdbcType="VARCHAR" />
-			<result property="remark" column="REMARK" jdbcType="VARCHAR" />
-			<result property="seq" column="SEQ" jdbcType="NUMERIC" />
-			<result property="flag" column="FLAG" jdbcType="VARCHAR" />
-			<result property="pid" column="PID" jdbcType="VARCHAR" />
-			<result property="createUser" column="CREATE_USER" jdbcType="VARCHAR" />
-			<result property="createTm" column="CREATE_TM" jdbcType="TIMESTAMP" />
-			<result property="updateUser" column="UPDATE_USER" jdbcType="VARCHAR" />
-			<result property="updateTm" column="UPDATE_TM" jdbcType="TIMESTAMP" />
- 	</resultMap>
- 	
- 	<insert id="insertSysRoleDto" parameterType="com.zen.easyui.dto.SysRoleDto">       
-     	INSERT INTO sys_role (
-     		ID,NAME,REMARK,SEQ,FLAG,PID,CREATE_USER,CREATE_TM,UPDATE_USER,UPDATE_TM
-     	) VALUES (#{id, jdbcType=VARCHAR},#{name, jdbcType=VARCHAR},#{remark, jdbcType=VARCHAR},#{seq, jdbcType=NUMERIC},#{flag, jdbcType=VARCHAR},#{pid, jdbcType=VARCHAR},#{createUser, jdbcType=VARCHAR},#{createTm, jdbcType=TIMESTAMP},#{updateUser, jdbcType=VARCHAR},#{updateTm, jdbcType=TIMESTAMP})
-   </insert>
-   
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zen.easyui.dao.SysRoleDao">
+
+    <resultMap type="com.zen.easyui.dto.SysRoleDto" id="sysRoleResultMap">
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"/>
+        <result property="remark" column="REMARK" jdbcType="VARCHAR"/>
+        <result property="seq" column="SEQ" jdbcType="NUMERIC"/>
+        <result property="flag" column="FLAG" jdbcType="VARCHAR"/>
+        <result property="pid" column="PID" jdbcType="VARCHAR"/>
+        <result property="createUser" column="CREATE_USER" jdbcType="VARCHAR"/>
+        <result property="createTm" column="CREATE_TM" jdbcType="TIMESTAMP"/>
+        <result property="updateUser" column="UPDATE_USER" jdbcType="VARCHAR"/>
+        <result property="updateTm" column="UPDATE_TM" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="insertSysRoleDto" parameterType="com.zen.easyui.dto.SysRoleDto">
+        INSERT INTO sys_role (
+            ID, NAME, REMARK, SEQ, FLAG, PID, CREATE_USER, CREATE_TM, UPDATE_USER, UPDATE_TM
+        ) VALUES
+            (#{id, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{remark, jdbcType=VARCHAR}, #{seq, jdbcType=NUMERIC},
+             #{flag, jdbcType=VARCHAR}, #{pid, jdbcType=VARCHAR}, #{createUser, jdbcType=VARCHAR},
+             #{createTm, jdbcType=TIMESTAMP}, #{updateUser, jdbcType=VARCHAR}, #{updateTm, jdbcType=TIMESTAMP})
+    </insert>
+
     <insert id="batchInsertSysRoleDto" parameterType="java.util.List">
-             INSERT INTO sys_role (ID,NAME,REMARK,SEQ,FLAG,PID,CREATE_USER,CREATE_TM,UPDATE_USER,UPDATE_TM) 
-             <foreach collection="list" item="item" index="index" separator="union all">
-				select #{item.id, jdbcType=VARCHAR},#{item.name, jdbcType=VARCHAR},#{item.remark, jdbcType=VARCHAR},#{item.seq, jdbcType=NUMERIC},#{item.flag, jdbcType=VARCHAR},#{item.pid, jdbcType=VARCHAR},#{item.createUser, jdbcType=VARCHAR},#{item.createTm, jdbcType=TIMESTAMP},#{item.updateUser, jdbcType=VARCHAR},#{item.updateTm, jdbcType=TIMESTAMP} from dual
-			</foreach>
-    </insert>   
-   
-   <sql id="sysRole_Where_Clause"> 
-   		<trim prefix=" WHERE  " prefixOverrides="AND">
-   		    	        <if test="id!=null and id!='' ">
-   		    	        	AND ID=#{id , jdbcType=VARCHAR} 
-						</if>
-   		    	        <if test="name!=null and name!='' ">
-   		    	        	AND NAME=#{name , jdbcType=VARCHAR} 
-						</if>
-   		    	        <if test="remark!=null and remark!='' ">
-   		    	        	AND REMARK=#{remark , jdbcType=VARCHAR} 
-						</if>
-   		    	        <if test="seq!=null and seq!='' ">
-   		    	        	AND SEQ=#{seq , jdbcType=NUMERIC} 
-						</if>
-   		    	        <if test="flag!=null and flag!='' ">
-   		    	        	AND FLAG=#{flag , jdbcType=VARCHAR} 
-						</if>
-   		    	        <if test="pid!=null and pid!='' ">
-   		    	        	AND PID=#{pid , jdbcType=VARCHAR} 
-						</if>
-   		    	        <if test="createUser!=null and createUser!='' ">
-   		    	        	AND CREATE_USER=#{createUser , jdbcType=VARCHAR} 
-						</if>
-   		    	        <if test="createTm!=null and createTm!='' ">
-   		    	        	AND CREATE_TM=#{createTm , jdbcType=TIMESTAMP} 
-						</if>
-   		    	        <if test="updateUser!=null and updateUser!='' ">
-   		    	        	AND UPDATE_USER=#{updateUser , jdbcType=VARCHAR} 
-						</if>
-   		    	        <if test="updateTm!=null and updateTm!='' ">
-   		    	        	AND UPDATE_TM=#{updateTm , jdbcType=TIMESTAMP} 
-						</if>
-   		 </trim>   
-   </sql>
-   
-   <update id="updateSysRoleByPk" parameterType="com.zen.easyui.dto.SysRoleDto" >  	
-   		UPDATE sys_role 
-   			SET
-   			<trim suffix=" " suffixOverrides=","> 
-   		    	        <if test="name!=null and name!='' ">
-   		    	        	NAME=#{name , jdbcType=VARCHAR},
-						</if>
-   		    	        <if test="remark!=null and remark!='' ">
-   		    	        	REMARK=#{remark , jdbcType=VARCHAR},
-						</if>
-   		    	        <if test="seq!=null and seq!='' ">
-   		    	        	SEQ=#{seq , jdbcType=NUMERIC},
-						</if>
-   		    	        <if test="flag!=null and flag!='' ">
-   		    	        	FLAG=#{flag , jdbcType=VARCHAR},
-						</if>
-   		    	        <if test="pid!=null and pid!='' ">
-   		    	        	PID=#{pid , jdbcType=VARCHAR},
-						</if>
-   		    	        <if test="createUser!=null and createUser!='' ">
-   		    	        	CREATE_USER=#{createUser , jdbcType=VARCHAR},
-						</if>
-   		    	        <if test="createTm!=null and createTm!='' ">
-   		    	        	CREATE_TM=#{createTm , jdbcType=TIMESTAMP},
-						</if>
-   		    	        <if test="updateUser!=null and updateUser!='' ">
-   		    	        	UPDATE_USER=#{updateUser , jdbcType=VARCHAR},
-						</if>
-   		    	        <if test="updateTm!=null and updateTm!='' ">
-   		    	        	UPDATE_TM=#{updateTm , jdbcType=TIMESTAMP},
-						</if>
-   		    </trim>
-   		WHERE 
-   		    ID=#{id, jdbcType=VARCHAR} 
-   </update>
-   
-   <select id="getSysRoleByPk" parameterType="com.zen.easyui.dto.SysRoleDto" resultMap="sysRoleResultMap">
-   		SELECT ID,NAME,REMARK,SEQ,FLAG,PID,CREATE_USER,CREATE_TM,UPDATE_USER,UPDATE_TM FROM  sys_role WHERE   ID=#{id, jdbcType=VARCHAR}
-   </select>
-   
-   <select id="listSysRoleByDto" parameterType="com.zen.easyui.dto.SysRoleDto" resultMap="sysRoleResultMap">
-   		SELECT ID,NAME,REMARK,SEQ,FLAG,PID,CREATE_USER,CREATE_TM,UPDATE_USER,UPDATE_TM FROM  sys_role 
-   		<include refid="sysRole_Where_Clause" />
-   </select>
-   
-   <delete id="deleteSysRoleByPk" parameterType="com.zen.easyui.dto.SysRoleDto">
-   		DELETE FROM sys_role WHERE ID=#{id, jdbcType=VARCHAR}
-   </delete>
- 	
+        INSERT INTO sys_role (ID,NAME,REMARK,SEQ,FLAG,PID,CREATE_USER,CREATE_TM,UPDATE_USER,UPDATE_TM)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            select
+            #{item.id, jdbcType=VARCHAR},#{item.name, jdbcType=VARCHAR},#{item.remark, jdbcType=VARCHAR},#{item.seq, jdbcType=NUMERIC},#{item.flag, jdbcType=VARCHAR},#{item.pid, jdbcType=VARCHAR},#{item.createUser, jdbcType=VARCHAR},#{item.createTm, jdbcType=TIMESTAMP},#{item.updateUser, jdbcType=VARCHAR},#{item.updateTm, jdbcType=TIMESTAMP}
+            from dual
+        </foreach>
+    </insert>
+
+    <sql id="sysRole_Where_Clause">
+        <trim prefix=" WHERE  " prefixOverrides="AND">
+            <if test="id!=null and id!='' ">
+                AND ID=#{id , jdbcType=VARCHAR}
+            </if>
+            <if test="name!=null and name!='' ">
+                AND NAME=#{name , jdbcType=VARCHAR}
+            </if>
+            <if test="remark!=null and remark!='' ">
+                AND REMARK=#{remark , jdbcType=VARCHAR}
+            </if>
+            <if test="seq!=null and seq!='' ">
+                AND SEQ=#{seq , jdbcType=NUMERIC}
+            </if>
+            <if test="flag!=null and flag!='' ">
+                AND FLAG=#{flag , jdbcType=VARCHAR}
+            </if>
+            <if test="pid!=null and pid!='' ">
+                AND PID=#{pid , jdbcType=VARCHAR}
+            </if>
+            <if test="createUser!=null and createUser!='' ">
+                AND CREATE_USER=#{createUser , jdbcType=VARCHAR}
+            </if>
+            <if test="createTm!=null and createTm!='' ">
+                AND CREATE_TM=#{createTm , jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateUser!=null and updateUser!='' ">
+                AND UPDATE_USER=#{updateUser , jdbcType=VARCHAR}
+            </if>
+            <if test="updateTm!=null and updateTm!='' ">
+                AND UPDATE_TM=#{updateTm , jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </sql>
+
+    <update id="updateSysRoleByPk" parameterType="com.zen.easyui.dto.SysRoleDto">
+        UPDATE sys_role
+        SET
+        <trim suffix=" " suffixOverrides=",">
+            <if test="name!=null and name!='' ">
+                NAME=#{name , jdbcType=VARCHAR},
+            </if>
+            <if test="remark!=null and remark!='' ">
+                REMARK=#{remark , jdbcType=VARCHAR},
+            </if>
+            <if test="seq!=null and seq!='' ">
+                SEQ=#{seq , jdbcType=NUMERIC},
+            </if>
+            <if test="flag!=null and flag!='' ">
+                FLAG=#{flag , jdbcType=VARCHAR},
+            </if>
+            <if test="pid!=null and pid!='' ">
+                PID=#{pid , jdbcType=VARCHAR},
+            </if>
+            <if test="createUser!=null and createUser!='' ">
+                CREATE_USER=#{createUser , jdbcType=VARCHAR},
+            </if>
+            <if test="createTm!=null and createTm!='' ">
+                CREATE_TM=#{createTm , jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser!=null and updateUser!='' ">
+                UPDATE_USER=#{updateUser , jdbcType=VARCHAR},
+            </if>
+            <if test="updateTm!=null and updateTm!='' ">
+                UPDATE_TM=#{updateTm , jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+        WHERE
+        ID=#{id, jdbcType=VARCHAR}
+    </update>
+
+    <select id="getSysRoleByPk" parameterType="com.zen.easyui.dto.SysRoleDto" resultMap="sysRoleResultMap">
+        SELECT
+            ID,
+            NAME,
+            REMARK,
+            SEQ,
+            FLAG,
+            PID,
+            CREATE_USER,
+            CREATE_TM,
+            UPDATE_USER,
+            UPDATE_TM
+        FROM sys_role
+        WHERE ID = #{id, jdbcType=VARCHAR}
+    </select>
+
+    <select id="listSysRoleByDto" parameterType="com.zen.easyui.dto.SysRoleDto" resultMap="sysRoleResultMap">
+        SELECT ID,NAME,REMARK,SEQ,FLAG,PID,CREATE_USER,CREATE_TM,UPDATE_USER,UPDATE_TM FROM sys_role
+        <include refid="sysRole_Where_Clause"/>
+    </select>
+
+    <delete id="deleteSysRoleByPk" parameterType="com.zen.easyui.dto.SysRoleDto">
+        DELETE FROM sys_role
+        WHERE ID = #{id, jdbcType=VARCHAR}
+    </delete>
+
 </mapper>
