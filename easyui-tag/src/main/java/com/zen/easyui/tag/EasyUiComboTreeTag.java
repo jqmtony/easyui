@@ -1,16 +1,18 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
-
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiComboTreeTag extends BodyTagSupport {
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id;
 
@@ -58,17 +60,17 @@ public class EasyUiComboTreeTag extends BodyTagSupport {
 
         htmlSb.append("<select type=\"text\" ");
         htmlSb.append(" name=\"").append(this.getName()).append("\"");
-        if (!TriRegulation.isEmpty(this.getId())) {
+        if (!RegulationUtil.isEmpty(this.getId())) {
             htmlSb.append(" id=\"").append(this.getId()).append("\"");
         }
-        if (!TriRegulation.isEmpty(this.getStyle())) {
+        if (!RegulationUtil.isEmpty(this.getStyle())) {
             htmlSb.append(" style=\"").append(this.getStyle()).append("\"");
         }
         htmlSb.append("></select>");
 
 
         htmlSb.append("<script type=\"text/javascript\">\n");
-        if (!TriRegulation.isEmpty(this.getUrl())) {
+        if (!RegulationUtil.isEmpty(this.getUrl())) {
 //      htmlSb.append("alert('unloadCombotreeIds=====' + unloadCombotreeIds);");
             htmlSb.append("if (isEmpty(unloadCombotreeIds) || unloadCombotreeIds.indexOf('" + this.getId() + "')<0) {\n");
             htmlSb.append(" ++unloadCombotreeNum ;\n");
@@ -92,21 +94,21 @@ public class EasyUiComboTreeTag extends BodyTagSupport {
 
         htmlSb.append("   onlyLeafCheck: '").append(this.isOnlyLeafCheck()).append("',\n");
         htmlSb.append("   url: '").append(this.getUrl()).append("',\n");
-        if (!TriRegulation.isEmpty(this.getValueField())) {
+        if (!RegulationUtil.isEmpty(this.getValueField())) {
             htmlSb.append(" valueField:'").append(this.getValueField()).append("',\n");
         }
-        if (!TriRegulation.isEmpty(this.getTextField())) {
+        if (!RegulationUtil.isEmpty(this.getTextField())) {
             htmlSb.append(" textField:'").append(this.getTextField()).append("',\n");
         }
 
-        if (!TriRegulation.isEmpty(this.getWidth())) {
+        if (!RegulationUtil.isEmpty(this.getWidth())) {
             htmlSb.append(" width:'").append(this.getWidth()).append("',\n");
         }
 
         if (this.isRequired()) {
             htmlSb.append("   required:").append(this.isRequired()).append(",\n");
         }
-        if (!TriRegulation.isEmpty(this.getOnChange())) {
+        if (!RegulationUtil.isEmpty(this.getOnChange())) {
             htmlSb.append("   onChange:function(){\n");
             htmlSb.append("     var tempChangeValue = getValue2TagId('").append(this.getId()).append("','combotree');");
             htmlSb.append("     if (!isEmpty(tempChangeValue)) {\n");
@@ -127,7 +129,7 @@ public class EasyUiComboTreeTag extends BodyTagSupport {
         htmlSb.append("}\n");
 
         //设置弹出页面，combotree默认选择第一条
-        if (!TriRegulation.isEmpty(this.getValue())) {
+        if (!RegulationUtil.isEmpty(this.getValue())) {
             htmlSb.append(" var tagValue = '").append(this.getValue()).append("'; \n");
         } else {
             htmlSb.append(" var tagValue = getValue2TagId('").append(this.getId()).append("','combotree');");
@@ -151,7 +153,7 @@ public class EasyUiComboTreeTag extends BodyTagSupport {
 //    htmlSb.append(" $('#").append(this.getId()).append("').combotree('tree').tree('find',node.id);\n");
 //    htmlSb.append(" $('#").append(this.getId()).append("').combotree('tree').tree('expandTo',node);\n");
 //    htmlSb.append(" $('#").append(this.getId()).append("').combotree('tree').tree('check',node);\n");
-//    if (!TriRegulation.isEmpty(this.getOnChange())) {
+//    if (!RegulationUtil.isEmpty(this.getOnChange())) {
 //      htmlSb.append(this.getOnChange()).append("(tagValue);");
 //    }
         //暂时屏蔽默认选择树的根节点操作。
@@ -167,13 +169,13 @@ public class EasyUiComboTreeTag extends BodyTagSupport {
         htmlSb.append("}\n ");
 
         htmlSb.append("     }");
-        if (!TriRegulation.isEmpty(this.getOnSelect()) || this.isOnlyLeafSelect()) {
+        if (!RegulationUtil.isEmpty(this.getOnSelect()) || this.isOnlyLeafSelect()) {
             htmlSb.append(",\n");
-            if (!TriRegulation.isEmpty(this.getOnSelect())) {
+            if (!RegulationUtil.isEmpty(this.getOnSelect())) {
                 htmlSb.append(" onSelect:").append(this.getOnSelect()).append(" \n");
             }
             if (this.isOnlyLeafSelect()) {
-                htmlSb.append(!TriRegulation.isEmpty(this.getOnSelect()) ? ";" : " onSelect:\n");
+                htmlSb.append(!RegulationUtil.isEmpty(this.getOnSelect()) ? ";" : " onSelect:\n");
                 htmlSb.append("OnlyLeafSelect").append(this.getId()).append(" \n");
             }
         }
@@ -194,158 +196,6 @@ public class EasyUiComboTreeTag extends BodyTagSupport {
     @Override
     public int doEndTag() throws JspException {
         return EVAL_PAGE;
-    }
-
-    public boolean isCollapseAll() {
-        return collapseAll;
-    }
-
-    public boolean isDisable() {
-        return disable;
-    }
-
-    public void setDisable(boolean disable) {
-        this.disable = disable;
-    }
-
-    public boolean isEnable() {
-        return enable;
-    }
-
-    public String getOnChange() {
-        return onChange;
-    }
-
-    public void setOnChange(String onChange) {
-        this.onChange = onChange;
-    }
-
-    public void setEnable(boolean enable) {
-        this.enable = enable;
-    }
-
-    public void setCollapseAll(boolean collapseAll) {
-        this.collapseAll = collapseAll;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean isCascadeCheck() {
-        return cascadeCheck;
-    }
-
-    public void setCascadeCheck(boolean cascadeCheck) {
-        this.cascadeCheck = cascadeCheck;
-    }
-
-    public boolean isMultiCheck() {
-        return multiCheck;
-    }
-
-    public void setMultiCheck(boolean multiCheck) {
-        this.multiCheck = multiCheck;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isRequired() {
-        return required;
-    }
-
-    public void setRequired(boolean required) {
-        this.required = required;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getValueField() {
-        return valueField;
-    }
-
-    public void setValueField(String valueField) {
-        this.valueField = valueField;
-    }
-
-    public String getTextField() {
-        return textField;
-    }
-
-    public void setTextField(String textField) {
-        this.textField = textField;
-    }
-
-    public boolean isEditable() {
-        return editable;
-    }
-
-    public void setEditable(boolean editable) {
-        this.editable = editable;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public boolean isOnlyLeafCheck() {
-        return onlyLeafCheck;
-    }
-
-    public void setOnlyLeafCheck(boolean onlyLeafCheck) {
-        this.onlyLeafCheck = onlyLeafCheck;
-    }
-
-    public boolean isOnlyLeafSelect() {
-        return onlyLeafSelect;
-    }
-
-    public void setOnlyLeafSelect(boolean onlyLeafSelect) {
-        this.onlyLeafSelect = onlyLeafSelect;
-    }
-
-    public String getOnSelect() {
-        return onSelect;
-    }
-
-    public void setOnSelect(String onSelect) {
-        this.onSelect = onSelect;
-    }
-
-    public String getWidth() {
-        return width;
-    }
-
-    public void setWidth(String width) {
-        this.width = width;
     }
 
 }

@@ -43,6 +43,8 @@
         <guava.version>19.0</guava.version>
         <!-- junit版本号 -->
         <junit.version>4.12</junit.version>
+        <!-- lombok版本号-->
+        <lombok.version>1.16.16</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -179,12 +181,21 @@
                 <artifactId>logback-classic</artifactId>
                 <version>${logback-classic.version}</version>
             </dependency>
+
             <!--google guava-->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-maven -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

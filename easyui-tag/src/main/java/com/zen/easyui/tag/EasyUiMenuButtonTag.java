@@ -1,19 +1,22 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
-import com.zen.easyui.util.TriStringUtil;
 import com.zen.easyui.util.MessageUtil;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RandomUtil;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiMenuButtonTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 4040423476954803162L;
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id; // 编号
 
@@ -30,8 +33,8 @@ public class EasyUiMenuButtonTag extends BodyTagSupport {
 
         try {
             StringBuffer htmlSb = new StringBuffer();
-            if (TriRegulation.isEmpty(this.getId())) {
-                this.setId(TriStringUtil.numRandom(2));
+            if (RegulationUtil.isEmpty(this.getId())) {
+                this.setId(RandomUtil.numRandom(2));
             }
             htmlSb.append("<a href=\"#\"  class=\"easyui-menubutton\" ");
 
@@ -39,18 +42,18 @@ public class EasyUiMenuButtonTag extends BodyTagSupport {
                 htmlSb.append(" iconCls=\"").append(this.getIconClass()).append("\"");
             }
 
-            if (!TriRegulation.isEmpty(this.getId())) {
+            if (!RegulationUtil.isEmpty(this.getId())) {
                 htmlSb.append(" id=\"").append(this.getId()).append("\"");
                 htmlSb.append(" menu=\"#mm_").append(this.getId()).append("\"");
             }
 
             htmlSb.append(">\n");
 
-            if (!TriRegulation.isEmpty(this.getTitle())) {
+            if (!RegulationUtil.isEmpty(this.getTitle())) {
                 htmlSb.append(this.getTitle());
-            } else if (!TriRegulation.isEmpty(this.getTitleKey())) {
+            } else if (!RegulationUtil.isEmpty(this.getTitleKey())) {
                 String keyStr = MessageUtil.getMessage(pageContext.getRequest(), this.getTitleKey());
-                htmlSb.append(!TriRegulation.isEmpty(keyStr) ? keyStr : "");
+                htmlSb.append(!RegulationUtil.isEmpty(keyStr) ? keyStr : "");
             }
             htmlSb.append("\n</a>\n");
 
@@ -74,46 +77,5 @@ public class EasyUiMenuButtonTag extends BodyTagSupport {
 
         return EVAL_PAGE;
     }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getIconClass() {
-        return iconClass;
-    }
-
-    public void setIconClass(String iconClass) {
-        this.iconClass = iconClass;
-    }
-
-    public String getTitleKey() {
-        return titleKey;
-    }
-
-    public void setTitleKey(String titleKey) {
-        this.titleKey = titleKey;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
 
 }

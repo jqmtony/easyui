@@ -1,18 +1,21 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiMenuTag extends BodyTagSupport {
 
     private static final long serialVersionUID = -8408069492551446646L;
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id;
 
@@ -28,7 +31,7 @@ public class EasyUiMenuTag extends BodyTagSupport {
         htmlSb.append(" id=\"").append(this.getId()).append("\" ");
         // htmlSb.append(" fit=\"").append(this.isFit()).append("\" ");
 
-        if (!TriRegulation.isEmpty(this.getStyle())) {
+        if (!RegulationUtil.isEmpty(this.getStyle())) {
             htmlSb.append(" style=\"").append(this.getStyle()).append("\" ");
         }
 
@@ -53,30 +56,6 @@ public class EasyUiMenuTag extends BodyTagSupport {
         }
 
         return EVAL_PAGE;
-    }
-
-    public boolean isFit() {
-        return fit;
-    }
-
-    public void setFit(boolean fit) {
-        this.fit = fit;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
     }
 
 }

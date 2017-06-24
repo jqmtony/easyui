@@ -1,8 +1,10 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
 import com.zen.easyui.util.MessageUtil;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
@@ -10,11 +12,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiComboGridTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 1634618855354058065L;
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private static final String defaultAglin = "center";
 
@@ -75,7 +78,7 @@ public class EasyUiComboGridTag extends BodyTagSupport {
             htmlSb.append(" autoValueCombo='true'");
         }
 
-        if (!TriRegulation.isEmpty(this.getStyle())) {
+        if (!RegulationUtil.isEmpty(this.getStyle())) {
             htmlSb.append(" style=\"").append(this.getStyle()).append(" \"");
         }
 
@@ -83,7 +86,7 @@ public class EasyUiComboGridTag extends BodyTagSupport {
 
         htmlSb.append("<script type=\"text/javascript\">\n");
         htmlSb.append("var isinitFlagCombogrid" + this.getId() + "= false;\n");
-        if (!TriRegulation.isEmpty(this.getUrl())) {
+        if (!RegulationUtil.isEmpty(this.getUrl())) {
 //      htmlSb.append(" alert('起初：unloadCombogridNum='+unloadCombogridNum+'当前combogrid=").append(this.getId()).append("');");
             htmlSb.append("if (isEmpty(unloadCombogridIds) || unloadCombogridIds.indexOf('" + this.getId() + "')<0) {\n");
             htmlSb.append(" ++unloadCombogridNum ;\n");
@@ -113,12 +116,12 @@ public class EasyUiComboGridTag extends BodyTagSupport {
             htmlSb.append(",\n");
             htmlSb.append("   required: true");
         }
-        if (!TriRegulation.isEmpty(this.getValue())) {
+        if (!RegulationUtil.isEmpty(this.getValue())) {
             htmlSb.append(",\n");
             htmlSb.append("   value:'").append(this.getValue()).append("'");
         }
 
-        if (!TriRegulation.isEmpty(this.getFilterMode())) {
+        if (!RegulationUtil.isEmpty(this.getFilterMode())) {
             htmlSb.append(",\n");
             htmlSb.append("   mode:'").append(this.getFilterMode()).append("'");
         }
@@ -127,20 +130,20 @@ public class EasyUiComboGridTag extends BodyTagSupport {
             this.setPanelHeight(this.getPanelHeight());
             this.setPanelWidth(this.getPanelWidth());
         }
-        if (!TriRegulation.isEmpty(this.getPanelWidth())) {
+        if (!RegulationUtil.isEmpty(this.getPanelWidth())) {
             htmlSb.append(",\n");
             htmlSb.append("   panelWidth:").append(this.getPanelWidth());
         }
 
-        if (!TriRegulation.isEmpty(this.getPanelHeight())) {
+        if (!RegulationUtil.isEmpty(this.getPanelHeight())) {
             htmlSb.append(",\n");
             htmlSb.append("   panelHeight:").append(this.getPanelHeight());
         }
-        if (!TriRegulation.isEmpty(this.getWidth())) {
+        if (!RegulationUtil.isEmpty(this.getWidth())) {
             htmlSb.append(",\n");
             htmlSb.append("   width:").append(this.getWidth());
         }
-        if (!TriRegulation.isEmpty(this.getOnChange())) {
+        if (!RegulationUtil.isEmpty(this.getOnChange())) {
             htmlSb.append(",\n");
             htmlSb.append("   onChange:").append(this.getOnChange());
         }
@@ -176,10 +179,10 @@ public class EasyUiComboGridTag extends BodyTagSupport {
 
             htmlSb.append("{field:'").append(columnTag.getField()).append("',title:'");
 
-            if (!TriRegulation.isEmpty(columnTag.getTitleKey())) {
+            if (!RegulationUtil.isEmpty(columnTag.getTitleKey())) {
                 String keyStr = MessageUtil.getMessage(pageContext.getRequest(), columnTag.getTitleKey());
 
-                if (!TriRegulation.isEmpty(keyStr)) {
+                if (!RegulationUtil.isEmpty(keyStr)) {
                     htmlSb.append(keyStr);
                 } else {
                     htmlSb.append(columnTag.getTitle());
@@ -189,13 +192,13 @@ public class EasyUiComboGridTag extends BodyTagSupport {
             }
 
             htmlSb.append("',");
-            if (!columnTag.isHidden() && TriRegulation.isEmpty(columnTag.getWidth())) {
+            if (!columnTag.isHidden() && RegulationUtil.isEmpty(columnTag.getWidth())) {
                 columnTag.setWidth(String.valueOf((Integer.valueOf(this.getPanelWidth()) / showColSize) - 1));
             }
-            if (!columnTag.isHidden() && !TriRegulation.isEmpty(columnTag.getWidth())) {
+            if (!columnTag.isHidden() && !RegulationUtil.isEmpty(columnTag.getWidth())) {
                 htmlSb.append("width:").append(columnTag.getWidth()).append(",");
             }
-            if (!columnTag.isHidden() && !TriRegulation.isEmpty(columnTag.getAlign())) {
+            if (!columnTag.isHidden() && !RegulationUtil.isEmpty(columnTag.getAlign())) {
                 htmlSb.append("align:'").append(columnTag.getAlign()).append("',");
             } else {
                 htmlSb.append("align:'").append(this.defaultAglin).append("',");
@@ -212,8 +215,8 @@ public class EasyUiComboGridTag extends BodyTagSupport {
         htmlSb.append("]] \n ");
 
         // 默认选择第一条数据，由于跟FORM LOAD冲突，暂时屏蔽(目前解决方式：新增selectFirst属性)
-        if (TriRegulation.isEmpty(this.getValue())) {
-//    if (this.isSelectFirst() && TriRegulation.isEmpty(this.getValue())) { //是否需要考虑this.isSelectFirst()这个条件
+        if (RegulationUtil.isEmpty(this.getValue())) {
+//    if (this.isSelectFirst() && RegulationUtil.isEmpty(this.getValue())) { //是否需要考虑this.isSelectFirst()这个条件
             htmlSb.append(",onLoadSuccess: function () {\n");
 
             if (this.isReadonly()) {//为只读设置灰色样式，在加载完成后执行
@@ -228,25 +231,25 @@ public class EasyUiComboGridTag extends BodyTagSupport {
             htmlSb.append("isinitFlagCombogrid" + this.getId() + "=false;\n");
             htmlSb.append("}\n");
 //        如果combogrid存在父关联对象，则子对象一定要设置value值
-            if (!TriRegulation.isEmpty(this.getValue())) {
+            if (!RegulationUtil.isEmpty(this.getValue())) {
                 htmlSb.append("var tagValue = '").append(this.getValue()).append("';\n");
             } else if (this.isSelectFirst()) {//如果不选第一条记录，则不自动赋值
                 htmlSb.append("var tagValue=getValue2TagId('").append(this.getId()).append("','combogrid');");
             }
 //      htmlSb.append(" alert('combogird="+this.getId()+" tagValue='+tagValue);");
-            htmlSb.append("var tagValue = ").append(!TriRegulation.isEmpty(this.getValue()) ? "'" + this.getValue() + "'" : this.isSelectFirst() ? "getValue2TagId('" + this.getId() + "','combogrid')" : "''").append(";");
+            htmlSb.append("var tagValue = ").append(!RegulationUtil.isEmpty(this.getValue()) ? "'" + this.getValue() + "'" : this.isSelectFirst() ? "getValue2TagId('" + this.getId() + "','combogrid')" : "''").append(";");
             htmlSb.append("if (isEmpty(tagValue) && ").append(this.isSelectFirst()).append(") {\n");
             htmlSb.append("var rows=$('#").append(this.getId()).append("').combogrid('grid').datagrid('getRows');\n");
             htmlSb.append("if (rows.length>0) {\n");
             htmlSb.append("$('#").append(this.getId()).append("').combogrid('grid').datagrid('selectRow',0);\n");
-            if (!TriRegulation.isEmpty(this.getOnChange())) {
+            if (!RegulationUtil.isEmpty(this.getOnChange())) {
                 htmlSb.append(this.getOnChange()).append("(rows[0]." + this.getIdField().trim() + ");");
             }
             htmlSb.append("} \n");
             htmlSb.append("} else {\n");
             htmlSb.append("setValue2TagId('").append(this.getId()).append("','combogrid',tagValue);\n");
             //编辑状态下，可能出现“省份”、“地市”  级联操作。   省份确定后，必须执行onChange事件使地市渲染值以后，才把formJson值赋给edit页面。但是loadFormJson时，会自动执行onChange事件。
-//      if (!TriRegulation.isEmpty(this.getOnChange())) {
+//      if (!RegulationUtil.isEmpty(this.getOnChange())) {
 //        htmlSb.append(this.getOnChange()).append("(tagValue);");
 //      }
             htmlSb.append("}\n");
@@ -276,177 +279,8 @@ public class EasyUiComboGridTag extends BodyTagSupport {
         return EVAL_PAGE;
     }
 
-    public String getFilterMode() {
-        return filterMode;
-    }
-
-    public void setFilterMode(String filterMode) {
-        this.filterMode = filterMode;
-    }
-
     public synchronized void addColumn(EasyUiComboGridColumnTag column) {
         this.getColumns().add(column);
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean isDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getIdField() {
-        return idField;
-    }
-
-    public void setIdField(String idField) {
-        this.idField = idField;
-    }
-
-    public String getTextField() {
-        return textField;
-    }
-
-    public void setTextField(String textField) {
-        this.textField = textField;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getPanelWidth() {
-        return panelWidth;
-    }
-
-    public void setPanelWidth(String panelWidth) {
-        this.panelWidth = panelWidth;
-    }
-
-    public String getPanelHeight() {
-        return panelHeight;
-    }
-
-    public void setPanelHeight(String panelHeight) {
-        this.panelHeight = panelHeight;
-    }
-
-    public boolean isStandardsize() {
-        return standardsize;
-    }
-
-    public void setStandardsize(boolean standardsize) {
-        this.standardsize = standardsize;
-    }
-
-    public boolean isEditable() {
-        return editable;
-    }
-
-    public void setEditable(boolean editable) {
-        this.editable = editable;
-    }
-
-    public List<EasyUiComboGridColumnTag> getColumns() {
-        return columns;
-    }
-
-    public void setColumns(List<EasyUiComboGridColumnTag> columns) {
-        this.columns = columns;
-    }
-
-    public String getOnChange() {
-        return onChange;
-    }
-
-    public void setOnChange(String onChange) {
-        this.onChange = onChange;
-    }
-
-    public boolean isRequired() {
-        return required;
-    }
-
-    public void setRequired(boolean required) {
-        this.required = required;
-    }
-
-    public boolean isSelectFirst() {
-        return selectFirst;
-    }
-
-    public void setSelectFirst(boolean selectFirst) {
-        this.selectFirst = selectFirst;
-    }
-
-    public boolean isAutoShowPanel() {
-        return autoShowPanel;
-    }
-
-    public void setAutoShowPanel(boolean autoShowPanel) {
-        this.autoShowPanel = autoShowPanel;
-    }
-
-    public boolean isAutoValueCombo() {
-        return autoValueCombo;
-    }
-
-    public void setAutoValueCombo(boolean autoValueCombo) {
-        this.autoValueCombo = autoValueCombo;
-    }
-
-    public String getWidth() {
-        return width;
-    }
-
-    public void setWidth(String width) {
-        this.width = width;
-    }
-
-    public boolean isReadonly() {
-        return readonly;
-    }
-
-    public void setReadonly(boolean readonly) {
-        this.readonly = readonly;
-    }
-
 
 }

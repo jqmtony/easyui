@@ -1,18 +1,20 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiAccordionTag extends BodyTagSupport {
 
     private static final long serialVersionUID = -4306262114383104919L;
-
-    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id; // Accoutdion标识;
 
@@ -30,7 +32,7 @@ public class EasyUiAccordionTag extends BodyTagSupport {
         htmlSb.append(" fit=\"").append(this.isFit()).append("\" ");
         htmlSb.append(" border=\"").append(this.isBorder()).append("\" ");
 
-        if (!TriRegulation.isEmpty(this.getStyle())) {
+        if (!RegulationUtil.isEmpty(this.getStyle())) {
             htmlSb.append(" style=\"").append(this.getStyle()).append("\" ");
         }
 
@@ -55,46 +57,6 @@ public class EasyUiAccordionTag extends BodyTagSupport {
         }
 
         return EVAL_PAGE;
-    }
-
-    public Logger getLog() {
-        return log;
-    }
-
-    public void setLog(Logger log) {
-        this.log = log;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public boolean isFit() {
-        return fit;
-    }
-
-    public void setFit(boolean fit) {
-        this.fit = fit;
-    }
-
-    public boolean isBorder() {
-        return border;
-    }
-
-    public void setBorder(boolean border) {
-        this.border = border;
     }
 
 }

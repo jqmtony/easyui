@@ -1,7 +1,10 @@
 package com.zen.easyui.dto;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class BaseDto {
 
     /**
@@ -24,35 +27,4 @@ public class BaseDto {
      */
     private Date UpdateTm;
 
-    public String getCreateUser() {
-        return CreateUser;
-    }
-
-    public void setCreateUser(String createUser) {
-        CreateUser = createUser;
-    }
-
-    public Date getCreateTm() {
-        return CreateTm;
-    }
-
-    public void setCreateTm(Date createTm) {
-        CreateTm = createTm;
-    }
-
-    public String getUpdateUser() {
-        return UpdateUser;
-    }
-
-    public void setUpdateUser(String updateUser) {
-        UpdateUser = updateUser;
-    }
-
-    public Date getUpdateTm() {
-        return UpdateTm;
-    }
-
-    public void setUpdateTm(Date updateTm) {
-        UpdateTm = updateTm;
-    }
 }

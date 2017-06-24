@@ -25,7 +25,6 @@ public class SysRoleController {
     /**
      * 跳转到角色列表页面
      *
-     * @param modelAndView
      * @return
      */
     @RequestMapping(value = "/toListPage")

@@ -1,13 +1,16 @@
 package com.zen.easyui.tag;
 
-import org.slf4j.LoggerFactory;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiTabPageTag extends TagSupport implements Cloneable {
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id; // id
 
@@ -43,94 +46,6 @@ public class EasyUiTabPageTag extends TagSupport implements Cloneable {
         }
 
         return SKIP_BODY;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getOnSelect() {
-        return onSelect;
-    }
-
-    public void setOnSelect(String onSelect) {
-        this.onSelect = onSelect;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public boolean isClosable() {
-        return closable;
-    }
-
-    public void setClosable(boolean closable) {
-        this.closable = closable;
-    }
-
-    public String getIconClass() {
-        return iconClass;
-    }
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    public void setIconClass(String iconClass) {
-        this.iconClass = iconClass;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public String getToolsId() {
-        return toolsId;
-    }
-
-    public void setToolsId(String toolsId) {
-        this.toolsId = toolsId;
-    }
-
-    public String getTitleKey() {
-        return titleKey;
-    }
-
-    public void setTitleKey(String titleKey) {
-        this.titleKey = titleKey;
-    }
-
-    public boolean isCache() {
-        return cache;
-    }
-
-    public void setCache(boolean cache) {
-        this.cache = cache;
-    }
-
-    public String getHref() {
-        return href;
-    }
-
-    public void setHref(String href) {
-        this.href = href;
     }
 
 }

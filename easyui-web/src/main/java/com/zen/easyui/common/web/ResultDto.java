@@ -1,5 +1,7 @@
 package com.zen.easyui.common.web;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -10,45 +12,29 @@ import java.io.Serializable;
  * @ClassName ResultDto.java
  * @Date 2017年3月17日 上午9:40:32
  */
+@Data
 public class ResultDto<T> implements Serializable {
 
     private static final long serialVersionUID = 4907893237411537857L;
 
+    /**
+     * 成功标识
+     */
     private boolean success = true;
+
+    /**
+     * 返回状态码
+     */
     private String code = "0";
+
+    /**
+     * 返回描述信息
+     */
     private String msg = "操作成功";
+
+    /**
+     * 返回数据
+     */
     private T data;
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 
 }

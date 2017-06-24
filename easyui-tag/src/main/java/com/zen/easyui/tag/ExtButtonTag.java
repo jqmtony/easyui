@@ -1,17 +1,20 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
 import com.zen.easyui.util.MessageUtil;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class ExtButtonTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 4040423476954803162L;
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id; // 编号
 
@@ -34,11 +37,11 @@ public class ExtButtonTag extends BodyTagSupport {
     @Override
     public int doStartTag() throws JspException {
         // 屏蔽按钮权限控制
-        /*if (!TriRegulation.isEmpty(this.getAuthCode())) {
+        /*if (!RegulationUtil.isEmpty(this.getAuthCode())) {
             String[] codeArr = this.getAuthCode().split(",");
             boolean isAuth = false;
             HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
-            if (!TriObjectHelper.equals(SessionContainer.getUserInfo(request).getLoginName(), GlobalConstant.ADMIN_USER_ID)) {// 管理员拥有所以权限
+            if (!ObjectHelper.equals(SessionContainer.getUserInfo(request).getLoginName(), GlobalConstant.ADMIN_USER_ID)) {// 管理员拥有所以权限
                 for (int i = 0; i < codeArr.length; i++) {
                     if (AuthenticateUtil.isHaveRightForFunDetail(request, codeArr[i])) {
                         isAuth = true;
@@ -56,16 +59,16 @@ public class ExtButtonTag extends BodyTagSupport {
 
             ExtToolbarTag toolbar = (ExtToolbarTag) getParent();
 
-            if (!TriRegulation.isEmpty(this.getOnClick())) {
+            if (!RegulationUtil.isEmpty(this.getOnClick())) {
                 htmlSb.append("<script> \n");
                 //数据字段定义
                 htmlSb.append(toolbar.getId()).append(".push({   \n");
                 htmlSb.append("xtype: 'button',");
-                if (!TriRegulation.isEmpty(this.getTitle())) {
+                if (!RegulationUtil.isEmpty(this.getTitle())) {
                     htmlSb.append("text : '").append(this.getTitle()).append("',   \n");
-                } else if (!TriRegulation.isEmpty(this.getTitleKey())) {
+                } else if (!RegulationUtil.isEmpty(this.getTitleKey())) {
                     String keyStr = MessageUtil.getMessage(pageContext.getRequest(), this.getTitleKey());
-                    htmlSb.append("text : '").append(!TriRegulation.isEmpty(keyStr) ? keyStr : "").append("',   \n");
+                    htmlSb.append("text : '").append(!RegulationUtil.isEmpty(keyStr) ? keyStr : "").append("',   \n");
                 }
                 htmlSb.append("iconCls : '").append(this.getIconClass()).append("',   \n");
                 htmlSb.append("handler :  function() {").append(this.getOnClick()).append("}   \n");
@@ -81,78 +84,6 @@ public class ExtButtonTag extends BodyTagSupport {
         }
 
         return EVAL_BODY_INCLUDE;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getIconClass() {
-        return iconClass;
-    }
-
-    public void setIconClass(String iconClass) {
-        this.iconClass = iconClass;
-    }
-
-    public String getOnClick() {
-        return onClick;
-    }
-
-    public void setOnClick(String onClick) {
-        this.onClick = onClick;
-    }
-
-    public String getAuthCode() {
-        return authCode;
-    }
-
-    public void setAuthCode(String authCode) {
-        this.authCode = authCode;
-    }
-
-    public boolean isPlain() {
-        return plain;
-    }
-
-    public void setPlain(boolean plain) {
-        this.plain = plain;
-    }
-
-    public String getTitleKey() {
-        return titleKey;
-    }
-
-    public void setTitleKey(String titleKey) {
-        this.titleKey = titleKey;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public boolean isDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
-
-    public String getTitleText() {
-        return titleText;
-    }
-
-    public void setTitleText(String titleText) {
-        this.titleText = titleText;
     }
 
 }

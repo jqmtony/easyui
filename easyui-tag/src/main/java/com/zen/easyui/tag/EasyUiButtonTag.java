@@ -1,19 +1,21 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
 import com.zen.easyui.util.MessageUtil;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.Tag;
 
-
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiButtonTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 4040423476954803162L;
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id; // 编号
 
@@ -42,11 +44,11 @@ public class EasyUiButtonTag extends BodyTagSupport {
     @Override
     public int doStartTag() throws JspException {
         // 屏蔽按钮权限控制
-//    if (!TriRegulation.isEmpty(this.getAuthCode())) {
+//    if (!RegulationUtil.isEmpty(this.getAuthCode())) {
 //      String[] codeArr = this.getAuthCode().split(",");
 //      boolean isAuth = false;
 //      HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
-//      if (!TriObjectHelper.equals(SessionContainer.getUserInfo(request).getLoginName(), GlobalConstant.ADMIN_USER_ID)) {// 管理员拥有所以权限
+//      if (!ObjectHelper.equals(SessionContainer.getUserInfo(request).getLoginName(), GlobalConstant.ADMIN_USER_ID)) {// 管理员拥有所以权限
 //        for (int i = 0; i < codeArr.length; i++) {
 //          if (AuthenticateUtil.isHaveRightForFunDetail(request, codeArr[i])) {
 //            isAuth = true;
@@ -62,7 +64,7 @@ public class EasyUiButtonTag extends BodyTagSupport {
         try {
             boolean menuButFlag = false;
             Tag parentTag = getParent();
-            if (!TriRegulation.isEmpty(parentTag)) {
+            if (!RegulationUtil.isEmpty(parentTag)) {
                 if (parentTag instanceof EasyUiMenuButtonTag) {
                     menuButFlag = true;
                 }
@@ -78,13 +80,13 @@ public class EasyUiButtonTag extends BodyTagSupport {
 
             htmlSb.append(" plain=\"").append(this.isPlain()).append("\"");
             String tmpTitle = "";
-            if (!TriRegulation.isEmpty(this.getTitle())) {
+            if (!RegulationUtil.isEmpty(this.getTitle())) {
                 tmpTitle = this.getTitle();
-            } else if (!TriRegulation.isEmpty(this.getTitleKey())) {
+            } else if (!RegulationUtil.isEmpty(this.getTitleKey())) {
                 tmpTitle = MessageUtil.getMessage(pageContext.getRequest(), this.getTitleKey());
             }
 
-            if (!TriRegulation.isEmpty(this.getTitleText())) {
+            if (!RegulationUtil.isEmpty(this.getTitleText())) {
                 htmlSb.append(" title=\"").append(this.getTitleText()).append("\"");
             } else {
                 htmlSb.append(" title=\"").append(tmpTitle).append("\"");
@@ -98,12 +100,12 @@ public class EasyUiButtonTag extends BodyTagSupport {
             }
             if (!"".equals(this.getOnClick())) {
 //        if (this.defaultEnterKey) {
-//          String showToolbar = "if (!isEmpty(" + GlobalConstant.PAGE_VAR_CURRENT_TOOLBAR_ID + ")) {showToolbarForm(" + GlobalConstant.PAGE_VAR_CURRENT_TOOLBAR_ID + ")};";
+//          String showToolbar = "if (!isEmpty(" + EasyuiTagGlobalConstant.PAGE_VAR_CURRENT_TOOLBAR_ID + ")) {showToolbarForm(" + EasyuiTagGlobalConstant.PAGE_VAR_CURRENT_TOOLBAR_ID + ")};";
 //          this.setOnClick(this.getOnClick() + showToolbar);
 //        }
                 htmlSb.append(" onclick=\"").append(this.getOnClick()).append("\"");
             }
-            if (!TriRegulation.isEmpty(this.getId())) {
+            if (!RegulationUtil.isEmpty(this.getId())) {
                 htmlSb.append(" id=\"").append(this.getId()).append("\"");
             }
             if (this.isDisabled()) {
@@ -122,7 +124,7 @@ public class EasyUiButtonTag extends BodyTagSupport {
                 htmlSb.append("</div>\n ");
             }
 
-            if (!TriRegulation.isEmpty(this.getId()) && !TriRegulation.isEmpty(this.getOnClick()) && (this.isOnceEnterKey() || this.isDefaultEnterKey())) {
+            if (!RegulationUtil.isEmpty(this.getId()) && !RegulationUtil.isEmpty(this.getOnClick()) && (this.isOnceEnterKey() || this.isDefaultEnterKey())) {
                 htmlSb.append("<script type=\"text/javascript\">\n");
                 htmlSb.append("$(function(){ \n");
                 // $(document)是获取整个网页的，$(window)是获取当前窗体的
@@ -132,7 +134,7 @@ public class EasyUiButtonTag extends BodyTagSupport {
                 if (this.defaultEnterKey) {
                     htmlSb.append("   defaultEnterKeyId=\"").append(this.getId()).append("\";  \n");
                 }
-//        if (!TriObjectHelper.equals(this.getOnClick(), "") && this.defaultEnterKey) {
+//        if (!ObjectHelper.equals(this.getOnClick(), "") && this.defaultEnterKey) {
 //          htmlSb.append("   function ").append(this.getId()).append("Onclick(){\n");
 //          htmlSb.append(this.getOnClick());
 //          htmlSb.append("     if (!isEmpty(").append(GlobalConstant.PAGE_VAR_CURRENT_TOOLBAR_ID).append(")) {\n");
@@ -152,114 +154,5 @@ public class EasyUiButtonTag extends BodyTagSupport {
 
         return EVAL_BODY_INCLUDE;
     }
-
-    public boolean isStopAutoSearch() {
-        return stopAutoSearch;
-    }
-
-    public void setStopAutoSearch(boolean stopAutoSearch) {
-        this.stopAutoSearch = stopAutoSearch;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getIconClass() {
-        return iconClass;
-    }
-
-    public void setIconClass(String iconClass) {
-        this.iconClass = iconClass;
-    }
-
-    public String getOnClick() {
-        return onClick;
-    }
-
-    public void setOnClick(String onClick) {
-        this.onClick = onClick;
-    }
-
-    public String getAuthCode() {
-        return authCode;
-    }
-
-    public void setAuthCode(String authCode) {
-        this.authCode = authCode;
-    }
-
-    public boolean isPlain() {
-        return plain;
-    }
-
-    public void setPlain(boolean plain) {
-        this.plain = plain;
-    }
-
-    public String getTitleKey() {
-        return titleKey;
-    }
-
-    public void setTitleKey(String titleKey) {
-        this.titleKey = titleKey;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public boolean isDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
-
-    /**
-     * 通过按钮名称获取对应的icon
-     * 可能比较耗资源，暂不实现
-     *
-     * @param titleName
-     * @return
-     */
-    private String getIconByTitleName(String titleName) {
-
-        return "";
-    }
-
-    public boolean isOnceEnterKey() {
-        return onceEnterKey;
-    }
-
-    public void setOnceEnterKey(boolean onceEnterKey) {
-        this.onceEnterKey = onceEnterKey;
-    }
-
-    public boolean isDefaultEnterKey() {
-        return defaultEnterKey;
-    }
-
-    public void setDefaultEnterKey(boolean defaultEnterKey) {
-        this.defaultEnterKey = defaultEnterKey;
-    }
-
-    public String getTitleText() {
-        return titleText;
-    }
-
-    public void setTitleText(String titleText) {
-        this.titleText = titleText;
-    }
-
 
 }

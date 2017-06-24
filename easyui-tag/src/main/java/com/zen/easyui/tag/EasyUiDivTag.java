@@ -1,17 +1,20 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiDivTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 598209081781510962L;
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id;
 
@@ -24,7 +27,7 @@ public class EasyUiDivTag extends BodyTagSupport {
             StringBuffer htmlSb = new StringBuffer();
             htmlSb.append("<div id=\"").append(this.getId()).append("\"");
 
-            if (!TriRegulation.isEmpty(this.getStyle())) {
+            if (!RegulationUtil.isEmpty(this.getStyle())) {
                 htmlSb.append(" style=\"").append(this.getStyle()).append("\" ");
             }
 
@@ -47,22 +50,6 @@ public class EasyUiDivTag extends BodyTagSupport {
         }
 
         return EVAL_PAGE;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
     }
 
 }

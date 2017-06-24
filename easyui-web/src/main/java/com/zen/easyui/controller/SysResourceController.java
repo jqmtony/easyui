@@ -29,7 +29,6 @@ public class SysResourceController {
     /**
      * 跳转到资源列表页面
      *
-     * @param modelAndView
      * @return
      */
     @RequestMapping(value = "/toListPage")
@@ -54,7 +53,6 @@ public class SysResourceController {
     /**
      * 跳转到EXT资源列表页面
      *
-     * @param modelAndView
      * @return
      */
     @RequestMapping(value = "/toExtListPage")

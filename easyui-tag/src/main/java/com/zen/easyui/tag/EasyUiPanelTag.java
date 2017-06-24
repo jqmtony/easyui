@@ -1,17 +1,21 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
 import com.zen.easyui.util.MessageUtil;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiPanelTag extends BodyTagSupport {
-    private static final long serialVersionUID = 1980539023299830443L;
 
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final long serialVersionUID = 1980539023299830443L;
 
     private String id; // 编号
 
@@ -50,23 +54,23 @@ public class EasyUiPanelTag extends BodyTagSupport {
         htmlSb.append(" noheader=\"").append(this.isNoheader()).append("\" ");
         htmlSb.append(" border=\"").append(this.isBorder()).append("\" ");
 
-        if (!TriRegulation.isEmpty(this.getStyle())) {
+        if (!RegulationUtil.isEmpty(this.getStyle())) {
             htmlSb.append(" style=\"").append(this.getStyle()).append("\" ");
         }
-        if (!TriRegulation.isEmpty(this.getTools())) {
+        if (!RegulationUtil.isEmpty(this.getTools())) {
             htmlSb.append(" tooles=\"#").append(this.getTools()).append("\" ");
         }
-        if (!TriRegulation.isEmpty(this.getTitle())) {
+        if (!RegulationUtil.isEmpty(this.getTitle())) {
             htmlSb.append(" title=\"");
-            htmlSb.append(TriRegulation.isEmpty(this.getTitle()) ? "" : this.getTitle());
+            htmlSb.append(RegulationUtil.isEmpty(this.getTitle()) ? "" : this.getTitle());
             htmlSb.append("\"");
-        } else if (!TriRegulation.isEmpty(this.getTitleKey())) {
+        } else if (!RegulationUtil.isEmpty(this.getTitleKey())) {
             htmlSb.append(" title=\"");
             String keyStr = MessageUtil.getMessage(pageContext.getRequest(), this.getTitleKey());
-            htmlSb.append(!TriRegulation.isEmpty(keyStr) ? keyStr : "");
+            htmlSb.append(!RegulationUtil.isEmpty(keyStr) ? keyStr : "");
             htmlSb.append("\"");
         }
-        if (!TriRegulation.isEmpty(this.getIconCls())) {
+        if (!RegulationUtil.isEmpty(this.getIconCls())) {
             htmlSb.append(" iconCls=\"").append(this.getIconCls()).append("\" ");
         }
         if (this.isAlldisable()) {
@@ -100,122 +104,6 @@ public class EasyUiPanelTag extends BodyTagSupport {
         }
 
         return EVAL_PAGE;
-    }
-
-    public String getTools() {
-        return tools;
-    }
-
-    public void setTools(String tools) {
-        this.tools = tools;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public boolean isAlldisable() {
-        return alldisable;
-    }
-
-    public void setAlldisable(boolean alldisable) {
-        this.alldisable = alldisable;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public boolean isFit() {
-        return fit;
-    }
-
-    public void setFit(boolean fit) {
-        this.fit = fit;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTitleKey() {
-        return titleKey;
-    }
-
-    public void setTitleKey(String titleKey) {
-        this.titleKey = titleKey;
-    }
-
-    public String getIconCls() {
-        return iconCls;
-    }
-
-    public void setIconCls(String iconCls) {
-        this.iconCls = iconCls;
-    }
-
-    public boolean isClosable() {
-        return closable;
-    }
-
-    public void setClosable(boolean closable) {
-        this.closable = closable;
-    }
-
-    public boolean isCollapsible() {
-        return collapsible;
-    }
-
-    public void setCollapsible(boolean collapsible) {
-        this.collapsible = collapsible;
-    }
-
-    public boolean isMinimizable() {
-        return minimizable;
-    }
-
-    public void setMinimizable(boolean minimizable) {
-        this.minimizable = minimizable;
-    }
-
-    public boolean isMaximizable() {
-        return maximizable;
-    }
-
-    public void setMaximizable(boolean maximizable) {
-        this.maximizable = maximizable;
-    }
-
-    public boolean isNoheader() {
-        return noheader;
-    }
-
-    public void setNoheader(boolean noheader) {
-        this.noheader = noheader;
-    }
-
-    public boolean isBorder() {
-        return border;
-    }
-
-    public void setBorder(boolean border) {
-        this.border = border;
     }
 
 }

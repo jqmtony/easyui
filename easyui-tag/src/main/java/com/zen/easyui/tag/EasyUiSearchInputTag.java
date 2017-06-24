@@ -1,13 +1,18 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiSearchInputTag extends BodyTagSupport {
 
     private static final String _HEIGHT = "550";
@@ -15,8 +20,6 @@ public class EasyUiSearchInputTag extends BodyTagSupport {
     private static final String _WIDTH = "850";
 
     private static final long serialVersionUID = -799903023945799288L;
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id;
 
@@ -99,7 +102,7 @@ public class EasyUiSearchInputTag extends BodyTagSupport {
         // cz:变更为LastValue+id 避免ID中首字母出现数字导致JS异常
         htmlSb.append("var ").append("LastValue").append(this.getId()).append("='';\n");
         //idSearchBox：隐藏域   idtext:文本域
-        if (TriRegulation.isEmpty(this.getCustomUrl())) {
+        if (RegulationUtil.isEmpty(this.getCustomUrl())) {
 
             // 为id默认分配一个回调函数.
             htmlSb.append("function callback4").append(this.getId()).append("(data){\n");
@@ -151,7 +154,7 @@ public class EasyUiSearchInputTag extends BodyTagSupport {
             htmlSb.append("setValue2Input(\"").append(this.getId()).append("text\", '');\n");
             htmlSb.append("setValue2Input(\"").append(this.getId()).append("SearchBox\", '');\n");
             htmlSb.append("}\n");
-            if (!TriRegulation.isEmpty(this.getCallback())) {
+            if (!RegulationUtil.isEmpty(this.getCallback())) {
                 htmlSb.append(this.getCallback()).append("(map);\n");
             }
             htmlSb.append(" }\n");
@@ -163,7 +166,7 @@ public class EasyUiSearchInputTag extends BodyTagSupport {
             htmlSb.append("LastValue").append(this.getId()).append("= ").append("TempValue").append(this.getId()).append(";\n");
             htmlSb.append("     ajaxPost(").append(this.inputValidateUrl).append("&searchFlag=").append(this.getSearchFlag()).append("&recordFlag=").append(this.getSearchFlag()).append("&selectType=")
                     .append(this.getSelectType());
-            htmlSb.append("&").append(TriRegulation.isEmpty(this.getQueryInputObj()) ? this.getTextField() : this.getQueryInputObj()).append("=' +").append("TempValue").append(this.getId()).append(" + ")
+            htmlSb.append("&").append(RegulationUtil.isEmpty(this.getQueryInputObj()) ? this.getTextField() : this.getQueryInputObj()).append("=' +").append("TempValue").append(this.getId()).append(" + ")
                     .append("'&queryValue=' +").append("TempValue").append(this.getId()).append("  ,callback4").append(this.getId()).append("); \n");
             htmlSb.append("   } else if (isEmpty(").append("TempValue").append(this.getId()).append(")){\n");
             // 清空隐藏字段的值
@@ -176,30 +179,30 @@ public class EasyUiSearchInputTag extends BodyTagSupport {
         htmlSb.append("</script>\n");
         htmlSb.append("<span class=\"searchbox textbox\" style=\"width: 148px;\">\n");
         htmlSb.append("<input type=\"text\" class=\"searchbox-text easyui-validatebox \" id=\"").append(this.getId()).append("SearchBox\" name=\"").append(this.getTextTagName()).append("\" ");
-        if (!TriRegulation.isEmpty(this.getValue())) {
+        if (!RegulationUtil.isEmpty(this.getValue())) {
             htmlSb.append(" value='").append(this.getValue()).append("' ");
         }
         if (this.isReadonly()) {
             htmlSb.append(" readonly='").append(this.isReadonly()).append("' ");
         }
-        if (!TriRegulation.isEmpty(this.isRequired())) {
+        if (!RegulationUtil.isEmpty(this.isRequired())) {
             htmlSb.append(" data-options=\"required:").append(this.isRequired());
         }
-        if (!TriRegulation.isEmpty(this.getValidType())) {
+        if (!RegulationUtil.isEmpty(this.getValidType())) {
             htmlSb.append(",validType:'").append(this.getValidType()).append("'\"\n");
         } else {
             htmlSb.append("\"\n");
         }
 
         // 开启验证或可编辑
-        if (!this.isReadonly() && (!TriRegulation.isEmpty(this.isValidate()) && this.isValidate())) {
+        if (!this.isReadonly() && (!RegulationUtil.isEmpty(this.isValidate()) && this.isValidate())) {
             htmlSb.append(" onblur=\"checkQueryValue").append(this.getId()).append("()\" ");
         }
         htmlSb.append("style=\"width: 120px;line-height: 20px;\" />\n");
         htmlSb.append("<span id=\"").append(this.getId()).append("SearchButtonSpan\">\n");
 
         // 自定义页面
-        if (isCustomPage && !TriRegulation.isEmpty(customUrl)) {
+        if (isCustomPage && !RegulationUtil.isEmpty(customUrl)) {
 
             htmlSb.append("<span id=\"").append(this.getId()).append("SearchButton\" class=\"searchbox-button\" style=\"height: 20px;\" onclick=\"javascript:openSearchWindowSelf2DgColumn('")
                     .append(this.getCustomUrl()).append("','").append(this.getTitle()).append("','").append(this.getWidth()).append("','").append(this.getHeight()).append("','');\">\n");
@@ -232,220 +235,6 @@ public class EasyUiSearchInputTag extends BodyTagSupport {
     @Override
     public int doEndTag() throws JspException {
         return EVAL_PAGE;
-    }
-
-    public String getMaSqlParams() {
-        return maSqlParams;
-    }
-
-    public void setMaSqlParams(String maSqlParams) {
-        this.maSqlParams = maSqlParams;
-    }
-
-    public String getMiSqlParams() {
-        return miSqlParams;
-    }
-
-    public void setMiSqlParams(String miSqlParams) {
-        this.miSqlParams = miSqlParams;
-    }
-
-    public int getMaSqlNum() {
-        return maSqlNum;
-    }
-
-    public void setMaSqlNum(int maSqlNum) {
-        this.maSqlNum = maSqlNum;
-    }
-
-    public int getMiSqlNum() {
-        return miSqlNum;
-    }
-
-    public void setMiSqlNum(int miSqlNum) {
-        this.miSqlNum = miSqlNum;
-    }
-
-    public String getValidType() {
-        return validType;
-    }
-
-    public void setValidType(String validType) {
-        this.validType = validType;
-    }
-
-    public String getIdField() {
-        return idField;
-    }
-
-    public void setIdField(String idField) {
-        this.idField = idField;
-    }
-
-    public String getTextField() {
-        return textField;
-    }
-
-    public void setTextField(String textField) {
-        this.textField = textField;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getWidth() {
-        // if (TriRegulation.isEmpty(width)) {
-        // width = _WIDTH;
-        // }
-        return width;
-    }
-
-    public void setWidth(String width) {
-        this.width = width;
-    }
-
-    public String getHeight() {
-        // if (TriRegulation.isEmpty(height)) {
-        // height = _HEIGHT;
-        // }
-        return height;
-    }
-
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    public String getSelectType() {
-        return selectType;
-    }
-
-    public void setSelectType(String selectType) {
-        this.selectType = selectType;
-    }
-
-    public String getSearchFlag() {
-        return searchFlag;
-    }
-
-    public void setSearchFlag(String searchFlag) {
-        this.searchFlag = searchFlag;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getIdTagName() {
-        return idTagName;
-    }
-
-    public void setIdTagName(String idTagName) {
-        this.idTagName = idTagName;
-    }
-
-    public String getTextTagName() {
-        return textTagName;
-    }
-
-    public void setTextTagName(String textTagName) {
-        this.textTagName = textTagName;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public boolean isRequired() {
-        return required;
-    }
-
-    public void setRequired(boolean required) {
-        this.required = required;
-    }
-
-    public String getCallback() {
-        return callback;
-    }
-
-    public void setCallback(String callback) {
-        this.callback = callback;
-    }
-
-    public boolean isValidate() {
-        return validate;
-    }
-
-    public void setValidate(boolean validate) {
-        this.validate = validate;
-    }
-
-    public String getQueryInputObj() {
-        return queryInputObj;
-    }
-
-    public void setQueryInputObj(String queryInputObj) {
-        this.queryInputObj = queryInputObj;
-    }
-
-    public String getQueryValue() {
-        return queryValue;
-    }
-
-    public void setQueryValue(String queryValue) {
-        this.queryValue = queryValue;
-    }
-
-    public String getQueryConstantValue() {
-        return queryConstantValue;
-    }
-
-    public void setQueryConstantValue(String queryConstantValue) {
-        this.queryConstantValue = queryConstantValue;
-    }
-
-    public boolean isCustomPage() {
-        return isCustomPage;
-    }
-
-    public void setIsCustomPage(boolean isCustomPage) {
-        this.isCustomPage = isCustomPage;
-    }
-
-    public String getFromFieldId() {
-        return fromFieldId;
-    }
-
-    public void setFromFieldId(String fromFieldId) {
-        this.fromFieldId = fromFieldId;
-    }
-
-    public boolean isReadonly() {
-        return readonly;
-    }
-
-    public void setReadonly(boolean readonly) {
-        this.readonly = readonly;
-    }
-
-    public String getCustomUrl() {
-        return customUrl;
-    }
-
-    public void setCustomUrl(String customUrl) {
-        this.customUrl = customUrl;
     }
 
 }

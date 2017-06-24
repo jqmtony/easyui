@@ -1,8 +1,8 @@
 package com.zen.easyui.util;
 
-import com.zen.easyui.constant.GlobalConstant;
+import com.zen.easyui.constant.EasyuiTagGlobalConstant;
 import com.zen.easyui.web.SessionContainer;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
@@ -10,9 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 
+@Slf4j
 public class MessageUtil {
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     protected static Locale locale;
 
@@ -23,15 +22,14 @@ public class MessageUtil {
      */
     public static Locale getLocale(String language) {
         Locale locale;
-        if (GlobalConstant.LANGUAGE_ZH_CN.equals(language)) {
+        if (EasyuiTagGlobalConstant.LANGUAGE_ZH_CN.equals(language)) {
             locale = Locale.SIMPLIFIED_CHINESE;
-        } else if (GlobalConstant.LANGUAGE_US_EN.equals(language)) {
+        } else if (EasyuiTagGlobalConstant.LANGUAGE_US_EN.equals(language)) {
             locale = Locale.US;
         } else {
             locale = Locale.getDefault();
         }
         return locale;
-
     }
 
     /**
@@ -76,7 +74,6 @@ public class MessageUtil {
      * @param language
      * @param messageId
      * @param args
-     * @param defaultMessage
      * @return
      */
     public String getMessage(String language, String messageId, Object[] args) {
@@ -90,7 +87,7 @@ public class MessageUtil {
     public String getMessage(Locale locale, String messageId, Object[] args, String defaultMessage) {
         String message = messageSource.getMessage(messageId, args, defaultMessage, locale);
 
-        return !TriRegulation.isEmpty(message) ? message.trim() : message;
+        return !RegulationUtil.isEmpty(message) ? message.trim() : message;
     }
 
     /**
@@ -99,7 +96,7 @@ public class MessageUtil {
     public static String getMessage(Locale locale, String messageId, Object[] args) {
         String message = messageSource.getMessage(messageId, args, locale);
 
-        return !TriRegulation.isEmpty(message) ? message.trim() : message;
+        return !RegulationUtil.isEmpty(message) ? message.trim() : message;
     }
 
     /**
@@ -141,7 +138,6 @@ public class MessageUtil {
         HttpServletRequest request = (HttpServletRequest) ServletRequest;
         locale = SessionContainer.getUserLocale(request);
         try {
-            //msg = RequestContextUtils.getWebApplicationContext(request).getMessage(messageId, args, locale);
             msg = RequestContextUtils.findWebApplicationContext(request).getMessage(messageId, args, locale);
         } catch (Exception e) {
             e.printStackTrace();

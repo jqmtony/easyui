@@ -1,10 +1,11 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.tag.vo.LabelValueBean;
-import com.zen.easyui.util.TriObjectHelper;
-import com.zen.easyui.util.TriRegulation;
 import com.zen.easyui.util.MessageUtil;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.ObjectHelper;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -13,12 +14,12 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiComboboxTag extends BodyTagSupport {
 
     private static final long serialVersionUID = -799903023945799288L;
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id;
 
@@ -91,11 +92,11 @@ public class EasyUiComboboxTag extends BodyTagSupport {
 
         htmlSb.append("<script type=\"text/javascript\">\n");
         htmlSb.append("$(function(){\n");
-        if ((!TriRegulation.isEmpty(this.getValue()) || !TriRegulation.isEmpty(this.getDefaultOption()))) {
+        if ((!RegulationUtil.isEmpty(this.getValue()) || !RegulationUtil.isEmpty(this.getDefaultOption()))) {
             htmlSb.append("function ").append(this.getId()).append("SelectValue(){\n");
-            if (!TriRegulation.isEmpty(this.getValue())) {
+            if (!RegulationUtil.isEmpty(this.getValue())) {
                 htmlSb.append("var tagValue = '").append(this.getValue()).append("';\n");
-            } else if (!TriRegulation.isEmpty(this.getDefaultOption())) {
+            } else if (!RegulationUtil.isEmpty(this.getDefaultOption())) {
                 htmlSb.append("var tagValue = '").append(this.getDefaultOption()).append("';\n");
             }
             htmlSb.append("setValue2TagId('").append(this.getId()).append("','select',tagValue);\n");
@@ -118,59 +119,59 @@ public class EasyUiComboboxTag extends BodyTagSupport {
 //      htmlSb.append(" autoShowPanel:").append(this.isAutoShowPanel()).append(",");
 //    }
 
-        if (!TriRegulation.isEmpty(this.getUrl())) {
+        if (!RegulationUtil.isEmpty(this.getUrl())) {
             htmlSb.append(" url:\"").append(this.getUrl()).append("\",");
         }
-        if (!TriRegulation.isEmpty(this.getData())) {
+        if (!RegulationUtil.isEmpty(this.getData())) {
             htmlSb.append(" data:").append(this.getData()).append(",");
         }
 
-        if (!TriRegulation.isEmpty(this.getValueField())) {
+        if (!RegulationUtil.isEmpty(this.getValueField())) {
             htmlSb.append(" valueField:\"").append(this.getValueField()).append("\",");
         }
 
-        if (!TriRegulation.isEmpty(this.getTextField())) {
+        if (!RegulationUtil.isEmpty(this.getTextField())) {
             htmlSb.append(" textField:\"").append(this.getTextField()).append("\",");
         }
 
-        if (!TriRegulation.isEmpty(this.getGroupField())) {
+        if (!RegulationUtil.isEmpty(this.getGroupField())) {
             htmlSb.append(" groupField:\"").append(this.getGroupField()).append("\",");
         }
 
-        if (!TriRegulation.isEmpty(this.getStyle())) {
+        if (!RegulationUtil.isEmpty(this.getStyle())) {
             htmlSb.append(" style:\"").append(this.getStyle()).append("\",");
         }
 
         if (this.isMultiple()) {
             htmlSb.append(" multiple:").append(this.isMultiple()).append(",");
         }
-        if (!TriRegulation.isEmpty(this.getWidth())) {
+        if (!RegulationUtil.isEmpty(this.getWidth())) {
             htmlSb.append(" width:").append(this.getWidth()).append(",");
         }
         if (this.isMultiline()) {
             htmlSb.append(" multiline:").append(this.isMultiline()).append(",");
         }
         // 1:list数据不为空，构造data
-        if (TriRegulation.isEmpty(this.getUrl()) && !TriRegulation.isEmpty(this.getList())) {
+        if (RegulationUtil.isEmpty(this.getUrl()) && !RegulationUtil.isEmpty(this.getList())) {
             htmlSb.append(" data:[\n");
             Object obj = null;
             Object value = null;
             for (Iterator iterator = this.getList().iterator(); iterator.hasNext(); ) {
                 obj = iterator.next();//obj类型 list/map/bean
-                value = TriObjectHelper.getFieldValue4Object(obj, this.getValueField());
+                value = ObjectHelper.getFieldValue4Object(obj, this.getValueField());
                 htmlSb.append("{label:\"");
-                htmlSb.append(TriObjectHelper.getFieldValue4Object(obj, this.getTextField()));
+                htmlSb.append(ObjectHelper.getFieldValue4Object(obj, this.getTextField()));
                 // 是否带内容描述字段
-                htmlSb.append(!TriRegulation.isEmpty(this.getDescField()) ? "\",desc:\"" + TriObjectHelper.getFieldValue4Object(obj, this.getDescField()) : "");
+                htmlSb.append(!RegulationUtil.isEmpty(this.getDescField()) ? "\",desc:\"" + ObjectHelper.getFieldValue4Object(obj, this.getDescField()) : "");
                 // 是否带分组字段
-                htmlSb.append(!TriRegulation.isEmpty(this.getGroupField()) ? "\",group:\"" + TriObjectHelper.getFieldValue4Object(obj, this.getGroupField()) : "");
+                htmlSb.append(!RegulationUtil.isEmpty(this.getGroupField()) ? "\",group:\"" + ObjectHelper.getFieldValue4Object(obj, this.getGroupField()) : "");
                 htmlSb.append("\",value:\"");
-                htmlSb.append(TriRegulation.isEmpty(value) ? "" : value).append(iterator.hasNext() ? "\"}," : "\"}");
+                htmlSb.append(RegulationUtil.isEmpty(value) ? "" : value).append(iterator.hasNext() ? "\"}," : "\"}");
             }
             htmlSb.append(" ],\n");
         }
         // 2:options数据不为空，构造data
-        if (TriRegulation.isEmpty(this.getUrl()) && !TriRegulation.isEmpty(this.getOptions())) {
+        if (RegulationUtil.isEmpty(this.getUrl()) && !RegulationUtil.isEmpty(this.getOptions())) {
             //默认设置valueField和textField
             String[] optionsArr = this.getOptions().split(",");
             htmlSb.append(" data:[\n");
@@ -184,7 +185,7 @@ public class EasyUiComboboxTag extends BodyTagSupport {
                 }
                 // 是否带内容描述字段
                 if (optionsArr[i].split(":").length == 3) {
-                    if (TriRegulation.isEmpty(this.getDescField())) {
+                    if (RegulationUtil.isEmpty(this.getDescField())) {
                         this.setDescField("desc");
                     }
                     htmlSb.append("\",desc:\"" + optionsArr[i].split(":")[2]);
@@ -205,37 +206,37 @@ public class EasyUiComboboxTag extends BodyTagSupport {
             htmlSb.append(" sty.addClass('textbox-disabled-style');");
         }
 
-        if (!TriRegulation.isEmpty(this.getOnLoadSuccess())) {
+        if (!RegulationUtil.isEmpty(this.getOnLoadSuccess())) {
             htmlSb.append(this.getOnLoadSuccess()).append(";");
         }
         // 3:成功回调函数或赋值不为空
-        if (!TriRegulation.isEmpty(this.getOnLoadSuccess()) || (!TriRegulation.isEmpty(this.getValue()) || !TriRegulation.isEmpty(this.getDefaultOption()))) {
+        if (!RegulationUtil.isEmpty(this.getOnLoadSuccess()) || (!RegulationUtil.isEmpty(this.getValue()) || !RegulationUtil.isEmpty(this.getDefaultOption()))) {
             htmlSb.append(this.getId()).append("SelectValue();\n");
         }
         htmlSb.append("},\n");
 
         // 自定义组合模式：选项中内容带描述字段
-        if (!TriRegulation.isEmpty(this.getDescField())) {
+        if (!RegulationUtil.isEmpty(this.getDescField())) {
 
             htmlSb.append(" formatter:function(row){\n");
             htmlSb.append("var formatterStr = '<span>' + row.").append(this.getTextField()).append(" + '</span>").append(this.getOptionsDescLinkStr()).append("'");
             htmlSb.append("+ '<span style=\"color:#888\">' + row.").append(this.getDescField()).append(" + '</span>';");
             htmlSb.append(" return formatterStr;},\n");
-        } else if (!TriRegulation.isEmpty(this.getFormatter())) {
+        } else if (!RegulationUtil.isEmpty(this.getFormatter())) {
             htmlSb.append(" formatter:").append(this.getFormatter()).append(",\n");
 //      htmlSb.append(" formatter:function(row){\n");
 //      htmlSb.append(this.getFormatter()).append("(row);},\n");
         }
-        if (!TriRegulation.isEmpty(this.getOnLoadError())) {
+        if (!RegulationUtil.isEmpty(this.getOnLoadError())) {
             htmlSb.append(" onLoadError:").append(this.getOnLoadError()).append(",\n");
         }
-        if (!TriRegulation.isEmpty(this.getOnSelect())) {
+        if (!RegulationUtil.isEmpty(this.getOnSelect())) {
             htmlSb.append(" onSelect:").append(this.getOnSelect()).append(",\n");
         }
-        if (!TriRegulation.isEmpty(this.getOnUnselect())) {
+        if (!RegulationUtil.isEmpty(this.getOnUnselect())) {
             htmlSb.append(" onUnselect:").append(this.getOnUnselect()).append(",\n");
         }
-        if (!TriRegulation.isEmpty(this.getOnChange())) {
+        if (!RegulationUtil.isEmpty(this.getOnChange())) {
             htmlSb.append(" onChange:").append(this.getOnChange()).append(",\n");
         }
 
@@ -258,246 +259,5 @@ public class EasyUiComboboxTag extends BodyTagSupport {
     public int doEndTag() throws JspException {
         return EVAL_PAGE;
     }
-
-    public String getDefaultOption() {
-        return defaultOption;
-    }
-
-    public String getOptionsDescLinkStr() {
-        return optionsDescLinkStr;
-    }
-
-    public void setOptionsDescLinkStr(String optionsDescLinkStr) {
-        this.optionsDescLinkStr = optionsDescLinkStr;
-    }
-
-    public void setDefaultOption(String defaultOption) {
-        this.defaultOption = defaultOption;
-    }
-
-    public boolean isOptionsTitleKey() {
-        return optionsTitleKey;
-    }
-
-    public void setOptionsTitleKey(boolean optionsTitleKey) {
-        this.optionsTitleKey = optionsTitleKey;
-    }
-
-    public String getOptions() {
-        return options;
-    }
-
-    public void setOptions(String options) {
-        this.options = options;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean isMultiple() {
-        return multiple;
-    }
-
-    public void setMultiple(boolean multiple) {
-        this.multiple = multiple;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isRequired() {
-        return required;
-    }
-
-    public void setRequired(boolean required) {
-        this.required = required;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getValueField() {
-        return valueField;
-    }
-
-    public void setValueField(String valueField) {
-        this.valueField = valueField;
-    }
-
-    public String getTextField() {
-        return textField;
-    }
-
-    public void setTextField(String textField) {
-        this.textField = textField;
-    }
-
-    public boolean isEditable() {
-        return editable;
-    }
-
-    public void setEditable(boolean editable) {
-        this.editable = editable;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public List getList() {
-        return list;
-    }
-
-    public void setList(List<LabelValueBean> list) {
-        this.list = list;
-    }
-
-    public String getFormatter() {
-        return formatter;
-    }
-
-    public void setFormatter(String formatter) {
-        this.formatter = formatter;
-    }
-
-    public boolean isDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public String getOnSelect() {
-        return onSelect;
-    }
-
-    public void setOnSelect(String onSelect) {
-        this.onSelect = onSelect;
-    }
-
-    public String getOnUnselect() {
-        return onUnselect;
-    }
-
-    public void setOnUnselect(String onUnselect) {
-        this.onUnselect = onUnselect;
-    }
-
-    public String getOnBeforeLoad() {
-        return onBeforeLoad;
-    }
-
-    public void setOnBeforeLoad(String onBeforeLoad) {
-        this.onBeforeLoad = onBeforeLoad;
-    }
-
-    public String getOnLoadSuccess() {
-        return onLoadSuccess;
-    }
-
-    public void setOnLoadSuccess(String onLoadSuccess) {
-        this.onLoadSuccess = onLoadSuccess;
-    }
-
-    public String getOnLoadError() {
-        return onLoadError;
-    }
-
-    public void setOnLoadError(String onLoadError) {
-        this.onLoadError = onLoadError;
-    }
-
-    public boolean isMultiline() {
-        return multiline;
-    }
-
-    public void setMultiline(boolean multiline) {
-        this.multiline = multiline;
-    }
-
-    public String getDescField() {
-        return descField;
-    }
-
-    public void setDescField(String descField) {
-        this.descField = descField;
-    }
-
-    public String getGroupField() {
-        return groupField;
-    }
-
-    public void setGroupField(String groupField) {
-        this.groupField = groupField;
-    }
-
-    public boolean isAutoShowPanel() {
-        return autoShowPanel;
-    }
-
-    public void setAutoShowPanel(boolean autoShowPanel) {
-        this.autoShowPanel = autoShowPanel;
-    }
-
-    public String getWidth() {
-        return width;
-    }
-
-    public void setWidth(String width) {
-        this.width = width;
-    }
-
-    public String getOnChange() {
-        return onChange;
-    }
-
-    public void setOnChange(String onChange) {
-        this.onChange = onChange;
-    }
-
-    public boolean isReadonly() {
-        return readonly;
-    }
-
-    public void setReadonly(boolean readonly) {
-        this.readonly = readonly;
-    }
-
 
 }

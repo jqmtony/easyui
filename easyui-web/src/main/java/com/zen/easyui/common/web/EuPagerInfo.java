@@ -1,7 +1,8 @@
 package com.zen.easyui.common.web;
 
-import com.zen.easyui.util.TriRegulation;
 import com.github.pagehelper.PageHelper;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.util.List;
  * @ClassName EuPagerInfo.java
  * @Date 2017年3月17日 上午9:40:32
  */
+@Data
 public class EuPagerInfo implements Serializable {
 
     private static final long serialVersionUID = -6294244855454374072L;
@@ -36,38 +38,6 @@ public class EuPagerInfo implements Serializable {
         super();
         this.page = page;
         this.rows = rows;
-    }
-
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }
-
-    public int getRows() {
-        return rows;
-    }
-
-    public void setRows(int rows) {
-        this.rows = rows;
-    }
-
-    public String getSort() {
-        return sort;
-    }
-
-    public void setSort(String sort) {
-        this.sort = sort;
-    }
-
-    public String getOrder() {
-        return order;
-    }
-
-    public void setOrder(String order) {
-        this.order = order;
     }
 
     /**
@@ -103,7 +73,7 @@ public class EuPagerInfo implements Serializable {
      * @return
      */
     private String getDbFieldNameByCamelCase(String fieldName) {
-        if (TriRegulation.isEmpty(fieldName)) {
+        if (RegulationUtil.isEmpty(fieldName)) {
             return "";
         } else {
             List<String> list = new ArrayList<String>();

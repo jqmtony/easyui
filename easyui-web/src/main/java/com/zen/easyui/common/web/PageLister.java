@@ -25,6 +25,7 @@
 package com.zen.easyui.common.web;
 
 import com.github.pagehelper.Page;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -40,6 +41,7 @@ import java.util.List;
  * @since 3.2.2
  * 项目地址 : http://git.oschina.net/free/Mybatis_PageHelper
  */
+@Data
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class PageLister<T> implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -61,7 +63,7 @@ public class PageLister<T> implements Serializable {
     /**
      * 包装Page对象
      *
-     * @param rows          page结果
+     * @param rows page结果
      */
     public PageLister(List<T> rows) {
         if (rows instanceof Page) {//分页
@@ -83,7 +85,7 @@ public class PageLister<T> implements Serializable {
             this.total = rows.size();
         }
     }
-    
+
     public PageLister(int pageNum, int pageSize, long total, List<T> rows) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
@@ -101,73 +103,4 @@ public class PageLister<T> implements Serializable {
         }
     }
 
-    public int getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public String getOrderBy() {
-        return orderBy;
-    }
-
-    public void setOrderBy(String orderBy) {
-        this.orderBy = orderBy;
-    }
-
-
-    public long getTotal() {
-        return total;
-    }
-
-    public void setTotal(long total) {
-        this.total = total;
-    }
-
-    public int getPages() {
-        return pages;
-    }
-
-    public void setPages(int pages) {
-        this.pages = pages;
-    }
-
-    public List<T> getRows() {
-        return rows;
-    }
-
-    public void setRows(List<T> rows) {
-        this.rows = rows;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("PageInfo{");
-        sb.append("pageNum=").append(pageNum);
-        sb.append(", pageSize=").append(pageSize);
-        sb.append(", size=").append(size);
-        sb.append(", total=").append(total);
-        sb.append(", pages=").append(pages);
-        sb.append(", rows=").append(rows);
-        sb.append('}');
-        return sb.toString();
-    }
 }

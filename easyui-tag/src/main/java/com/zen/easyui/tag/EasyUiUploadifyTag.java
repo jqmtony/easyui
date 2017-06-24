@@ -1,6 +1,9 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
@@ -8,7 +11,11 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiUploadifyTag extends TagSupport {
+
     protected String id;// ID
 
     protected String url = "fileList.do?method=fileUpload";// url默认值
@@ -68,22 +75,22 @@ public class EasyUiUploadifyTag extends TagSupport {
             extend = "*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.ico;*.tif";
         } else if ("office".equals(this.getExtend())) {
             extend = "*.doc;*.docx;*.txt;*.ppt;*.xls;*.xlsx;*.html;*.htm";
-        } else if (TriRegulation.isEmpty(this.getExtend()) || "all".equals(this.getExtend())) {
+        } else if (RegulationUtil.isEmpty(this.getExtend()) || "all".equals(this.getExtend())) {
             extend = "*.*";
         }
-        if (TriRegulation.isEmpty(id)) {
+        if (RegulationUtil.isEmpty(id)) {
             id = "uploadify";
         }
-        if (TriRegulation.isEmpty(fileSizeLimit)) {
+        if (RegulationUtil.isEmpty(fileSizeLimit)) {
             fileSizeLimit = "50MB";
         }
-        if (TriRegulation.isEmpty(buttonText)) {
+        if (RegulationUtil.isEmpty(buttonText)) {
             buttonText = "浏览文件";
         }
-        if (TriRegulation.isEmpty(uploadNum)) {
+        if (RegulationUtil.isEmpty(uploadNum)) {
             uploadNum = "50";
         }
-        if (TriRegulation.isEmpty(url)) {
+        if (RegulationUtil.isEmpty(url)) {
             url = "fileList.do?method=fileUpload";
         }
 
@@ -115,7 +122,7 @@ public class EasyUiUploadifyTag extends TagSupport {
         sb.append("});");
 
         sb.append("} ," + "onQueueComplete : function(queueData) { ");
-        if (TriRegulation.isEmpty(uploadSuccessCallback) && this.isWindowOrDialog()) {
+        if (RegulationUtil.isEmpty(uploadSuccessCallback) && this.isWindowOrDialog()) {
             sb.append("var win = frameElement.api.opener;" + "win.reloadTable();" + "euShow(\'上传完成\');" + "frameElement.api.close();");
         } else {
             if (uploadSuccessCallback != null)
@@ -128,7 +135,7 @@ public class EasyUiUploadifyTag extends TagSupport {
         sb.append("},");
         // 上传成功处理函数
         sb.append("onUploadSuccess : function(file, data, response) {");
-        if (!TriRegulation.isEmpty(this.getUploadSingleSuccessCallback())) {
+        if (!RegulationUtil.isEmpty(this.getUploadSingleSuccessCallback())) {
             sb.append(this.getUploadSingleSuccessCallback() + "(data,file,response);");
         }
         sb.append("var d=$.parseJSON(data);");
@@ -162,150 +169,6 @@ public class EasyUiUploadifyTag extends TagSupport {
         }
 
         return sb;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getFormData() {
-        return formData;
-    }
-
-    public void setFormData(String formData) {
-        this.formData = formData;
-    }
-
-    public String getExtend() {
-        return extend;
-    }
-
-    public void setExtend(String extend) {
-        this.extend = extend;
-    }
-
-    public String getButtonText() {
-        return buttonText;
-    }
-
-    public void setButtonText(String buttonText) {
-        this.buttonText = buttonText;
-    }
-
-    public boolean isMulti() {
-        return multi;
-    }
-
-    public void setMulti(boolean multi) {
-        this.multi = multi;
-    }
-
-    public String getQueueID() {
-        return queueID;
-    }
-
-    public void setQueueID(String queueID) {
-        this.queueID = queueID;
-    }
-
-    public boolean isWindowOrDialog() {
-        return windowOrDialog;
-    }
-
-    public void setWindowOrDialog(boolean windowOrDialog) {
-        this.windowOrDialog = windowOrDialog;
-    }
-
-    public boolean isAutoUpload() {
-        return autoUpload;
-    }
-
-    public void setAutoUpload(boolean autoUpload) {
-        this.autoUpload = autoUpload;
-    }
-
-    public String getUploadNum() {
-        return uploadNum;
-    }
-
-    public void setUploadNum(String uploadNum) {
-        this.uploadNum = uploadNum;
-    }
-
-    public String getUploadSingleSuccessCallback() {
-        return uploadSingleSuccessCallback;
-    }
-
-    public void setUploadSingleSuccessCallback(String uploadSingleSuccessCallback) {
-        this.uploadSingleSuccessCallback = uploadSingleSuccessCallback;
-    }
-
-    public String getOnQueueComplete() {
-        return onQueueComplete;
-    }
-
-    public void setOnQueueComplete(String onQueueComplete) {
-        this.onQueueComplete = onQueueComplete;
-    }
-
-    public boolean isUploadFileView() {
-        return uploadFileView;
-    }
-
-    public void setUploadFileView(boolean uploadFileView) {
-        this.uploadFileView = uploadFileView;
-    }
-
-    public String getFileSizeLimit() {
-        return fileSizeLimit;
-    }
-
-    public void setFileSizeLimit(String fileSizeLimit) {
-        this.fileSizeLimit = fileSizeLimit;
-    }
-
-    public String getUploadSuccessCallback() {
-        return uploadSuccessCallback;
-    }
-
-    public void setUploadSuccessCallback(String uploadSuccessCallback) {
-        this.uploadSuccessCallback = uploadSuccessCallback;
-    }
-
-    public String getUploadFailCallback() {
-        return uploadFailCallback;
-    }
-
-    public void setUploadFailCallback(String uploadFailCallback) {
-        this.uploadFailCallback = uploadFailCallback;
-    }
-
-    public boolean isLinkScript() {
-        return linkScript;
-    }
-
-    public void setLinkScript(boolean linkScript) {
-        this.linkScript = linkScript;
     }
 
 }

@@ -1,6 +1,6 @@
 package com.zen.easyui.constant;
 
-public class GlobalConstant {
+public class EasyuiTagGlobalConstant {
 
 
 

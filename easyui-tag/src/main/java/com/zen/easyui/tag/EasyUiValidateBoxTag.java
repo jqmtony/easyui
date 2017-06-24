@@ -1,9 +1,11 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.constant.GlobalConstant;
+import com.zen.easyui.constant.EasyuiTagGlobalConstant;
 import com.zen.easyui.util.MessageUtil;
-import com.zen.easyui.util.TriRegulation;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
@@ -17,10 +19,12 @@ import java.io.IOException;
  * @ClassName EasyUiValidateBoxTag.java
  * @Date 2017/4/24 15:53
  */
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiValidateBoxTag extends BodyTagSupport {
-    private static final long serialVersionUID = -4795604324752399473L;
 
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final long serialVersionUID = -4795604324752399473L;
 
     /**
      * 编号
@@ -139,35 +143,35 @@ public class EasyUiValidateBoxTag extends BodyTagSupport {
 
         htmlSb.append(" name=\"").append(this.getName()).append("\"");
 
-        if (!TriRegulation.isEmpty(this.getId())) {
+        if (!RegulationUtil.isEmpty(this.getId())) {
             htmlSb.append(" id=\"").append(this.getId()).append("\"");
         }
 
-        if (!TriRegulation.isEmpty(this.getType())) {
+        if (!RegulationUtil.isEmpty(this.getType())) {
             htmlSb.append(" type=\"").append(this.getType()).append("\"");
         }
 
-        if (!TriRegulation.isEmpty(this.getValue())) {
+        if (!RegulationUtil.isEmpty(this.getValue())) {
             htmlSb.append(" value=\"").append(this.getValue()).append("\"");
         }
 
         if (this.isReadonly()) {
-            this.setStyle(!TriRegulation.isEmpty(this.getStyle()) ? this.getStyle() + GlobalConstant.WEB_DISABLE_STYLE : GlobalConstant.WEB_DISABLE_STYLE);
+            this.setStyle(!RegulationUtil.isEmpty(this.getStyle()) ? this.getStyle() + EasyuiTagGlobalConstant.WEB_DISABLE_STYLE : EasyuiTagGlobalConstant.WEB_DISABLE_STYLE);
         }
-        if (!TriRegulation.isEmpty(this.getStyle())) {
+        if (!RegulationUtil.isEmpty(this.getStyle())) {
             htmlSb.append(" style=\"").append(this.getStyle()).append("\"");
         }
 
-        if (!TriRegulation.isEmpty(this.getOnblur())) {
+        if (!RegulationUtil.isEmpty(this.getOnblur())) {
             htmlSb.append("  onblur=\"").append(this.onblur).append("\"");
         }
-        if (!TriRegulation.isEmpty(this.getOnclick())) {
+        if (!RegulationUtil.isEmpty(this.getOnclick())) {
             htmlSb.append("  onclick=\"").append(this.onclick).append("\"");
         }
-        if (!TriRegulation.isEmpty(this.getOnchange())) {
+        if (!RegulationUtil.isEmpty(this.getOnchange())) {
             htmlSb.append("  onChange=\"").append(this.getOnchange()).append("\"");
         }
-        if (!TriRegulation.isEmpty(this.getOnmouseout())) {
+        if (!RegulationUtil.isEmpty(this.getOnmouseout())) {
             htmlSb.append("  onmouseout=\"").append(this.getOnmouseout()).append("\"");
         }
 
@@ -175,7 +179,7 @@ public class EasyUiValidateBoxTag extends BodyTagSupport {
         htmlSb.append(" data-options=\"");
 
         htmlSb.append(" required : ").append(this.isRequired()).append(",\n");
-        if (!TriRegulation.isEmpty(this.getValidType())) {
+        if (!RegulationUtil.isEmpty(this.getValidType())) {
             htmlSb.append(" validType : ").append(this.getValidType()).append(",\n");
         }
         htmlSb.append(" novalidate : ").append(this.isNovalidate()).append(",\n");
@@ -187,44 +191,44 @@ public class EasyUiValidateBoxTag extends BodyTagSupport {
 
         htmlSb.append("\"");
 
-        if (!TriRegulation.isEmpty(this.getOnBeforeValidate())) {
+        if (!RegulationUtil.isEmpty(this.getOnBeforeValidate())) {
             htmlSb.append("  onBeforeValidate=\"").append(this.getOnBeforeValidate()).append("\"");
         }
-        if (!TriRegulation.isEmpty(this.getOnValidate())) {
+        if (!RegulationUtil.isEmpty(this.getOnValidate())) {
             htmlSb.append("  onValidate=\"").append(this.getOnValidate()).append("\"");
         }
 
         String keyStr = "";
-        if (!TriRegulation.isEmpty(this.getInvalidMessageKey())) {
+        if (!RegulationUtil.isEmpty(this.getInvalidMessageKey())) {
             keyStr = MessageUtil.getMessage(pageContext.getRequest(), this.getInvalidMessageKey());
 
-            if (TriRegulation.isEmpty(keyStr)) {
-                keyStr = TriRegulation.isEmpty(this.getInvalidMessage()) ? "" : this.getInvalidMessage();
+            if (RegulationUtil.isEmpty(keyStr)) {
+                keyStr = RegulationUtil.isEmpty(this.getInvalidMessage()) ? "" : this.getInvalidMessage();
             }
         } else {
-            keyStr = TriRegulation.isEmpty(this.getInvalidMessage()) ? "" : this.getInvalidMessage();
+            keyStr = RegulationUtil.isEmpty(this.getInvalidMessage()) ? "" : this.getInvalidMessage();
         }
-        if (!TriRegulation.isEmpty(keyStr)) {
+        if (!RegulationUtil.isEmpty(keyStr)) {
             htmlSb.append(" invalidMessage=\"").append(keyStr).append("\"");
         }
 
-        if (!TriRegulation.isEmpty(this.getMissingMessageKey())) {
+        if (!RegulationUtil.isEmpty(this.getMissingMessageKey())) {
             keyStr = MessageUtil.getMessage(pageContext.getRequest(), this.getMissingMessageKey());
 
-            if (TriRegulation.isEmpty(keyStr)) {
-                keyStr = TriRegulation.isEmpty(this.getMissingMessage()) ? "" : this.getMissingMessage();
+            if (RegulationUtil.isEmpty(keyStr)) {
+                keyStr = RegulationUtil.isEmpty(this.getMissingMessage()) ? "" : this.getMissingMessage();
             }
         } else {
-            keyStr = TriRegulation.isEmpty(this.getMissingMessage()) ? "" : this.getMissingMessage();
+            keyStr = RegulationUtil.isEmpty(this.getMissingMessage()) ? "" : this.getMissingMessage();
         }
 
-        if (!TriRegulation.isEmpty(keyStr)) {
+        if (!RegulationUtil.isEmpty(keyStr)) {
             htmlSb.append(" missingMessage=\"").append(this.getMissingMessage()).append("\"");
         }
 
         htmlSb.append(" />");
 
-        if (!TriRegulation.isEmpty(this.getId()) && !TriRegulation.isEmpty(this.getValue())) {
+        if (!RegulationUtil.isEmpty(this.getId()) && !RegulationUtil.isEmpty(this.getValue())) {
             htmlSb.append("<script type=\"text/javascript\">\n");
             htmlSb.append("$(function(){\n");
             htmlSb.append("if (isEmpty(getValue2TagId(\"").append(this.getId()).append("\",'input'))) {\n");
@@ -249,189 +253,4 @@ public class EasyUiValidateBoxTag extends BodyTagSupport {
         return EVAL_PAGE;
     }
 
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public boolean isRequired() {
-        return required;
-    }
-
-    public void setRequired(boolean required) {
-        this.required = required;
-    }
-
-    public boolean isNovalidate() {
-        return novalidate;
-    }
-
-    public void setNovalidate(boolean novalidate) {
-        this.novalidate = novalidate;
-    }
-
-    public boolean isEditable() {
-        return editable;
-    }
-
-    public void setEditable(boolean editable) {
-        this.editable = editable;
-    }
-
-    public boolean isDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
-
-    public boolean isReadonly() {
-        return readonly;
-    }
-
-    public void setReadonly(boolean readonly) {
-        this.readonly = readonly;
-    }
-
-    public boolean isValidateOnCreate() {
-        return validateOnCreate;
-    }
-
-    public void setValidateOnCreate(boolean validateOnCreate) {
-        this.validateOnCreate = validateOnCreate;
-    }
-
-    public boolean isValidateOnBlur() {
-        return validateOnBlur;
-    }
-
-    public void setValidateOnBlur(boolean validateOnBlur) {
-        this.validateOnBlur = validateOnBlur;
-    }
-
-    public String getValidType() {
-        return validType;
-    }
-
-    public void setValidType(String validType) {
-        this.validType = validType;
-    }
-
-    public String getMissingMessage() {
-        return missingMessage;
-    }
-
-    public void setMissingMessage(String missingMessage) {
-        this.missingMessage = missingMessage;
-    }
-
-    public String getMissingMessageKey() {
-        return missingMessageKey;
-    }
-
-    public void setMissingMessageKey(String missingMessageKey) {
-        this.missingMessageKey = missingMessageKey;
-    }
-
-    public String getInvalidMessage() {
-        return invalidMessage;
-    }
-
-    public void setInvalidMessage(String invalidMessage) {
-        this.invalidMessage = invalidMessage;
-    }
-
-    public String getInvalidMessageKey() {
-        return invalidMessageKey;
-    }
-
-    public void setInvalidMessageKey(String invalidMessageKey) {
-        this.invalidMessageKey = invalidMessageKey;
-    }
-
-    public String getOnblur() {
-        return onblur;
-    }
-
-    public void setOnblur(String onblur) {
-        this.onblur = onblur;
-    }
-
-    public String getOnclick() {
-        return onclick;
-    }
-
-    public void setOnclick(String onclick) {
-        this.onclick = onclick;
-    }
-
-    public String getOnchange() {
-        return onchange;
-    }
-
-    public void setOnchange(String onchange) {
-        this.onchange = onchange;
-    }
-
-    public String getOnmouseout() {
-        return onmouseout;
-    }
-
-    public void setOnmouseout(String onmouseout) {
-        this.onmouseout = onmouseout;
-    }
-
-    public String getOnBeforeValidate() {
-        return onBeforeValidate;
-    }
-
-    public void setOnBeforeValidate(String onBeforeValidate) {
-        this.onBeforeValidate = onBeforeValidate;
-    }
-
-    public String getOnValidate() {
-        return onValidate;
-    }
-
-    public void setOnValidate(String onValidate) {
-        this.onValidate = onValidate;
-    }
 }

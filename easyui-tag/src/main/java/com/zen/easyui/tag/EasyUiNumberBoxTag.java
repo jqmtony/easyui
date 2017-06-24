@@ -1,19 +1,21 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
-import com.zen.easyui.util.TriStringUtil;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RandomUtil;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiNumberBoxTag extends BodyTagSupport {
 
-
     private static final long serialVersionUID = 1L;
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id;
 
@@ -55,7 +57,7 @@ public class EasyUiNumberBoxTag extends BodyTagSupport {
     @Override
     public int doStartTag() throws JspException {
         StringBuilder htmlSb = new StringBuilder();
-        String tmpId = TriRegulation.isEmpty(this.getId()) ? this.getName() + TriStringUtil.random(2) : this.getId();
+        String tmpId = RegulationUtil.isEmpty(this.getId()) ? this.getName() + RandomUtil.random(2) : this.getId();
 
         htmlSb.append("<input name=\"").append(this.getName()).append("\"\n");
         htmlSb.append(" id=\"").append(tmpId).append("\" type=\"text\"\n");
@@ -68,40 +70,40 @@ public class EasyUiNumberBoxTag extends BodyTagSupport {
         if (this.isDisabled()) {
             htmlSb.append(" disabled:").append(this.isDisabled()).append(",");
         }
-        if (!TriRegulation.isEmpty(this.getValue())) {
+        if (!RegulationUtil.isEmpty(this.getValue())) {
             htmlSb.append(" value:\"").append(this.getValue()).append("\",");
         }
-        if (!TriRegulation.isEmpty(this.getMin())) {
+        if (!RegulationUtil.isEmpty(this.getMin())) {
             htmlSb.append(" min:").append(this.getMin()).append(",");
         }
-        if (!TriRegulation.isEmpty(this.getMax())) {
+        if (!RegulationUtil.isEmpty(this.getMax())) {
             htmlSb.append(" max:").append(this.getMax()).append(",");
         }
-        if (!TriRegulation.isEmpty(this.getPrecision())) {
+        if (!RegulationUtil.isEmpty(this.getPrecision())) {
             htmlSb.append(" precision:").append(this.getPrecision()).append(",");
         }
-        if (!TriRegulation.isEmpty(this.getDecimalSeparator())) {
+        if (!RegulationUtil.isEmpty(this.getDecimalSeparator())) {
             htmlSb.append(" decimalSeparator:\"").append(this.getDecimalSeparator()).append("\",");
         }
-        if (!TriRegulation.isEmpty(this.getGroupSeparator())) {
+        if (!RegulationUtil.isEmpty(this.getGroupSeparator())) {
             htmlSb.append(" groupSeparator:\"").append(this.getGroupSeparator()).append("\",");
         }
-        if (!TriRegulation.isEmpty(this.getPrefix())) {
+        if (!RegulationUtil.isEmpty(this.getPrefix())) {
             htmlSb.append(" prefix:\"").append(this.getPrefix()).append("\",");
         }
-        if (!TriRegulation.isEmpty(this.getSuffix())) {
+        if (!RegulationUtil.isEmpty(this.getSuffix())) {
             htmlSb.append(" suffix:\"").append(this.getSuffix()).append("\",");
         }
-        if (!TriRegulation.isEmpty(this.getFormatter())) {
+        if (!RegulationUtil.isEmpty(this.getFormatter())) {
             htmlSb.append("  formatter:").append(this.getFilter()).append(",");
         }
-        if (!TriRegulation.isEmpty(this.getParser())) {
+        if (!RegulationUtil.isEmpty(this.getParser())) {
             htmlSb.append("  parser:").append(this.getParser()).append(",");
         }
-        if (!TriRegulation.isEmpty(this.getOnChange())) {
+        if (!RegulationUtil.isEmpty(this.getOnChange())) {
             htmlSb.append("  onChange:").append(this.getOnChange()).append(" /n");
         }
-        if (!TriRegulation.isEmpty(this.getValidType())) {
+        if (!RegulationUtil.isEmpty(this.getValidType())) {
             htmlSb.append(" validType:\"").append(this.getValidType()).append("\",");
         }
         if (this.isRequired()) {
@@ -135,150 +137,4 @@ public class EasyUiNumberBoxTag extends BodyTagSupport {
 
         return EVAL_PAGE;
     }
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public Integer getMin() {
-        return min;
-    }
-
-    public void setMin(Integer min) {
-        this.min = min;
-    }
-
-    public Integer getMax() {
-        return max;
-    }
-
-    public void setMax(Integer max) {
-        this.max = max;
-    }
-
-    public Integer getPrecision() {
-        return precision;
-    }
-
-    public void setPrecision(Integer precision) {
-        this.precision = precision;
-    }
-
-    public Integer getDecimalSeparator() {
-        return decimalSeparator;
-    }
-
-    public void setDecimalSeparator(Integer decimalSeparator) {
-        this.decimalSeparator = decimalSeparator;
-    }
-
-    public String getGroupSeparator() {
-        return groupSeparator;
-    }
-
-    public void setGroupSeparator(String groupSeparator) {
-        this.groupSeparator = groupSeparator;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public String getSuffix() {
-        return suffix;
-    }
-
-    public void setSuffix(String suffix) {
-        this.suffix = suffix;
-    }
-
-    public String getFilter() {
-        return filter;
-    }
-
-    public void setFilter(String filter) {
-        this.filter = filter;
-    }
-
-    public String getFormatter() {
-        return formatter;
-    }
-
-    public void setFormatter(String formatter) {
-        this.formatter = formatter;
-    }
-
-    public String getParser() {
-        return parser;
-    }
-
-    public void setParser(String parser) {
-        this.parser = parser;
-    }
-
-    public String getOnChange() {
-        return onChange;
-    }
-
-    public void setOnChange(String onChange) {
-        this.onChange = onChange;
-    }
-
-    public String getValidType() {
-        return validType;
-    }
-
-    public void setValidType(String validType) {
-        this.validType = validType;
-    }
-
-    public boolean isRequired() {
-        return required;
-    }
-
-    public void setRequired(boolean required) {
-        this.required = required;
-    }
-
-    public String getWidth() {
-        return width;
-    }
-
-    public void setWidth(String width) {
-        this.width = width;
-    }
-
 }

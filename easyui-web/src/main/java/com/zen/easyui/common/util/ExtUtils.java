@@ -1,7 +1,7 @@
 package com.zen.easyui.common.util;
 
 import com.zen.easyui.common.vo.ExtTreeNode;
-import com.zen.easyui.util.TriRegulation;
+import com.zen.easyui.util.RegulationUtil;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -12,9 +12,9 @@ public class ExtUtils {
     /**
      * ext构建节点树结构 (查询结果要求先经过排序，提高效率)
      *
-     * @param <ExtTreeNode>
      * @param nodes
-     * @param parentId
+     * @param rootParentId
+     * @param expanded
      * @return
      */
     public static List<ExtTreeNode> getTreeList(List<ExtTreeNode> nodes, String rootParentId, Boolean expanded) {
@@ -59,8 +59,7 @@ public class ExtUtils {
     /**
      * 查找list<obj>中，是否存在fieldName属性，并且属性值为fieldValue
      *
-     * @param fieldName
-     * @param fieldValue
+     * @param id
      * @param list
      * @return
      */
@@ -81,9 +80,9 @@ public class ExtUtils {
     /**
      * ext构建节点树结构 (查询结果要求先经过排序，提高效率)
      *
-     * @param <ExtTreeNode>
      * @param nodes
      * @param parentId
+     * @param expanded
      * @return
      */
     private static List<ExtTreeNode> getTreeChildList(List<ExtTreeNode> nodes, String parentId, Boolean expanded) {
@@ -92,7 +91,7 @@ public class ExtUtils {
 
         if (nodes != null && nodes.size() > 0) {
             // 父节点ID
-            parentId = TriRegulation.isEmpty(parentId) ? "" : parentId;
+            parentId = RegulationUtil.isEmpty(parentId) ? "" : parentId;
             // 循环
             Iterator<ExtTreeNode> ite = nodes.iterator();
             while (ite.hasNext()) {

@@ -1,16 +1,20 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.Tag;
 import javax.servlet.jsp.tagext.TagSupport;
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiTableColumnTag extends TagSupport implements Cloneable {
-    private static final long serialVersionUID = -4308552552551957488L;
 
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final long serialVersionUID = -4308552552551957488L;
 
     private String field; // 字段值
 
@@ -43,7 +47,7 @@ public class EasyUiTableColumnTag extends TagSupport implements Cloneable {
         try {
             Tag parentTag = getParent();
             //存在parentTag為EasyUiTreegridTableTag 時 存在BUG
-            while (!TriRegulation.isEmpty(parentTag) && !(parentTag instanceof EasyUiDatagridTableTag) && !(parentTag instanceof EasyUiTreegridTableTag)) {
+            while (!RegulationUtil.isEmpty(parentTag) && !(parentTag instanceof EasyUiDatagridTableTag) && !(parentTag instanceof EasyUiTreegridTableTag)) {
                 parentTag = parentTag.getParent();
                 /** 解决以下写法BUG:CZ
                  eu:column parentTag 为：c:forEach
@@ -54,7 +58,7 @@ public class EasyUiTableColumnTag extends TagSupport implements Cloneable {
                  **/
             }
 
-            if (!TriRegulation.isEmpty(parentTag)) {
+            if (!RegulationUtil.isEmpty(parentTag)) {
                 if (parentTag instanceof EasyUiDatagridTableTag) {
                     EasyUiDatagridTableTag datagridTag = (EasyUiDatagridTableTag) parentTag;
                     datagridTag.addColumn((EasyUiTableColumnTag) this.clone());
@@ -71,110 +75,6 @@ public class EasyUiTableColumnTag extends TagSupport implements Cloneable {
         }
 
         return SKIP_BODY;
-    }
-
-    public int getRowspan() {
-        return rowspan;
-    }
-
-    public void setRowspan(int rowspan) {
-        this.rowspan = rowspan;
-    }
-
-    public int getColspan() {
-        return colspan;
-    }
-
-    public void setColspan(int colspan) {
-        this.colspan = colspan;
-    }
-
-    public String getField() {
-        return field;
-    }
-
-    public void setField(String field) {
-        this.field = field;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTitleKey() {
-        return titleKey;
-    }
-
-    public void setTitleKey(String titleKey) {
-        this.titleKey = titleKey;
-    }
-
-    public String getWidth() {
-        return width;
-    }
-
-    public void setWidth(String width) {
-        this.width = width;
-    }
-
-    public String getFormatter() {
-        return formatter;
-    }
-
-    public void setFormatter(String formatter) {
-        this.formatter = formatter;
-    }
-
-    public String getAlign() {
-        return align;
-    }
-
-    public void setAlign(String align) {
-        this.align = align;
-    }
-
-    public String getEditor() {
-        return editor;
-    }
-
-    public void setEditor(String editor) {
-        this.editor = editor;
-    }
-
-    public boolean isHidden() {
-        return hidden;
-    }
-
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
-    }
-
-    public boolean isCheckbox() {
-        return checkbox;
-    }
-
-    public void setCheckbox(boolean checkbox) {
-        this.checkbox = checkbox;
-    }
-
-    public boolean isSortable() {
-        return sortable;
-    }
-
-    public void setSortable(boolean sortable) {
-        this.sortable = sortable;
-    }
-
-    public String getStyler() {
-        return styler;
-    }
-
-    public void setStyler(String styler) {
-        this.styler = styler;
     }
 
 }

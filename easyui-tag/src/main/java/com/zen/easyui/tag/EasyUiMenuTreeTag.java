@@ -1,15 +1,18 @@
 package com.zen.easyui.tag;
 
-import org.slf4j.LoggerFactory;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiMenuTreeTag extends BodyTagSupport {
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id; // 菜单编号
 
@@ -88,54 +91,6 @@ public class EasyUiMenuTreeTag extends BodyTagSupport {
         }
 
         return EVAL_PAGE;
-    }
-
-    public boolean isCollapseAll() {
-        return collapseAll;
-    }
-
-    public void setCollapseAll(boolean collapseAll) {
-        this.collapseAll = collapseAll;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public boolean isAnimate() {
-        return animate;
-    }
-
-    public void setAnimate(boolean animate) {
-        this.animate = animate;
-    }
-
-    public boolean isDnd() {
-        return dnd;
-    }
-
-    public void setDnd(boolean dnd) {
-        this.dnd = dnd;
     }
 
 }

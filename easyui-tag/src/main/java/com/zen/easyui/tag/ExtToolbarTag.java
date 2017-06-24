@@ -1,15 +1,19 @@
 package com.zen.easyui.tag;
 
-import org.slf4j.LoggerFactory;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class ExtToolbarTag extends BodyTagSupport {
-    private static final long serialVersionUID = 598209081781510962L;
 
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final long serialVersionUID = 598209081781510962L;
 
     private String id;
 
@@ -47,38 +51,5 @@ public class ExtToolbarTag extends BodyTagSupport {
 
         return EVAL_PAGE;
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public boolean isShowToolbarForm() {
-        return showToolbarForm;
-    }
-
-    public void setShowToolbarForm(boolean showToolbarForm) {
-        this.showToolbarForm = showToolbarForm;
-    }
-
-    public boolean isShowDefault() {
-        return showDefault;
-    }
-
-    public void setShowDefault(boolean showDefault) {
-        this.showDefault = showDefault;
-    }
-
 
 }

@@ -1,10 +1,12 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriObjectHelper;
-import com.zen.easyui.util.TriRegulation;
-import com.zen.easyui.util.TriStringUtil;
 import com.zen.easyui.util.MessageUtil;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.ObjectHelper;
+import com.zen.easyui.util.RandomUtil;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
@@ -13,10 +15,12 @@ import java.util.Iterator;
 import java.util.List;
 
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiRadioCheckBoxTag extends BodyTagSupport {
-    private static final long serialVersionUID = 1634618855354058065L;
 
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final long serialVersionUID = 1634618855354058065L;
 
     private String id;
 
@@ -46,32 +50,32 @@ public class EasyUiRadioCheckBoxTag extends BodyTagSupport {
     @Override
     public int doStartTag() throws JspException {
         StringBuilder htmlSb = new StringBuilder();
-        if (!TriRegulation.isEmpty(list)) {
-            if (TriRegulation.isEmpty(this.getText())) {
+        if (!RegulationUtil.isEmpty(list)) {
+            if (RegulationUtil.isEmpty(this.getText())) {
                 this.setText("label");
             }
-            if (TriRegulation.isEmpty(this.getValue())) {
+            if (RegulationUtil.isEmpty(this.getValue())) {
                 this.setValue("value");
             }
             for (Iterator iterator = list.iterator(); iterator.hasNext(); ) {
                 Object obj = (Object) iterator.next();
-                String textTemp = (String) TriObjectHelper.getFieldValue4Object(obj, this.getText());
-                String valueTemp = (String) TriObjectHelper.getFieldValue4Object(obj, this.getValue());
-                String id = this.getName() + TriStringUtil.random(2);
+                String textTemp = (String) ObjectHelper.getFieldValue4Object(obj, this.getText());
+                String valueTemp = (String) ObjectHelper.getFieldValue4Object(obj, this.getValue());
+                String id = this.getName() + RandomUtil.random(2);
                 htmlSb.append("<input  type=\"").append(this.getType()).append("\"");
                 htmlSb.append(" name=\"").append(this.getName()).append("\"");
                 htmlSb.append(" id=\"").append(id).append("\"");
                 htmlSb.append(" value=\"").append(valueTemp).append("\"");
-                if (!TriRegulation.isEmpty(this.getOnClick())) {
+                if (!RegulationUtil.isEmpty(this.getOnClick())) {
                     htmlSb.append(" onclick=\"").append(this.getOnClick()).append("('").append(valueTemp).append("')\"");
                 }
-                if (!TriRegulation.isEmpty(this.getOnChange())) {
+                if (!RegulationUtil.isEmpty(this.getOnChange())) {
                     htmlSb.append(" onchange=\"").append(this.getOnChange()).append("('").append(valueTemp).append("')\"");
                 }
-                if (!TriRegulation.isEmpty(this.getDisabled()) && this.getDisabled().equals("true")) {
+                if (!RegulationUtil.isEmpty(this.getDisabled()) && this.getDisabled().equals("true")) {
                     htmlSb.append(" disabled=\"disabled\"");
                 }
-                if (!TriRegulation.isEmpty(this.getReadonly()) && this.getReadonly().equals("true")) {
+                if (!RegulationUtil.isEmpty(this.getReadonly()) && this.getReadonly().equals("true")) {
                     htmlSb.append(" readonly=\"readonly\"");
                 }
                 htmlSb.append("/>");
@@ -82,27 +86,27 @@ public class EasyUiRadioCheckBoxTag extends BodyTagSupport {
             for (int i = 0; i < this.getText().split(",").length; i++) {
                 htmlSb.append("<input  type=\"").append(this.getType()).append("\"");
                 htmlSb.append(" name=\"").append(this.getName()).append("\"");
-                if (!TriRegulation.isEmpty(this.getId())) {
+                if (!RegulationUtil.isEmpty(this.getId())) {
                     htmlSb.append(" id=\"").append(this.getId().split(",")[i]).append("\"");
                 }
-                if (!TriRegulation.isEmpty(this.getValue())) {
+                if (!RegulationUtil.isEmpty(this.getValue())) {
                     htmlSb.append(" value=\"").append(this.getValue().split(",")[i]).append("\"");
                 }
-                if (!TriRegulation.isEmpty(this.getChecked()) && this.getChecked().equals(this.getId().split(",")[i])) {
+                if (!RegulationUtil.isEmpty(this.getChecked()) && this.getChecked().equals(this.getId().split(",")[i])) {
                     htmlSb.append(" checked=\"checked\"");
                 }
-                if (!TriRegulation.isEmpty(this.getOnClick())) {
+                if (!RegulationUtil.isEmpty(this.getOnClick())) {
                     htmlSb.append(" onclick=\"").append(this.getOnClick()).append("('").append(this.getId().split(",")[i]).append("','")
-                            .append(!TriRegulation.isEmpty(this.getValue()) ? this.getValue().split(",")[i] : "").append("')\"");
+                            .append(!RegulationUtil.isEmpty(this.getValue()) ? this.getValue().split(",")[i] : "").append("')\"");
                 }
-                if (!TriRegulation.isEmpty(this.getOnChange())) {
+                if (!RegulationUtil.isEmpty(this.getOnChange())) {
                     htmlSb.append(" onchange=\"").append(this.getOnChange()).append("('").append(this.getId().split(",")[i]).append("','")
-                            .append(!TriRegulation.isEmpty(this.getValue()) ? this.getValue().split(",")[i] : "").append("')\"");
+                            .append(!RegulationUtil.isEmpty(this.getValue()) ? this.getValue().split(",")[i] : "").append("')\"");
                 }
-                if (!TriRegulation.isEmpty(this.getDisabled()) && this.getDisabled().equals("true")) {
+                if (!RegulationUtil.isEmpty(this.getDisabled()) && this.getDisabled().equals("true")) {
                     htmlSb.append(" disabled=\"disabled\"");
                 }
-                if (!TriRegulation.isEmpty(this.getReadonly()) && this.getReadonly().equals("true")) {
+                if (!RegulationUtil.isEmpty(this.getReadonly()) && this.getReadonly().equals("true")) {
                     htmlSb.append(" readonly=\"readonly\"");
                 }
                 htmlSb.append("/>");
@@ -133,102 +137,6 @@ public class EasyUiRadioCheckBoxTag extends BodyTagSupport {
     public int doEndTag() throws JspException {
 
         return EVAL_PAGE;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getOnClick() {
-        return onClick;
-    }
-
-    public void setOnClick(String onClick) {
-        this.onClick = onClick;
-    }
-
-    public String getChecked() {
-        return checked;
-    }
-
-    public void setChecked(String checked) {
-        this.checked = checked;
-    }
-
-    public String getOnChange() {
-        return onChange;
-    }
-
-    public void setOnChange(String onChange) {
-        this.onChange = onChange;
-    }
-
-    public String getDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(String disabled) {
-        this.disabled = disabled;
-    }
-
-    public boolean isTitleKey() {
-        return titleKey;
-    }
-
-    public void setTitleKey(boolean titleKey) {
-        this.titleKey = titleKey;
-    }
-
-    public String getReadonly() {
-        return readonly;
-    }
-
-    public void setReadonly(String readonly) {
-        this.readonly = readonly;
-    }
-
-    public List getList() {
-        return list;
-    }
-
-    public void setList(List list) {
-        this.list = list;
     }
 
 }

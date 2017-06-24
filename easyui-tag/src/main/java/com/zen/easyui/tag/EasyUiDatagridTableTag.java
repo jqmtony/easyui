@@ -1,20 +1,23 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.constant.GlobalConstant;
-import com.zen.easyui.util.TriRegulation;
+import com.zen.easyui.constant.EasyuiTagGlobalConstant;
 import com.zen.easyui.util.MessageUtil;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 import java.util.*;
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiDatagridTableTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 91284553969493878L;
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id; // datagrid标识
 
@@ -49,31 +52,31 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
 
     private String frozenFormatters; // 锁定列样式
 
-    private boolean rownumbers = GlobalConstant.DATAGRID_ROWNUMBERS; // 显示行号 Y
+    private boolean rownumbers = EasyuiTagGlobalConstant.DATAGRID_ROWNUMBERS; // 显示行号 Y
 
-    private boolean onlySingleSelect = GlobalConstant.DATAGRID_ROW_ONLY_SINGLE_SELECT; // 开启只能单选
+    private boolean onlySingleSelect = EasyuiTagGlobalConstant.DATAGRID_ROW_ONLY_SINGLE_SELECT; // 开启只能单选
 
-    private boolean singleSelect = GlobalConstant.DATAGRID_ROW_SINGLE_SELECT; // 开启单行选择,false=多行
+    private boolean singleSelect = EasyuiTagGlobalConstant.DATAGRID_ROW_SINGLE_SELECT; // 开启单行选择,false=多行
 
     private boolean checkOnSelect = true; //
 
     private boolean selectOnCheck = true; //
 
-    private boolean headerContextMenu = GlobalConstant.DATAGRID_HEADER_CONTEXT_MENU;// 开启表头字段的菜单功能
+    private boolean headerContextMenu = EasyuiTagGlobalConstant.DATAGRID_HEADER_CONTEXT_MENU;// 开启表头字段的菜单功能
 
-    private boolean enableHeaderClickMenu = GlobalConstant.DATAGRID_ENABLE_HEADER_CLICK_MENU;// 开启表头列名称右侧那个箭头形状的鼠标左键点击菜单
+    private boolean enableHeaderClickMenu = EasyuiTagGlobalConstant.DATAGRID_ENABLE_HEADER_CLICK_MENU;// 开启表头列名称右侧那个箭头形状的鼠标左键点击菜单
 
-    private boolean enableHeaderContextMenu = GlobalConstant.DATAGRID_ENABLE_R_HEADER_CONTEXT_MENU;// 开启表头列名称右键点击菜单
+    private boolean enableHeaderContextMenu = EasyuiTagGlobalConstant.DATAGRID_ENABLE_R_HEADER_CONTEXT_MENU;// 开启表头列名称右键点击菜单
 
-    private boolean enableRowContextMenu = GlobalConstant.DATAGRID_ENABLE_ROW_CONTEXT_MENU;// 开启行右键点击菜单
+    private boolean enableRowContextMenu = EasyuiTagGlobalConstant.DATAGRID_ENABLE_ROW_CONTEXT_MENU;// 开启行右键点击菜单
 
-    private boolean moveMenu = GlobalConstant.DATAGRID_MOVE_MENU; // 开始行右键菜单的移动列功能
+    private boolean moveMenu = EasyuiTagGlobalConstant.DATAGRID_MOVE_MENU; // 开始行右键菜单的移动列功能
 
-    private boolean dndRow = GlobalConstant.DATAGRID_DND_ROW; // 开启此表格的行拖动排序功能 Y
+    private boolean dndRow = EasyuiTagGlobalConstant.DATAGRID_DND_ROW; // 开启此表格的行拖动排序功能 Y
 
-    private boolean selectOnRowContextMenu = GlobalConstant.DATAGRID_SELECT_ON_ROW_CONTEXT_MENU; // 此属性开启当右键点击行时自动选择该行的功能
+    private boolean selectOnRowContextMenu = EasyuiTagGlobalConstant.DATAGRID_SELECT_ON_ROW_CONTEXT_MENU; // 此属性开启当右键点击行时自动选择该行的功能
 
-    private boolean rowTooltip = GlobalConstant.DATAGRID_ROW_TOOLTIP;// 开启行内容浮动提示
+    private boolean rowTooltip = EasyuiTagGlobalConstant.DATAGRID_ROW_TOOLTIP;// 开启行内容浮动提示
 
     private boolean autoEditing = false; // 该属性启用双击行时自定开启该行的编辑状态
 
@@ -113,9 +116,9 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
 
     private String onUncheckAll;
 
-    private int pageSize = GlobalConstant.DATAGRID_PAGE_SIZE; // 每页显示几行
+    private int pageSize = EasyuiTagGlobalConstant.DATAGRID_PAGE_SIZE; // 每页显示几行
 
-    private String pageSizeList = GlobalConstant.DATAGRID_PAGE_SIZE_LIST; // 供用户选择的行数
+    private String pageSizeList = EasyuiTagGlobalConstant.DATAGRID_PAGE_SIZE_LIST; // 供用户选择的行数
 
     private String onBeforeEdit;
 
@@ -127,7 +130,7 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
 
     private String mergeCellsKeys; // 合并行的依据字段，用逗号隔开 （与mergeCellsFields配合一起使用）
 
-    private boolean remoteSort = GlobalConstant.DATAGRID_REMOTE_SORT; // 定义是否从服务器对数据进行排序。
+    private boolean remoteSort = EasyuiTagGlobalConstant.DATAGRID_REMOTE_SORT; // 定义是否从服务器对数据进行排序。
     // Y
 
     private boolean multiSort = false;//
@@ -181,7 +184,7 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
             htmlSb.append("<table class='sign-datagrid'");//class='sign-datagrid'不要删！！！，影响查询栏隐藏实现
             htmlSb.append(" id=\"").append(this.getId()).append("\"");// 用于jquery，class定位，勿删  class=\"sign-datagrid\"
             htmlSb.append(" nowrap=\"").append(this.isNowrap()).append("\"");
-            if (!TriRegulation.isEmpty(this.getStyle())) {
+            if (!RegulationUtil.isEmpty(this.getStyle())) {
                 htmlSb.append(" style=\"").append(this.getStyle()).append("\"");
             }
             htmlSb.append(">\n</table>");
@@ -191,13 +194,13 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
             htmlSb.append(" var ").append(this.getId()).append("CascadeDatagrid = '").append(this.getCascadeDatagrid()).append("';\n");
             htmlSb.append(" var ").append(this.getId()).append("CascadeDatagridParams = '").append(this.getCascadeDatagridParams()).append("';\n");
             // 如果开启行双击编辑弹出框字段
-            if (this.isOpenSearchWindowField() && !TriRegulation.isEmpty(this.getSearchWindowFields())) {
+            if (this.isOpenSearchWindowField() && !RegulationUtil.isEmpty(this.getSearchWindowFields())) {
                 htmlSb.append(" var ").append(this.getId()).append("RowIndex = 0;\n");
                 // htmlSb.append(" var currentClickRowIndex = 0;\n");
             }
             htmlSb.append("$(function(){\n");
             // 纳入需要统计的datagrid
-            if (!TriRegulation.isEmpty(this.getUrl())) {
+            if (!RegulationUtil.isEmpty(this.getUrl())) {
                 htmlSb.append("if ((isEmpty(unloadDatagridIds) && ").append(this.isStopReload()).append("==false) || (").append(this.isAutoReload()).append("==true)){\n");
                 htmlSb.append("   unloadDatagridIds +='" + this.getId() + ",';\n");
                 htmlSb.append("}\n");
@@ -206,9 +209,9 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
             htmlSb.append(" var t = $('#").append(this.getId()).append("').datagrid({\n");
             htmlSb.append("   border: false,\n");
             htmlSb.append("   pagination: ").append(this.isPagination()).append(",\n");
-            if (!TriRegulation.isEmpty(this.getTitleKey()) && !TriRegulation.isEmpty(MessageUtil.getMessage(this.pageContext.getRequest(), this.getTitleKey()))) {
+            if (!RegulationUtil.isEmpty(this.getTitleKey()) && !RegulationUtil.isEmpty(MessageUtil.getMessage(this.pageContext.getRequest(), this.getTitleKey()))) {
                 htmlSb.append("   title: ").append(MessageUtil.getMessage(this.pageContext.getRequest(), this.getTitleKey())).append(",\n");
-            } else if (!TriRegulation.isEmpty(this.getTitle())) {
+            } else if (!RegulationUtil.isEmpty(this.getTitle())) {
                 htmlSb.append("   title: ").append(this.getTitle()).append(",\n");
             }
 
@@ -257,7 +260,7 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
             htmlSb.append("   selectOnRowContextMenu: ").append(this.isSelectOnRowContextMenu()).append(",\n");
             htmlSb.append("   remoteSort: ").append(this.isRemoteSort()).append(",\n");
             htmlSb.append("   multiSort: ").append(this.isMultiSort()).append(",\n");
-            if (!TriRegulation.isEmpty(this.getColumnFilter())) {
+            if (!RegulationUtil.isEmpty(this.getColumnFilter())) {
                 htmlSb.append("   columnFilter: ").append(this.getColumnFilter()).append(",\n");
             }
             if (this.isAutoEditing()) {
@@ -273,31 +276,31 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
                 htmlSb.append("   toolbar:'#").append(this.getToolbarId()).append("'");
             }
 
-            if (!TriRegulation.isEmpty(this.getFrozenFields())) {
+            if (!RegulationUtil.isEmpty(this.getFrozenFields())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   frozenColumns:[[").append("\n");
                 for (int i = 0; i < this.getFrozenFields().split(",").length; i++) {
-                    if (TriRegulation.isEmpty(this.getFrozenFields().split(",")[i])) {
+                    if (RegulationUtil.isEmpty(this.getFrozenFields().split(",")[i])) {
                         continue;
                     }
                     htmlSb.append("   { ");
 
-                    if (!TriRegulation.isEmpty(this.getFrozenFields()) && !TriRegulation.isEmpty(this.getFrozenFields().split(",")[i])) {
+                    if (!RegulationUtil.isEmpty(this.getFrozenFields()) && !RegulationUtil.isEmpty(this.getFrozenFields().split(",")[i])) {
                         htmlSb.append("field:'").append(this.getFrozenFields().split(",")[i]).append("'\n");
                     }
-                    if (!TriRegulation.isEmpty(this.getFrozenTitles()) && !TriRegulation.isEmpty(this.getFrozenTitles().split(",")[i])) {
+                    if (!RegulationUtil.isEmpty(this.getFrozenTitles()) && !RegulationUtil.isEmpty(this.getFrozenTitles().split(",")[i])) {
                         htmlSb.append(",title:'").append(this.getFrozenTitles().split(",")[i]).append("'\n");
-                    } else if (!TriRegulation.isEmpty(this.getFrozenTitleKeys())) {
+                    } else if (!RegulationUtil.isEmpty(this.getFrozenTitleKeys())) {
                         htmlSb.append(",title:'").append(MessageUtil.getMessage(this.pageContext.getRequest(), this.getFrozenTitleKeys().split(",")[i])).append("'\n");
                     }
-                    if (!TriRegulation.isEmpty(this.getFrozenWidths()) && !TriRegulation.isEmpty(this.getFrozenWidths().split(",")[i])) {
+                    if (!RegulationUtil.isEmpty(this.getFrozenWidths()) && !RegulationUtil.isEmpty(this.getFrozenWidths().split(",")[i])) {
                         htmlSb.append(",width:'").append(this.getFrozenWidths().split(",")[i]).append("'\n");
                     }
-                    if (!TriRegulation.isEmpty(this.getFrozenEditors()) && !TriRegulation.isEmpty(this.getFrozenFields().split(",")[i])) {
+                    if (!RegulationUtil.isEmpty(this.getFrozenEditors()) && !RegulationUtil.isEmpty(this.getFrozenFields().split(",")[i])) {
                         htmlSb.append(",\n");
                         htmlSb.append(",editor:'").append(this.getFrozenEditors().split(",")[i]).append("'");
                     }
-                    if (!TriRegulation.isEmpty(this.getFrozenColumnTypes()) && this.getFrozenColumnTypes().split(",").length - 1 == i) {
+                    if (!RegulationUtil.isEmpty(this.getFrozenColumnTypes()) && this.getFrozenColumnTypes().split(",").length - 1 == i) {
                         // 单选框类型
                         if ("checkbox".equals(this.getFrozenColumnTypes().split(",")[i])) {
                             htmlSb.append(",\n");
@@ -305,7 +308,7 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
                         }
                         // 其他类型
                     }
-                    if (!TriRegulation.isEmpty(this.getFrozenFormatters()) && !TriRegulation.isEmpty(this.getFrozenFormatters().split(",")[i])) {
+                    if (!RegulationUtil.isEmpty(this.getFrozenFormatters()) && !RegulationUtil.isEmpty(this.getFrozenFormatters().split(",")[i])) {
                         htmlSb.append(",\n");
                         htmlSb.append("   formatter:function(value){\n");
                         htmlSb.append("   return '<span style=\"").append(this.getFrozenFormatters().split(",")[i]).append("\">' + value + '</span>'").append(";\n");
@@ -318,78 +321,78 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
                 htmlSb.append(",\n");
                 htmlSb.append("  frozenColumns: [[{ field: 'ckb', checkbox: true,hidden:true }]]");// 开启隐藏的冻结列（用于列冻结/取消冻结动态配置）
             }
-            if (!TriRegulation.isEmpty(this.getRowStyler())) {
+            if (!RegulationUtil.isEmpty(this.getRowStyler())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   rowStyler:").append(this.getRowStyler());
             }
-            if (!TriRegulation.isEmpty(this.getGroupField())) {
+            if (!RegulationUtil.isEmpty(this.getGroupField())) {
                 htmlSb.append(",\n");
                 htmlSb.append(" groupField:").append(this.getGroupField());
             }
-            if (!TriRegulation.isEmpty(this.getGroupFormatter())) {
+            if (!RegulationUtil.isEmpty(this.getGroupFormatter())) {
                 htmlSb.append(",\n");
                 htmlSb.append("groupFormatter:").append(this.getGroupFormatter());
             }
 
-            if (!TriRegulation.isEmpty(this.getData())) {
+            if (!RegulationUtil.isEmpty(this.getData())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   data:").append(this.getData());
             }
-            if (!TriRegulation.isEmpty(this.getIdField())) {
+            if (!RegulationUtil.isEmpty(this.getIdField())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   idField:'").append(this.getIdField()).append("'");
             }
             // 单击开启编辑
-            if (!TriRegulation.isEmpty(this.getOnClickRow()) || this.isClickEdit()) {
+            if (!RegulationUtil.isEmpty(this.getOnClickRow()) || this.isClickEdit()) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onClickRow: function (rowIndex,row) {\n");
                 if (this.isClickEdit()) {
                     htmlSb.append("      $('#").append(this.getId()).append("').datagrid('beginEdit',rowIndex); ");
                 }
-                if (!TriRegulation.isEmpty(this.getOnClickRow())) {
+                if (!RegulationUtil.isEmpty(this.getOnClickRow())) {
                     htmlSb.append(this.getOnClickRow()).append("(rowIndex,row);");
                 }
                 htmlSb.append("}");
             }
             // 双击开启编辑
-            if (!TriRegulation.isEmpty(this.getOnDbClickRow()) || this.isDbClickEdit()) {
+            if (!RegulationUtil.isEmpty(this.getOnDbClickRow()) || this.isDbClickEdit()) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onDblClickRow : function(rowIndex,row) {\n");
                 if (this.isDbClickEdit()) {
                     htmlSb.append("      $('#").append(this.getId()).append("').datagrid('beginEdit',rowIndex); ");
                 }
-                if (!TriRegulation.isEmpty(this.getOnDbClickRow())) {
+                if (!RegulationUtil.isEmpty(this.getOnDbClickRow())) {
                     htmlSb.append(this.getOnDbClickRow()).append("(rowIndex,row);");
                 }
                 htmlSb.append("   }");
             }
             // 行编辑前操作 ,或开启编辑searchInput
-            if (!TriRegulation.isEmpty(this.getOnBeforeEdit())) {
+            if (!RegulationUtil.isEmpty(this.getOnBeforeEdit())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onBeforeEdit:").append(this.getOnBeforeEdit());
             }
-            if (!TriRegulation.isEmpty(this.getOnAfterEdit())) {
+            if (!RegulationUtil.isEmpty(this.getOnAfterEdit())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onAfterEdit:").append(this.getOnAfterEdit());
             }
-            if (!TriRegulation.isEmpty(this.getOnBeginEdit())) {
+            if (!RegulationUtil.isEmpty(this.getOnBeginEdit())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onBeginEdit:").append(this.getOnBeginEdit());
             }
 
-            if (!TriRegulation.isEmpty(this.getOnEndEdit())) {
+            if (!RegulationUtil.isEmpty(this.getOnEndEdit())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onEndEdit:").append(this.getOnAfterEdit());
             }
             // 行更新前操作 或者需要开启行searchInput点击后，回写行字段editStatus状态
-            if (!TriRegulation.isEmpty(this.getOnBeforeUpdateRow()) || (this.isOpenSearchWindowField() && !TriRegulation.isEmpty(this.getSearchWindowFields()))) {// 该事件在扩展datagrid
+            if (!RegulationUtil.isEmpty(this.getOnBeforeUpdateRow()) || (this.isOpenSearchWindowField() && !RegulationUtil.isEmpty(this.getSearchWindowFields()))) {// 该事件在扩展datagrid
                 // js中
                 htmlSb.append(",\n");
                 htmlSb.append("   onBeforeUpdateRow:function(rowIndex,row){ \n");
                 // 开启编辑searchInput
-                if (this.isOpenSearchWindowField() && !TriRegulation.isEmpty(this.getSearchWindowFields())) {
+                if (this.isOpenSearchWindowField() && !RegulationUtil.isEmpty(this.getSearchWindowFields())) {
                     // 该事件在扩展datagrid js中
-                    if (!TriRegulation.isEmpty(this.getIdField())) {
+                    if (!RegulationUtil.isEmpty(this.getIdField())) {
                         htmlSb.append("if(isEmpty(row.").append(this.getIdField()).append(")){");
                         htmlSb.append("   row.editStatus='update'; \n");
                         htmlSb.append("}");
@@ -398,18 +401,18 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
                     }
 
                 }
-                if (!TriRegulation.isEmpty(this.getOnBeforeUpdateRow())) {
+                if (!RegulationUtil.isEmpty(this.getOnBeforeUpdateRow())) {
                     htmlSb.append(this.getOnBeforeUpdateRow()).append("(rowIndex,row);");
                 }
                 htmlSb.append("} ");
             }
 
-            if (!TriRegulation.isEmpty(this.getDoEvent())) {// "1:dd();2:d2();"
+            if (!RegulationUtil.isEmpty(this.getDoEvent())) {// "1:dd();2:d2();"
 
                 String[] str = this.getDoEvent().split(";");
                 for (int i = 0; i < str.length; i++) {
                     String[] actionType = str[i].split(":");
-                    if (!TriRegulation.isEmpty(actionType[0]) && actionType[0].equals("onclick")) {// 1:单机事件
+                    if (!RegulationUtil.isEmpty(actionType[0]) && actionType[0].equals("onclick")) {// 1:单机事件
                         htmlSb.append(",\n");
                         htmlSb.append("onClickRow: function (index,row){\n");
                         for (int j = 0; j < actionType[1].split(",").length; j++) {
@@ -417,7 +420,7 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
                         }
                         htmlSb.append("} ");
                     }
-                    if (!TriRegulation.isEmpty(actionType[0]) && actionType[0].equals("ondbclick")) {// 2：双机事件
+                    if (!RegulationUtil.isEmpty(actionType[0]) && actionType[0].equals("ondbclick")) {// 2：双机事件
                         htmlSb.append(",\n");
                         htmlSb.append("onDblClickRow: function (index,row){\n");
                         for (int j = 0; j < actionType[1].split(",").length; j++) {
@@ -427,51 +430,51 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
                     }
                 }
             }
-            if (!TriRegulation.isEmpty(this.getOnSelect())) {
+            if (!RegulationUtil.isEmpty(this.getOnSelect())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onSelect:").append(this.getOnSelect());
             }
-            if (!TriRegulation.isEmpty(this.getOnClickCell())) {
+            if (!RegulationUtil.isEmpty(this.getOnClickCell())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onClickCell:").append(this.getOnClickCell());
             }
 
-            if (!TriRegulation.isEmpty(this.getOnUnselect())) {
+            if (!RegulationUtil.isEmpty(this.getOnUnselect())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onUnselect:").append(this.getOnUnselect());
             }
 
-            if (!TriRegulation.isEmpty(this.getOnSelectAll())) {
+            if (!RegulationUtil.isEmpty(this.getOnSelectAll())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onSelectAll:").append(this.getOnSelectAll());
             }
 
-            if (!TriRegulation.isEmpty(this.getOnUnselectAll())) {
+            if (!RegulationUtil.isEmpty(this.getOnUnselectAll())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onUnselectAll:").append(this.getOnUnselectAll());
             }
 
-            if (!TriRegulation.isEmpty(this.getOnCheck())) {
+            if (!RegulationUtil.isEmpty(this.getOnCheck())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onCheck:").append(this.getOnCheck());
             }
 
-            if (!TriRegulation.isEmpty(this.getOnUncheck())) {
+            if (!RegulationUtil.isEmpty(this.getOnUncheck())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onUncheck:").append(this.getOnUncheck());
             }
 
-            if (!TriRegulation.isEmpty(this.getOnCheckAll())) {
+            if (!RegulationUtil.isEmpty(this.getOnCheckAll())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onCheckAll:").append(this.getOnCheckAll());
             }
 
-            if (!TriRegulation.isEmpty(this.getOnUncheckAll())) {
+            if (!RegulationUtil.isEmpty(this.getOnUncheckAll())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   onUncheckAll:").append(this.getOnUncheckAll());
             }
 
-            if (!TriRegulation.isEmpty(this.getQueryParams())) {
+            if (!RegulationUtil.isEmpty(this.getQueryParams())) {
                 htmlSb.append(",\n");
                 htmlSb.append("   queryParams:{").append(this.getQueryParams()).append("}");
             }
@@ -480,11 +483,11 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
             // htmlSb.append("alert('onLoadSuccess over');");
             // htmlSb.append("  $.fn.datagrid.extensions.onLoadSuccess.apply(this, arguments); \n");// 这句要加上。以支持相应扩展功能 （1.4.3已无扩展功能，需另找其他类似扩展）
 
-            if (!TriRegulation.isEmpty(this.getOnLoadSuccess()) || (!TriRegulation.isEmpty(this.getMergeCellsFields()) && !TriRegulation.isEmpty(this.getMergeCellsKeys()))) {
-                if (!TriRegulation.isEmpty(this.getOnLoadSuccess())) {
+            if (!RegulationUtil.isEmpty(this.getOnLoadSuccess()) || (!RegulationUtil.isEmpty(this.getMergeCellsFields()) && !RegulationUtil.isEmpty(this.getMergeCellsKeys()))) {
+                if (!RegulationUtil.isEmpty(this.getOnLoadSuccess())) {
                     htmlSb.append(this.getOnLoadSuccess()).append("(data);\n");
                 }
-                if (!TriRegulation.isEmpty(this.getMergeCellsFields()) && !TriRegulation.isEmpty(this.getMergeCellsKeys())) {
+                if (!RegulationUtil.isEmpty(this.getMergeCellsFields()) && !RegulationUtil.isEmpty(this.getMergeCellsKeys())) {
                     htmlSb.append(" var margerCellsFields = \"").append(this.getMergeCellsFields()).append("\";\n");
                     htmlSb.append(" var margerCellsKeys = \"").append(this.getMergeCellsKeys()).append("\";\n");
                     htmlSb.append("  mergeColCells2Dg(\"").append(this.getId()).append("\",replaceSpace(margerCellsKeys).split(\",\"),replaceSpace(margerCellsFields).split(\",\"));\n");
@@ -512,7 +515,7 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
             htmlSb.append(",\n");
             htmlSb.append("columns:[\n");
 
-            if (!TriRegulation.isEmpty(this.getColumnMap())) {
+            if (!RegulationUtil.isEmpty(this.getColumnMap())) {
                 Set<String> keySet = this.getColumnMap().keySet();
                 Iterator<String> iter = keySet.iterator();
                 while (iter.hasNext()) {
@@ -533,7 +536,7 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
 
                 }//while
             } else {
-                if (!TriRegulation.isEmpty(this.getColumns())) {
+                if (!RegulationUtil.isEmpty(this.getColumns())) {
                     htmlSb.append("[\n");
                     for (Iterator columnIter = this.getColumns().iterator(); columnIter.hasNext(); ) {
                         EasyUiTableColumnTag column = (EasyUiTableColumnTag) columnIter.next();
@@ -575,57 +578,57 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
     private String getColumnHtml(EasyUiTableColumnTag column) {
         StringBuilder htmlSb = new StringBuilder();
         htmlSb.append("{");
-        if (!TriRegulation.isEmpty(column.getTitle()) || !TriRegulation.isEmpty(column.getTitleKey())) {
+        if (!RegulationUtil.isEmpty(column.getTitle()) || !RegulationUtil.isEmpty(column.getTitleKey())) {
             htmlSb.append("title:\"");
-            if (!TriRegulation.isEmpty(column.getTitle())) {
+            if (!RegulationUtil.isEmpty(column.getTitle())) {
                 htmlSb.append(column.getTitle());
-            } else if (!TriRegulation.isEmpty(column.getTitleKey())) {
+            } else if (!RegulationUtil.isEmpty(column.getTitleKey())) {
                 String keyStr = MessageUtil.getMessage(pageContext.getRequest(), column.getTitleKey());
-                htmlSb.append(!TriRegulation.isEmpty(keyStr) ? keyStr : "");
+                htmlSb.append(!RegulationUtil.isEmpty(keyStr) ? keyStr : "");
             }
             htmlSb.append("\",");
         }
-        if (!TriRegulation.isEmpty(column.getField())) {
+        if (!RegulationUtil.isEmpty(column.getField())) {
             htmlSb.append("field:\"").append(column.getField()).append("\",");
         }
         htmlSb.append("sortable:").append(column.isSortable()).append("");
 
 
-        if (!TriRegulation.isEmpty(this.getColumnMap()) && !TriRegulation.isEmpty(column.getWidth())) {//多表头
-            if (!TriRegulation.isEmpty(column.isHidden()) && !column.isHidden()) {
+        if (!RegulationUtil.isEmpty(this.getColumnMap()) && !RegulationUtil.isEmpty(column.getWidth())) {//多表头
+            if (!RegulationUtil.isEmpty(column.isHidden()) && !column.isHidden()) {
                 htmlSb.append(",width:").append(column.getWidth());
             }
         } else {  //单表头
-            if (!TriRegulation.isEmpty(column.getWidth())) {
-                if (!TriRegulation.isEmpty(column.isHidden()) && !column.isHidden()) {
+            if (!RegulationUtil.isEmpty(column.getWidth())) {
+                if (!RegulationUtil.isEmpty(column.isHidden()) && !column.isHidden()) {
                     htmlSb.append(",width:").append(column.getWidth());
                 }
             }
         }
 
-        if (!TriRegulation.isEmpty(column.getRowspan()) && column.getRowspan() > 0) {
+        if (!RegulationUtil.isEmpty(column.getRowspan()) && column.getRowspan() > 0) {
             htmlSb.append(",rowspan:").append(column.getRowspan()).append("");
         }
-        if (!TriRegulation.isEmpty(column.getColspan()) && column.getColspan() > 0) {
+        if (!RegulationUtil.isEmpty(column.getColspan()) && column.getColspan() > 0) {
             htmlSb.append(",colspan:").append(column.getColspan()).append("");
         }
-        if (!TriRegulation.isEmpty(column.getFormatter())) {
+        if (!RegulationUtil.isEmpty(column.getFormatter())) {
             htmlSb.append(",formatter:").append(column.getFormatter()).append("");
         }
-        if (!TriRegulation.isEmpty(column.getStyler())) {
+        if (!RegulationUtil.isEmpty(column.getStyler())) {
             htmlSb.append(",styler:\"").append(column.getStyler()).append("\"");
         }
-        if (!TriRegulation.isEmpty(column.getAlign())) {
+        if (!RegulationUtil.isEmpty(column.getAlign())) {
             htmlSb.append(",align:\"").append(column.getAlign()).append("\"");
         }
         if (column.isCheckbox()) {
             htmlSb.append(",checkbox:\"").append(column.isCheckbox()).append("\"");
             htmlSb.append(",checked:\"checked\"");
         }
-        if (!TriRegulation.isEmpty(column.isHidden()) && column.isHidden()) {
+        if (!RegulationUtil.isEmpty(column.isHidden()) && column.isHidden()) {
             htmlSb.append(",hidden:").append(column.isHidden());
         }
-        if (!TriRegulation.isEmpty(column.getEditor())) {
+        if (!RegulationUtil.isEmpty(column.getEditor())) {
             /**
              CZI:
              错误写法:
@@ -642,605 +645,6 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
         return htmlSb.toString();
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAutoMergeCells() {
-        return autoMergeCells;
-    }
-
-    public void setAutoMergeCells(String autoMergeCells) {
-        this.autoMergeCells = autoMergeCells;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getOnClickCell() {
-        return onClickCell;
-    }
-
-    public void setOnClickCell(String onClickCell) {
-        this.onClickCell = onClickCell;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public boolean isPagination() {
-        return pagination;
-    }
-
-    public void setPagination(boolean pagination) {
-        this.pagination = pagination;
-    }
-
-    public boolean isFit() {
-        return fit;
-    }
-
-    public void setFit(boolean fit) {
-        this.fit = fit;
-    }
-
-    public boolean isFitColumns() {
-        return fitColumns;
-    }
-
-    public void setFitColumns(boolean fitColumns) {
-        this.fitColumns = fitColumns;
-    }
-
-    public boolean isRownumbers() {
-        return rownumbers;
-    }
-
-    public void setRownumbers(boolean rownumbers) {
-        this.rownumbers = rownumbers;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public String getPageSizeList() {
-        return pageSizeList;
-    }
-
-    public void setPageSizeList(String pageSizeList) {
-        this.pageSizeList = pageSizeList;
-    }
-
-    public String getToolbarId() {
-        return toolbarId;
-    }
-
-    public void setToolbarId(String toolbarId) {
-        this.toolbarId = toolbarId;
-    }
-
-    public boolean isSingleSelect() {
-        return singleSelect;
-    }
-
-    public void setSingleSelect(boolean singleSelect) {
-        this.singleSelect = singleSelect;
-    }
-
-    public String getOnClickRow() {
-        return onClickRow;
-    }
-
-    public void setOnClickRow(String onClickRow) {
-        this.onClickRow = onClickRow;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public String getOnLoadSuccess() {
-        return onLoadSuccess;
-    }
-
-    public void setOnLoadSuccess(String onLoadSuccess) {
-        this.onLoadSuccess = onLoadSuccess;
-    }
-
-    public String getIdField() {
-        return idField;
-    }
-
-    public void setIdField(String idField) {
-        this.idField = idField;
-    }
-
-    public String getTitleKey() {
-        return titleKey;
-    }
-
-    public void setTitleKey(String titleKey) {
-        this.titleKey = titleKey;
-    }
-
-    public String getOnSelect() {
-        return onSelect;
-    }
-
-    public void setOnSelect(String onSelect) {
-        this.onSelect = onSelect;
-    }
-
-    public String getOnUnselect() {
-        return onUnselect;
-    }
-
-    public void setOnUnselect(String onUnselect) {
-        this.onUnselect = onUnselect;
-    }
-
-    public String getOnSelectAll() {
-        return onSelectAll;
-    }
-
-    public void setOnSelectAll(String onSelectAll) {
-        this.onSelectAll = onSelectAll;
-    }
-
-    public String getOnUnselectAll() {
-        return onUnselectAll;
-    }
-
-    public void setOnUnselectAll(String onUnselectAll) {
-        this.onUnselectAll = onUnselectAll;
-    }
-
-    public String getQueryParams() {
-        return queryParams;
-    }
-
-    public void setQueryParams(String queryParams) {
-        this.queryParams = queryParams;
-    }
-
-    public String getOnCheck() {
-        return onCheck;
-    }
-
-    public String getOnDbClickRow() {
-        return onDbClickRow;
-    }
-
-    public void setOnDbClickRow(String onDbClickRow) {
-        this.onDbClickRow = onDbClickRow;
-    }
-
-    public String getOnBeforeEdit() {
-        return onBeforeEdit;
-    }
-
-    public void setOnBeforeEdit(String onBeforeEdit) {
-        this.onBeforeEdit = onBeforeEdit;
-    }
-
-    public String getOnAfterEdit() {
-        return onAfterEdit;
-    }
-
-    public void setOnAfterEdit(String onAfterEdit) {
-        this.onAfterEdit = onAfterEdit;
-    }
-
-    public void setOnCheck(String onCheck) {
-        this.onCheck = onCheck;
-    }
-
-    public String getOnUncheck() {
-        return onUncheck;
-    }
-
-    public void setOnUncheck(String onUncheck) {
-        this.onUncheck = onUncheck;
-    }
-
-    public String getOnCheckAll() {
-        return onCheckAll;
-    }
-
-    public void setOnCheckAll(String onCheckAll) {
-        this.onCheckAll = onCheckAll;
-    }
-
-    public String getOnUncheckAll() {
-        return onUncheckAll;
-    }
-
-    public void setOnUncheckAll(String onUncheckAll) {
-        this.onUncheckAll = onUncheckAll;
-    }
-
-    public boolean isCheckOnSelect() {
-        return checkOnSelect;
-    }
-
-    public void setCheckOnSelect(boolean checkOnSelect) {
-        this.checkOnSelect = checkOnSelect;
-    }
-
-    public boolean isSelectOnCheck() {
-        return selectOnCheck;
-    }
-
-    public void setSelectOnCheck(boolean selectOnCheck) {
-        this.selectOnCheck = selectOnCheck;
-    }
-
-    public boolean isNowrap() {
-        return nowrap;
-    }
-
-    public void setNowrap(boolean nowrap) {
-        this.nowrap = nowrap;
-    }
-
-    public String getRowStyler() {
-        return rowStyler;
-    }
-
-    public void setRowStyler(String rowStyler) {
-        this.rowStyler = rowStyler;
-    }
-
-    public String getMergeCellsFields() {
-        return mergeCellsFields;
-    }
-
-    public void setMergeCellsFields(String mergeCellsFields) {
-        this.mergeCellsFields = mergeCellsFields;
-    }
-
-    public String getMergeCellsKeys() {
-        return mergeCellsKeys;
-    }
-
-    public void setMergeCellsKeys(String mergeCellsKeys) {
-        this.mergeCellsKeys = mergeCellsKeys;
-    }
-
-    public String getFrozenFields() {
-        return frozenFields;
-    }
-
-    public void setFrozenFields(String frozenFields) {
-        this.frozenFields = frozenFields;
-    }
-
-    public String getFrozenTitles() {
-        return frozenTitles;
-    }
-
-    public void setFrozenTitles(String frozenTitles) {
-        this.frozenTitles = frozenTitles;
-    }
-
-    public String getFrozenTitleKeys() {
-        return frozenTitleKeys;
-    }
-
-    public void setFrozenTitleKeys(String frozenTitleKeys) {
-        this.frozenTitleKeys = frozenTitleKeys;
-    }
-
-    public String getFrozenEditors() {
-        return frozenEditors;
-    }
-
-    public void setFrozenEditors(String frozenEditors) {
-        this.frozenEditors = frozenEditors;
-    }
-
-    public String getFrozenWidths() {
-        return frozenWidths;
-    }
-
-    public void setFrozenWidths(String frozenWidths) {
-        this.frozenWidths = frozenWidths;
-    }
-
-    public String getFrozenFormatters() {
-        return frozenFormatters;
-    }
-
-    public void setFrozenFormatters(String frozenFormatters) {
-        this.frozenFormatters = frozenFormatters;
-    }
-
-    public String getFrozenColumnTypes() {
-        return frozenColumnTypes;
-    }
-
-    public void setFrozenColumnTypes(String frozenColumnTypes) {
-        this.frozenColumnTypes = frozenColumnTypes;
-    }
-
-    public boolean isEnableHeaderClickMenu() {
-        return enableHeaderClickMenu;
-    }
-
-    public void setEnableHeaderClickMenu(boolean enableHeaderClickMenu) {
-        this.enableHeaderClickMenu = enableHeaderClickMenu;
-    }
-
-    public boolean isEnableHeaderContextMenu() {
-        return enableHeaderContextMenu;
-    }
-
-    public void setEnableHeaderContextMenu(boolean enableHeaderContextMenu) {
-        this.enableHeaderContextMenu = enableHeaderContextMenu;
-    }
-
-    public boolean isEnableRowContextMenu() {
-        return enableRowContextMenu;
-    }
-
-    public void setEnableRowContextMenu(boolean enableRowContextMenu) {
-        this.enableRowContextMenu = enableRowContextMenu;
-    }
-
-    public boolean isMoveMenu() {
-        return moveMenu;
-    }
-
-    public void setMoveMenu(boolean moveMenu) {
-        this.moveMenu = moveMenu;
-    }
-
-    public boolean isDndRow() {
-        return dndRow;
-    }
-
-    public void setDndRow(boolean dndRow) {
-        this.dndRow = dndRow;
-    }
-
-    public boolean isSelectOnRowContextMenu() {
-        return selectOnRowContextMenu;
-    }
-
-    public void setSelectOnRowContextMenu(boolean selectOnRowContextMenu) {
-        this.selectOnRowContextMenu = selectOnRowContextMenu;
-    }
-
-    public boolean isRowTooltip() {
-        return rowTooltip;
-    }
-
-    public void setRowTooltip(boolean rowTooltip) {
-        this.rowTooltip = rowTooltip;
-    }
-
-    public boolean isAutoEditing() {
-        return autoEditing;
-    }
-
-    public void setAutoEditing(boolean autoEditing) {
-        this.autoEditing = autoEditing;
-    }
-
-    public boolean isSingleEditing() {
-        return singleEditing;
-    }
-
-    public void setSingleEditing(boolean singleEditing) {
-        this.singleEditing = singleEditing;
-    }
-
-    public String getColumnFilter() {
-        return columnFilter;
-    }
-
-    public void setColumnFilter(String columnFilter) {
-        this.columnFilter = columnFilter;
-    }
-
-    public boolean isExtEditing() {
-        return extEditing;
-    }
-
-    public void setExtEditing(boolean extEditing) {
-        this.extEditing = extEditing;
-    }
-
-    public boolean isRemoteSort() {
-        return remoteSort;
-    }
-
-    public void setRemoteSort(boolean remoteSort) {
-        this.remoteSort = remoteSort;
-    }
-
-    public boolean isMultiSort() {
-        return multiSort;
-    }
-
-    public void setMultiSort(boolean multiSort) {
-        this.multiSort = multiSort;
-    }
-
-    public boolean isAutoReload() {
-        return autoReload;
-    }
-
-    public void setAutoReload(boolean autoReload) {
-        this.autoReload = autoReload;
-    }
-
-    public boolean isHeaderContextMenu() {
-        return headerContextMenu;
-    }
-
-    public void setHeaderContextMenu(boolean headerContextMenu) {
-        this.headerContextMenu = headerContextMenu;
-    }
-
-    public String getDoEvent() {
-        return doEvent;
-    }
-
-    public void setDoEvent(String doEvent) {
-        this.doEvent = doEvent;
-    }
-
-    public boolean isStopReload() {
-        return stopReload;
-    }
-
-    public void setStopReload(boolean stopReload) {
-        this.stopReload = stopReload;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public boolean isOnlySingleSelect() {
-        return onlySingleSelect;
-    }
-
-    public void setOnlySingleSelect(boolean onlySingleSelect) {
-        this.onlySingleSelect = onlySingleSelect;
-    }
-
-    public boolean isOpenSearchWindowField() {
-        return openSearchWindowField;
-    }
-
-    public void setOpenSearchWindowField(boolean openSearchWindowField) {
-        this.openSearchWindowField = openSearchWindowField;
-    }
-
-    public String getSearchWindowFields() {
-        return searchWindowFields;
-    }
-
-    public void setSearchWindowFields(String searchWindowFields) {
-        this.searchWindowFields = searchWindowFields;
-    }
-
-    public String getSearchWindowFieldFun() {
-        return searchWindowFieldFun;
-    }
-
-    public void setSearchWindowFieldFun(String searchWindowFieldFun) {
-        this.searchWindowFieldFun = searchWindowFieldFun;
-    }
-
-    public String getOnBeforeUpdateRow() {
-        return onBeforeUpdateRow;
-    }
-
-    public void setOnBeforeUpdateRow(String onBeforeUpdateRow) {
-        this.onBeforeUpdateRow = onBeforeUpdateRow;
-    }
-
-    public boolean isDbClickEdit() {
-        return dbClickEdit;
-    }
-
-    public void setDbClickEdit(boolean dbClickEdit) {
-        this.dbClickEdit = dbClickEdit;
-    }
-
-    public boolean isClickEdit() {
-        return clickEdit;
-    }
-
-    public boolean isShowFooter() {
-        return showFooter;
-    }
-
-    public void setShowFooter(boolean showFooter) {
-        this.showFooter = showFooter;
-    }
-
-    public void setClickEdit(boolean clickEdit) {
-        this.clickEdit = clickEdit;
-    }
-
-    public String getGroupField() {
-        return groupField;
-    }
-
-    public void setGroupField(String groupField) {
-        this.groupField = groupField;
-    }
-
-    public String getGroupFormatter() {
-        return groupFormatter;
-    }
-
-    public void setGroupFormatter(String groupFormatter) {
-        this.groupFormatter = groupFormatter;
-    }
-
-    public String getCascadeDatagrid() {
-        return cascadeDatagrid;
-    }
-
-    public void setCascadeDatagrid(String cascadeDatagrid) {
-        this.cascadeDatagrid = cascadeDatagrid;
-    }
-
-    public String getCascadeDatagridParams() {
-        return cascadeDatagridParams;
-    }
-
-    public void setCascadeDatagridParams(String cascadeDatagridParams) {
-        this.cascadeDatagridParams = cascadeDatagridParams;
-    }
-
-    public List<EasyUiTableColumnTag> getColumns() {
-        return columns;
-    }
-
-    public void setColumns(List<EasyUiTableColumnTag> columns) {
-        this.columns = columns;
-    }
-
-    public Map<String, List<EasyUiTableColumnTag>> getColumnMap() {
-        return columnMap;
-    }
-
-    public void setColumnMap(TreeMap<String, List<EasyUiTableColumnTag>> columnMap) {
-        this.columnMap = columnMap;
-    }
 
     /**
      * 向columnMap对象中插入一个新行数据
@@ -1248,8 +652,8 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
      * @param column
      */
     public synchronized void addColumn(EasyUiTableColumnTag column) {
-        if (TriRegulation.isEmpty(this.getColumnMap())) {
-            if (TriRegulation.isEmpty(this.columns)) {
+        if (RegulationUtil.isEmpty(this.getColumnMap())) {
+            if (RegulationUtil.isEmpty(this.columns)) {
                 this.columns = new ArrayList<EasyUiTableColumnTag>();
             }
             this.columns.add(column);
@@ -1262,29 +666,12 @@ public class EasyUiDatagridTableTag extends BodyTagSupport {
      * 向columnMap对象中插入一个新对象，序号自增1
      */
     public synchronized void addColumnMap() {
-        if (TriRegulation.isEmpty(this.getColumnMap())) {
+        if (RegulationUtil.isEmpty(this.getColumnMap())) {
             this.columnMap = new TreeMap<String, List<EasyUiTableColumnTag>>();
             this.columnMap.put("1", new ArrayList<EasyUiTableColumnTag>());
         } else {
             this.columnMap.put(Integer.valueOf(this.columnMap.lastKey()) + 1 + "", new ArrayList<EasyUiTableColumnTag>());
         }
     }
-
-    public String getOnEndEdit() {
-        return onEndEdit;
-    }
-
-    public void setOnEndEdit(String onEndEdit) {
-        this.onEndEdit = onEndEdit;
-    }
-
-    public String getOnBeginEdit() {
-        return onBeginEdit;
-    }
-
-    public void setOnBeginEdit(String onBeginEdit) {
-        this.onBeginEdit = onBeginEdit;
-    }
-
 
 }

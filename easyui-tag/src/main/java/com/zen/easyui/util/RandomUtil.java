@@ -2,7 +2,7 @@ package com.zen.easyui.util;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-public class TriStringUtil {
+public class RandomUtil {
 
     /**
      * 随即生成指定位数的含数字验证码字符串

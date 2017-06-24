@@ -1,18 +1,21 @@
 package com.zen.easyui.tag;
 
 import com.zen.easyui.util.MessageUtil;
-import com.zen.easyui.util.TriRegulation;
-import com.zen.easyui.util.TriStringUtil;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RandomUtil;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiTextTag extends BodyTagSupport {
     private static final long serialVersionUID = -4795604324752399473L;
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id; // 编号
 
@@ -87,23 +90,23 @@ public class EasyUiTextTag extends BodyTagSupport {
     @Override
     public int doStartTag() throws JspException {
         StringBuilder htmlSb = new StringBuilder();
-        String tmpId = TriRegulation.isEmpty(this.getId()) ? this.getName() + TriStringUtil.random(2) : this.getId();
+        String tmpId = RegulationUtil.isEmpty(this.getId()) ? this.getName() + RandomUtil.random(2) : this.getId();
         htmlSb.append("<input name=\"").append(this.getName()).append("\"\n");
         htmlSb.append(" id=\"").append(tmpId).append("\"\n");
         if (this.showonly) {//显示白板
             htmlSb.append("class=\"").append(showClass).append("\"\n");
             htmlSb.append("readonly=\"true\"\n");
-            if (!TriRegulation.isEmpty(this.getValue())) {
+            if (!RegulationUtil.isEmpty(this.getValue())) {
                 htmlSb.append(" value=\"").append(this.getValue()).append("\"");
             }
         }
         if ("hidden".equalsIgnoreCase(this.getType())) {
             htmlSb.append("type=\"hidden\"\n");
-            if (!TriRegulation.isEmpty(this.getValue())) {
+            if (!RegulationUtil.isEmpty(this.getValue())) {
                 htmlSb.append(" value=\"").append(this.getValue()).append("\"");
             }
         }
-        if (!TriRegulation.isEmpty(this.getStyle())) {
+        if (!RegulationUtil.isEmpty(this.getStyle())) {
             htmlSb.append(" style=\"").append(this.getStyle()).append("\"\n");
         }
 
@@ -119,29 +122,29 @@ public class EasyUiTextTag extends BodyTagSupport {
             if (this.isReadonly()) {
                 htmlSb.append("readonly:").append(this.isReadonly()).append(",");
             }
-            if (!TriRegulation.isEmpty(this.getWidth())) {
+            if (!RegulationUtil.isEmpty(this.getWidth())) {
                 htmlSb.append("width:\"" + this.getWidth()).append("\",");
             }
-            if (!TriRegulation.isEmpty(this.getHeight())) {
+            if (!RegulationUtil.isEmpty(this.getHeight())) {
                 htmlSb.append("height:\"" + this.getHeight()).append("\",");
             }
-            if (!TriRegulation.isEmpty(this.getValidType())) {
+            if (!RegulationUtil.isEmpty(this.getValidType())) {
                 if (this.getValidType().indexOf("[") == 0) {
                     htmlSb.append(" validType:").append(this.getValidType()).append(",");
                 } else {
                     htmlSb.append(" validType:\"").append(this.getValidType()).append("\",");
                 }
             }
-            if (!TriRegulation.isEmpty(this.getValue())) {
+            if (!RegulationUtil.isEmpty(this.getValue())) {
                 htmlSb.append(" value:\"").append(this.getValue()).append("\",");
             }
-            if (!TriRegulation.isEmpty(this.getPrompt())) {
+            if (!RegulationUtil.isEmpty(this.getPrompt())) {
                 htmlSb.append(" prompt:\"").append(this.getPrompt()).append("\",");
             }
 
             if (this.isMultiline()) {
                 htmlSb.append(" multiline:").append(this.isMultiline()).append(",");
-                if (TriRegulation.isEmpty(this.getHeight())) {
+                if (RegulationUtil.isEmpty(this.getHeight())) {
                     htmlSb.append("height:\"50").append("\",");
                 }
             }
@@ -151,67 +154,67 @@ public class EasyUiTextTag extends BodyTagSupport {
             if (this.isDisabled()) {
                 htmlSb.append(" disabled:").append(this.isDisabled()).append(",");
             }
-            if (!TriRegulation.isEmpty(this.getIconCls())) {
+            if (!RegulationUtil.isEmpty(this.getIconCls())) {
                 htmlSb.append(" iconCls:\"").append(this.getIconCls()).append("\",");
             }
 
-            if (!TriRegulation.isEmpty(this.getIconAlign())) {
+            if (!RegulationUtil.isEmpty(this.getIconAlign())) {
                 htmlSb.append(" iconAlign:\"").append(this.getIconAlign()).append("\",");
             }
 
-            if (!TriRegulation.isEmpty(this.getIconWidth())) {
+            if (!RegulationUtil.isEmpty(this.getIconWidth())) {
                 htmlSb.append(" iconWidth:\"").append(this.getIconWidth()).append("\",");
             }
 
-            if (!TriRegulation.isEmpty(this.getButtonText())) {
+            if (!RegulationUtil.isEmpty(this.getButtonText())) {
                 htmlSb.append(" buttonText:\"").append(this.getButtonText()).append("\",");
             }
 
-            if (!TriRegulation.isEmpty(this.getButtonIcon())) {
+            if (!RegulationUtil.isEmpty(this.getButtonIcon())) {
                 htmlSb.append(" buttonIcon:\"").append(this.getButtonIcon()).append("\",");
             }
 
-            if (!TriRegulation.isEmpty(this.getButtonAlign())) {
+            if (!RegulationUtil.isEmpty(this.getButtonAlign())) {
                 htmlSb.append(" buttonAlign:\"").append(this.getButtonAlign()).append("\",");
             }
 
 
             String keyStr = "";
-            if (!TriRegulation.isEmpty(this.getInvalidMessageKey())) {
+            if (!RegulationUtil.isEmpty(this.getInvalidMessageKey())) {
                 keyStr = MessageUtil.getMessage(pageContext.getRequest(), this.getInvalidMessageKey());
 
-                if (TriRegulation.isEmpty(keyStr)) {
-                    keyStr = TriRegulation.isEmpty(this.getInvalidMessage()) ? "" : this.getInvalidMessage();
+                if (RegulationUtil.isEmpty(keyStr)) {
+                    keyStr = RegulationUtil.isEmpty(this.getInvalidMessage()) ? "" : this.getInvalidMessage();
                 }
             } else {
-                keyStr = TriRegulation.isEmpty(this.getInvalidMessage()) ? "" : this.getInvalidMessage();
+                keyStr = RegulationUtil.isEmpty(this.getInvalidMessage()) ? "" : this.getInvalidMessage();
             }
-            if (!TriRegulation.isEmpty(keyStr)) {
+            if (!RegulationUtil.isEmpty(keyStr)) {
                 htmlSb.append(" invalidMessage:\"").append(keyStr).append("\",");
             }
 
-            if (!TriRegulation.isEmpty(this.getMissingMessageKey())) {
+            if (!RegulationUtil.isEmpty(this.getMissingMessageKey())) {
                 keyStr = MessageUtil.getMessage(pageContext.getRequest(), this.getMissingMessageKey());
 
-                if (TriRegulation.isEmpty(keyStr)) {
-                    keyStr = TriRegulation.isEmpty(this.getMissingMessage()) ? "" : this.getMissingMessage();
+                if (RegulationUtil.isEmpty(keyStr)) {
+                    keyStr = RegulationUtil.isEmpty(this.getMissingMessage()) ? "" : this.getMissingMessage();
                 }
             } else {
-                keyStr = TriRegulation.isEmpty(this.getMissingMessage()) ? "" : this.getMissingMessage();
+                keyStr = RegulationUtil.isEmpty(this.getMissingMessage()) ? "" : this.getMissingMessage();
             }
 
-            if (!TriRegulation.isEmpty(keyStr)) {
+            if (!RegulationUtil.isEmpty(keyStr)) {
                 htmlSb.append(" missingMessage:\"").append(this.getMissingMessage()).append("\",");
             }
-            if (!TriRegulation.isEmpty(this.getOnchange())) {
+            if (!RegulationUtil.isEmpty(this.getOnchange())) {
 //      htmlSb.append("   onChange:function(){\n");
 //      htmlSb.append(this.getOnChange()).append("(newValue, oldValue);},\n");
                 htmlSb.append("   onChange:").append(this.getOnchange()).append(",\n");
             }
-            if (!TriRegulation.isEmpty(this.getOnclickIcon())) {
+            if (!RegulationUtil.isEmpty(this.getOnclickIcon())) {
                 htmlSb.append("   onClickIcon:").append(this.getOnclickIcon()).append(",\n");
             }
-            if (!TriRegulation.isEmpty(this.getOnclickButton())) {
+            if (!RegulationUtil.isEmpty(this.getOnclickButton())) {
                 htmlSb.append("   onClickButton:").append(this.getOnclickButton()).append(",\n");
             }
 
@@ -222,7 +225,7 @@ public class EasyUiTextTag extends BodyTagSupport {
             if (this.isReadonly()) {
                 htmlSb.append("$('input',$('#").append(tmpId).append("').next('span')).addClass('textbox-disabled-style');\n");
             }
-            if (!TriRegulation.isEmpty(this.getOnclick())) {
+            if (!RegulationUtil.isEmpty(this.getOnclick())) {
                 htmlSb.append("$('input',$('#").append(tmpId).append("').next('span')).click(function(){\n");
                 if (this.getOnclick().indexOf("(") > 0) {
                     htmlSb.append(this.getOnclick()).append(";})\n");
@@ -230,7 +233,7 @@ public class EasyUiTextTag extends BodyTagSupport {
                     htmlSb.append(this.getOnclick()).append("(this);})\n");
                 }
             }
-            if (!TriRegulation.isEmpty(this.getOnblur())) {
+            if (!RegulationUtil.isEmpty(this.getOnblur())) {
                 htmlSb.append("$('input',$('#").append(tmpId).append("').next('span')).blur(function(){\n");
                 if (this.getOnblur().indexOf("(") > 0) {
                     htmlSb.append(this.getOnblur()).append(";})\n");
@@ -238,7 +241,7 @@ public class EasyUiTextTag extends BodyTagSupport {
                     htmlSb.append(this.getOnblur()).append("(this);})\n");
                 }
             }
-            if (!TriRegulation.isEmpty(this.getOnenterKey())) {
+            if (!RegulationUtil.isEmpty(this.getOnenterKey())) {
                 htmlSb.append("$('#").append(tmpId).append("').textbox('textbox').keydown(function(e){\n");
                 htmlSb.append("if (e.keyCode == 13) {\n");
                 if (this.getOnenterKey().indexOf("(") > 0) {
@@ -249,7 +252,7 @@ public class EasyUiTextTag extends BodyTagSupport {
                 htmlSb.append("})\n");
             }
 
-            if (!TriRegulation.isEmpty(this.getOnkeypress())) {
+            if (!RegulationUtil.isEmpty(this.getOnkeypress())) {
                 htmlSb.append("$('#").append(tmpId).append("').textbox('textbox').keypress(function(e){\n");
                 //htmlSb.append("alert(e);  \n");
                 htmlSb.append(this.getOnkeypress()).append("(e);   \n");
@@ -273,282 +276,5 @@ public class EasyUiTextTag extends BodyTagSupport {
     public int doEndTag() throws JspException {
         return EVAL_PAGE;
     }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public boolean isReadonly() {
-        return readonly;
-    }
-
-    public void setReadonly(boolean readonly) {
-        this.readonly = readonly;
-    }
-
-    public String getOnblur() {
-        return onblur;
-    }
-
-    public void setOnblur(String onblur) {
-        this.onblur = onblur;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isRequired() {
-        return required;
-    }
-
-    public void setRequired(boolean required) {
-        this.required = required;
-    }
-
-    public String getValidType() {
-        return validType;
-    }
-
-    public void setValidType(String validType) {
-        this.validType = validType;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getTooltip() {
-        return tooltip;
-    }
-
-    public void setTooltip(String tooltip) {
-        this.tooltip = tooltip;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-
-    public String getWidth() {
-        return width;
-    }
-
-    public void setWidth(String width) {
-        if (!TriRegulation.isEmpty(width)) {
-            this.width = width;
-        }
-    }
-
-    public String getHeight() {
-        return height;
-    }
-
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    public String getPrompt() {
-        return prompt;
-    }
-
-    public void setPrompt(String prompt) {
-        this.prompt = prompt;
-    }
-
-    public boolean isMultiline() {
-        return multiline;
-    }
-
-    public void setMultiline(boolean multiline) {
-        this.multiline = multiline;
-    }
-
-    public boolean isEditable() {
-        return editable;
-    }
-
-    public void setEditable(boolean editable) {
-        this.editable = editable;
-    }
-
-    public boolean isDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
-
-    public String getIconCls() {
-        return iconCls;
-    }
-
-    public void setIconCls(String iconCls) {
-        this.iconCls = iconCls;
-    }
-
-    public String getIconAlign() {
-        return iconAlign;
-    }
-
-    public void setIconAlign(String iconAlign) {
-        this.iconAlign = iconAlign;
-    }
-
-    public String getIconWidth() {
-        return iconWidth;
-    }
-
-    public void setIconWidth(String iconWidth) {
-        this.iconWidth = iconWidth;
-    }
-
-    public String getButtonText() {
-        return buttonText;
-    }
-
-    public void setButtonText(String buttonText) {
-        this.buttonText = buttonText;
-    }
-
-    public String getButtonIcon() {
-        return buttonIcon;
-    }
-
-    public void setButtonIcon(String buttonIcon) {
-        this.buttonIcon = buttonIcon;
-    }
-
-    public String getButtonAlign() {
-        return buttonAlign;
-    }
-
-    public void setButtonAlign(String buttonAlign) {
-        this.buttonAlign = buttonAlign;
-    }
-
-
-    public String getMissingMessage() {
-        return missingMessage;
-    }
-
-    public void setMissingMessage(String missingMessage) {
-        this.missingMessage = missingMessage;
-    }
-
-    public String getMissingMessageKey() {
-        return missingMessageKey;
-    }
-
-    public void setMissingMessageKey(String missingMessageKey) {
-        this.missingMessageKey = missingMessageKey;
-    }
-
-    public String getInvalidMessage() {
-        return invalidMessage;
-    }
-
-    public void setInvalidMessage(String invalidMessage) {
-        this.invalidMessage = invalidMessage;
-    }
-
-    public String getInvalidMessageKey() {
-        return invalidMessageKey;
-    }
-
-    public void setInvalidMessageKey(String invalidMessageKey) {
-        this.invalidMessageKey = invalidMessageKey;
-    }
-
-    public boolean isShowonly() {
-        return showonly;
-    }
-
-    public void setShowonly(boolean showonly) {
-        this.showonly = showonly;
-    }
-
-    public String getOnclick() {
-        return onclick;
-    }
-
-    public void setOnclick(String onclick) {
-        this.onclick = onclick;
-    }
-
-    public String getOnchange() {
-        return onchange;
-    }
-
-    public void setOnchange(String onchange) {
-        this.onchange = onchange;
-    }
-
-    public String getOnclickButton() {
-        return onclickButton;
-    }
-
-    public void setOnclickButton(String onclickButton) {
-        this.onclickButton = onclickButton;
-    }
-
-    public String getOnclickIcon() {
-        return onclickIcon;
-    }
-
-    public void setOnclickIcon(String onclickIcon) {
-        this.onclickIcon = onclickIcon;
-    }
-
-    public String getOnenterKey() {
-        return onenterKey;
-    }
-
-    public void setOnenterKey(String onenterKey) {
-        this.onenterKey = onenterKey;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
-    public static String getShowclass() {
-        return showClass;
-    }
-
-    public String getOnkeypress() {
-        return onkeypress;
-    }
-
-    public void setOnkeypress(String onkeypress) {
-        this.onkeypress = onkeypress;
-    }
-
 
 }

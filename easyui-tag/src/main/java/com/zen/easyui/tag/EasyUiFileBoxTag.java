@@ -1,19 +1,21 @@
 package com.zen.easyui.tag;
 
-import com.zen.easyui.util.TriRegulation;
-import com.zen.easyui.util.TriStringUtil;
-import org.slf4j.LoggerFactory;
+import com.zen.easyui.util.RandomUtil;
+import com.zen.easyui.util.RegulationUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 
-
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class EasyUiFileBoxTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 540064338631167843L;
-
-    private org.slf4j.Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String id; // 编号
 
@@ -39,20 +41,20 @@ public class EasyUiFileBoxTag extends BodyTagSupport {
     public int doStartTag() throws JspException {
         StringBuilder htmlSb = new StringBuilder();
 
-        String tmpId = TriRegulation.isEmpty(this.getId()) ? this.getName() + TriStringUtil.random(2) : this.getId();
+        String tmpId = RegulationUtil.isEmpty(this.getId()) ? this.getName() + RandomUtil.random(2) : this.getId();
 
         htmlSb.append("<input ");
         htmlSb.append(" name=\"").append(this.getName()).append("\"");
 
-        if (!TriRegulation.isEmpty(tmpId)) {
+        if (!RegulationUtil.isEmpty(tmpId)) {
             htmlSb.append(" id=\"").append(tmpId).append("\"");
         }
-        if (!TriRegulation.isEmpty(this.getStyle())) {
+        if (!RegulationUtil.isEmpty(this.getStyle())) {
             htmlSb.append(" style=\"").append(this.getStyle()).append("\"");
         }
         htmlSb.append(">");
 
-        if (!TriRegulation.isEmpty(tmpId)) {
+        if (!RegulationUtil.isEmpty(tmpId)) {
             htmlSb.append("<script type=\"text/javascript\">\n");
             htmlSb.append("$(function(){\n");
             htmlSb.append("$('#").append(tmpId).append("').filebox({ \n");
@@ -62,19 +64,19 @@ public class EasyUiFileBoxTag extends BodyTagSupport {
             if (this.isReadonly()) {
                 htmlSb.append("readonly:").append(this.isReadonly()).append(",\n");
             }
-            if (!TriRegulation.isEmpty(this.getOnChange())) {
+            if (!RegulationUtil.isEmpty(this.getOnChange())) {
                 htmlSb.append("onChange:").append(this.getOnChange()).append(",\n");
             }
-            if (!TriRegulation.isEmpty(this.getOnClickButton())) {
+            if (!RegulationUtil.isEmpty(this.getOnClickButton())) {
                 htmlSb.append("onClickButton:").append(this.getOnClickButton()).append(",\n");
             }
-            if (!TriRegulation.isEmpty(this.getButtonText())) {
+            if (!RegulationUtil.isEmpty(this.getButtonText())) {
                 htmlSb.append("buttonText:\"").append(this.getButtonText()).append("\",\n");
             }
-            if (!TriRegulation.isEmpty(this.getButtonIcon())) {
+            if (!RegulationUtil.isEmpty(this.getButtonIcon())) {
                 htmlSb.append("buttonIcon:\"").append(this.getButtonIcon()).append("\",\n");
             }
-            if (!TriRegulation.isEmpty(this.getButtonAlign())) {
+            if (!RegulationUtil.isEmpty(this.getButtonAlign())) {
                 htmlSb.append("buttonAlign:\"").append(this.getButtonAlign()).append("\" \n");
             }
             htmlSb.append("   });\n");
@@ -95,86 +97,6 @@ public class EasyUiFileBoxTag extends BodyTagSupport {
     @Override
     public int doEndTag() throws JspException {
         return EVAL_PAGE;
-    }
-
-    public boolean isReadonly() {
-        return readonly;
-    }
-
-    public void setReadonly(boolean readonly) {
-        this.readonly = readonly;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isRequired() {
-        return required;
-    }
-
-    public void setRequired(boolean required) {
-        this.required = required;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public String getButtonText() {
-        return buttonText;
-    }
-
-    public void setButtonText(String buttonText) {
-        this.buttonText = buttonText;
-    }
-
-    public String getButtonIcon() {
-        return buttonIcon;
-    }
-
-    public void setButtonIcon(String buttonIcon) {
-        this.buttonIcon = buttonIcon;
-    }
-
-    public String getButtonAlign() {
-        return buttonAlign;
-    }
-
-    public void setButtonAlign(String buttonAlign) {
-        this.buttonAlign = buttonAlign;
-    }
-
-    public String getOnClickButton() {
-        return onClickButton;
-    }
-
-    public void setOnClickButton(String onClickButton) {
-        this.onClickButton = onClickButton;
-    }
-
-    public String getOnChange() {
-        return onChange;
-    }
-
-    public void setOnChange(String onChange) {
-        this.onChange = onChange;
     }
 
 }
