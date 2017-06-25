@@ -148,36 +148,7 @@ public class EasyuiTagGlobalConstant {
    */
   public static boolean TREEGRID_ONLY_NODE_EXPAND = false;
 
-  /**
-
-
   // =========================可变常量 来源缓存数据 end=============================
-
-  /**
-   * 语言标示字符串
-   */
-  public final static String LANGUAGE_KEY = "LANGUAGE";
-
-  /**
-   * 语言标示描述
-   */
-  public final static String LANGUAGE_KEY_DESC = "LANGUAGE_DESC";
-
-  /**
-   *  默认语言 中文
-   */
-  public static String DEFAULT_LANGUAGE = "zh_CN";
-
-  /**
-   * 语言 中文
-   */
-  public static String LANGUAGE_ZH_CN = "zh_CN";
-
-  /**
-   * 语言 英文
-   */
-  public static String LANGUAGE_US_EN = "us_EN";
-
 
   /**
    * form请求方法
@@ -188,7 +159,6 @@ public class EasyuiTagGlobalConstant {
    * form列数
    */
   public static final Integer FROM_COLS = 1;
-  
 
   /**
    * 样式：不可用

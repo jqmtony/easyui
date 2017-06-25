@@ -104,7 +104,7 @@ public class SysResourceController {
      * 编辑资源信息
      *
      * @param resourceDto
-     * @param flag
+     * @param editFlag
      * @return
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)

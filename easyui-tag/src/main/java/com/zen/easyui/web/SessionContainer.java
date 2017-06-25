@@ -1,6 +1,6 @@
 package com.zen.easyui.web;
 
-import com.zen.easyui.constant.EasyuiTagGlobalConstant;
+import com.zen.easyui.enums.LanguageEnum;
 import com.zen.easyui.util.MessageUtil;
 import com.zen.easyui.util.RegulationUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -12,11 +12,25 @@ import java.util.Locale;
 public class SessionContainer {
 
     /**
+     * 语言标示字符串
+     */
+    private final static String LANGUAGE_KEY = "LANGUAGE";
+
+    /**
+     * 语言标示描述
+     */
+    private final static String LANGUAGE_KEY_DESC = "LANGUAGE_DESC";
+
+    /**
+     * 默认语言 中文
+     */
+    private static String DEFAULT_LANGUAGE = LanguageEnum.ZH_CN.getLanguage();
+
+    /**
      * 设置用户当前语言
      */
     public static void saveUserLanguage(HttpServletRequest request, String language) {
-        request.getSession().setAttribute(EasyuiTagGlobalConstant.LANGUAGE_KEY, RegulationUtil.isEmpty(language) ? EasyuiTagGlobalConstant.DEFAULT_LANGUAGE : language);
-
+        request.getSession().setAttribute(LANGUAGE_KEY, RegulationUtil.isEmpty(language) ? DEFAULT_LANGUAGE : language);
     }
 
     /**
@@ -26,9 +40,9 @@ public class SessionContainer {
      * @return
      */
     public static String getUserLanguage(HttpServletRequest request) {
-        String defaultLanguage = EasyuiTagGlobalConstant.DEFAULT_LANGUAGE;
-        if (request.getSession().getAttribute(EasyuiTagGlobalConstant.LANGUAGE_KEY) != null) {
-            defaultLanguage = (String) request.getSession().getAttribute(EasyuiTagGlobalConstant.LANGUAGE_KEY);
+        String defaultLanguage = DEFAULT_LANGUAGE;
+        if (request.getSession().getAttribute(LANGUAGE_KEY) != null) {
+            defaultLanguage = (String) request.getSession().getAttribute(LANGUAGE_KEY);
         }
         return defaultLanguage;
     }
@@ -40,7 +54,7 @@ public class SessionContainer {
      * @param languageDesc
      */
     public static void saveUserLanguageDesc(HttpServletRequest request, String languageDesc) {
-        request.getSession().setAttribute(EasyuiTagGlobalConstant.LANGUAGE_KEY_DESC, languageDesc);
+        request.getSession().setAttribute(LANGUAGE_KEY_DESC, languageDesc);
     }
 
     /**
@@ -50,7 +64,7 @@ public class SessionContainer {
      * @return
      */
     public static String getUserLanguageDesc(HttpServletRequest request) {
-        return (String) request.getSession().getAttribute(EasyuiTagGlobalConstant.LANGUAGE_KEY_DESC);
+        return (String) request.getSession().getAttribute(LANGUAGE_KEY_DESC);
     }
 
     /**

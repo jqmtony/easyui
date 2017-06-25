@@ -1,6 +1,6 @@
 package com.zen.easyui.util;
 
-import com.zen.easyui.constant.EasyuiTagGlobalConstant;
+import com.zen.easyui.enums.LanguageEnum;
 import com.zen.easyui.web.SessionContainer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -22,12 +22,19 @@ public class MessageUtil {
      */
     public static Locale getLocale(String language) {
         Locale locale;
-        if (EasyuiTagGlobalConstant.LANGUAGE_ZH_CN.equals(language)) {
-            locale = Locale.SIMPLIFIED_CHINESE;
-        } else if (EasyuiTagGlobalConstant.LANGUAGE_US_EN.equals(language)) {
-            locale = Locale.US;
-        } else {
-            locale = Locale.getDefault();
+        LanguageEnum languageEnum = LanguageEnum.getLanguageEnum(language);
+        if (null == languageEnum) {
+            return Locale.getDefault();
+        }
+        switch (languageEnum) {
+            case ZH_CN:
+                locale = Locale.SIMPLIFIED_CHINESE;
+                break;
+            case US_EN:
+                locale = Locale.US;
+                break;
+            default:
+                locale = Locale.getDefault();
         }
         return locale;
     }
