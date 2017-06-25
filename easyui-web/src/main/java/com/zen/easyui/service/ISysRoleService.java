@@ -1,6 +1,5 @@
 package com.zen.easyui.service;
 
-import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.dto.SysRoleDto;
 
@@ -46,7 +45,6 @@ public interface ISysRoleService {
      * 分页获取角色
      *
      * @param roleDto   角色信息实体
-     * @param pagerInfo 分页参数
      */
-    PageLister<SysRoleDto> listRoleByPage(SysRoleDto roleDto, EuPagerInfo pagerInfo);
+    PageLister<SysRoleDto> listRoleByPage(SysRoleDto roleDto);
 }

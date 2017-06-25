@@ -5,7 +5,6 @@ import com.zen.easyui.common.constant.GlobalConstant;
 import com.zen.easyui.common.enums.EditFlagEnum;
 import com.zen.easyui.common.vo.ExtTreeNode;
 import com.zen.easyui.common.vo.TreeNode;
-import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.common.web.ResultDto;
 import com.zen.easyui.dto.SysResourceDto;
@@ -42,12 +41,11 @@ public class SysResourceController {
      * 分页资源获取信息
      *
      * @param resourceDto
-     * @param pageInfo
      * @return
      */
     @RequestMapping(value = "/listByPage")
-    PageLister<SysResourceDto> listByPage(SysResourceDto resourceDto, EuPagerInfo pageInfo) {
-        return sysResourceService.listResourceByPage(resourceDto, pageInfo);
+    PageLister<SysResourceDto> listByPage(SysResourceDto resourceDto) {
+        return sysResourceService.listResourceByPage(resourceDto);
     }
 
     /**

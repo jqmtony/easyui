@@ -77,17 +77,11 @@
             <artifactId>aspectjweaver</artifactId>
         </dependency>
 
-        <!-- 添加mybatis的核心包 -->
+        <!-- 添加mybatis-plus的核心包 -->
         <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
         </dependency>
-        <!-- 添加mybatis与Spring整合的核心包 -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-        </dependency>
-        <!-- 添加mybatis分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>

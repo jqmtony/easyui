@@ -3,7 +3,6 @@ package com.zen.easyui.controller;
 import com.alibaba.fastjson.JSON;
 import com.zen.easyui.common.constant.GlobalConstant;
 import com.zen.easyui.common.enums.EditFlagEnum;
-import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.common.web.ResultDto;
 import com.zen.easyui.dto.SysRoleDto;
@@ -38,12 +37,11 @@ public class SysRoleController {
      * 分页角色获取信息
      *
      * @param roleDto
-     * @param pageInfo
      * @return
      */
     @RequestMapping(value = "/listByPage")
-    PageLister<SysRoleDto> listByPage(SysRoleDto roleDto, EuPagerInfo pageInfo) {
-        return sysRoleService.listRoleByPage(roleDto, pageInfo);
+    PageLister<SysRoleDto> listByPage(SysRoleDto roleDto) {
+        return sysRoleService.listRoleByPage(roleDto);
     }
 
     /**

@@ -5,7 +5,6 @@ import com.zen.easyui.common.util.IdentityUtil;
 import com.zen.easyui.common.util.TreeNodeUtil;
 import com.zen.easyui.common.vo.ExtTreeNode;
 import com.zen.easyui.common.vo.TreeNode;
-import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.dao.SysResourceDao;
 import com.zen.easyui.dto.SysResourceDto;
@@ -89,8 +88,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-    public PageLister<SysResourceDto> listResourceByPage(SysResourceDto resourceDto, EuPagerInfo pagerInfo) {
-        pagerInfo.startPage();
+    public PageLister<SysResourceDto> listResourceByPage(SysResourceDto resourceDto) {
         return new PageLister<SysResourceDto>(sysResourceDao.listSysResourceByDto(resourceDto));
     }
 

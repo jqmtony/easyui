@@ -1,6 +1,5 @@
 package com.zen.easyui.service;
 
-import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.dto.SysUserDto;
 
@@ -46,7 +45,6 @@ public interface ISysUserService {
      * 分页获取用户
      *
      * @param userDto   用户信息实体
-     * @param pagerInfo 分页参数
      */
-    PageLister<SysUserDto> listUserByPage(SysUserDto userDto, EuPagerInfo pagerInfo);
+    PageLister<SysUserDto> listUserByPage(SysUserDto userDto);
 }

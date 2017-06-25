@@ -27,4 +27,34 @@ public class BaseDto {
      */
     private Date UpdateTm;
 
+    /**
+     * 当前页
+     */
+    private Integer page;
+
+    /**
+     * 当前页
+     */
+    private Integer pageNumber;
+
+    /**
+     * 每页显示多少行
+     */
+    private Integer rows;
+
+    /**
+     * 每页显示多少行
+     */
+    private Integer pageSize;
+
+    /**
+     * 排序列
+     */
+    private String sort;
+
+    /**
+     * 升序或者降序(asc,desc)
+     */
+    private String order;
+
 }

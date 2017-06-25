@@ -3,7 +3,6 @@ package com.zen.easyui.controller;
 import com.alibaba.fastjson.JSON;
 import com.zen.easyui.common.constant.GlobalConstant;
 import com.zen.easyui.common.enums.EditFlagEnum;
-import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.common.web.ResultDto;
 import com.zen.easyui.dto.SysUserDto;
@@ -38,12 +37,11 @@ public class SysUserController {
      * 分页用户获取信息
      *
      * @param userDto
-     * @param pageInfo
      * @return
      */
     @RequestMapping(value = "/listByPage")
-    PageLister<SysUserDto> listByPage(SysUserDto userDto, EuPagerInfo pageInfo) {
-        return sysUserService.listUserByPage(userDto, pageInfo);
+    PageLister<SysUserDto> listByPage(SysUserDto userDto) {
+        return sysUserService.listUserByPage(userDto);
     }
 
     /**

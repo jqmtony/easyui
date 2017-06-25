@@ -2,7 +2,6 @@ package com.zen.easyui.service.impl;
 
 import com.zen.easyui.common.util.DesUtil;
 import com.zen.easyui.common.util.IdentityUtil;
-import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.dao.SysUserDao;
 import com.zen.easyui.dto.SysUserDto;
@@ -81,12 +80,10 @@ public class SysUserServiceImpl implements ISysUserService {
      * 分页获取用户
      *
      * @param userDto   用户信息实体
-     * @param pagerInfo 分页参数
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-    public PageLister<SysUserDto> listUserByPage(SysUserDto userDto, EuPagerInfo pagerInfo) {
-        pagerInfo.startPage();
-        return new PageLister<SysUserDto>(sysUserDao.listSysUserByDto(userDto));
+    public PageLister<SysUserDto> listUserByPage(SysUserDto userDto) {
+        return new PageLister<>(sysUserDao.listSysUserByDto(userDto));
     }
 }

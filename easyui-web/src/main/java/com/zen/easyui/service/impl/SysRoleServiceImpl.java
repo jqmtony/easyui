@@ -1,7 +1,6 @@
 package com.zen.easyui.service.impl;
 
 import com.zen.easyui.common.util.IdentityUtil;
-import com.zen.easyui.common.web.EuPagerInfo;
 import com.zen.easyui.common.web.PageLister;
 import com.zen.easyui.dao.SysRoleDao;
 import com.zen.easyui.dto.SysRoleDto;
@@ -79,12 +78,10 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * 分页获取角色
      *
      * @param roleDto   角色信息实体
-     * @param pagerInfo 分页参数
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-    public PageLister<SysRoleDto> listRoleByPage(SysRoleDto roleDto, EuPagerInfo pagerInfo) {
-        pagerInfo.startPage();
+    public PageLister<SysRoleDto> listRoleByPage(SysRoleDto roleDto) {
         return new PageLister<SysRoleDto>(sysRoleDao.listSysRoleByDto(roleDto));
     }
 }

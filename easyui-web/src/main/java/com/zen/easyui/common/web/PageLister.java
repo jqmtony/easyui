@@ -70,7 +70,7 @@ public class PageLister<T> implements Serializable {
             Page page = (Page) rows;
             this.pageNum = page.getPageNum();
             this.pageSize = page.getPageSize();
-            this.orderBy = page.getOrderBy();
+            //this.orderBy = page.getOrderBy();
 
             this.pages = page.getPages();
             this.rows = page;
